@@ -1,0 +1,87 @@
+input[type="checkbox"] {
+  margin-right: 0;
+}
+
+input[classname="passwordCU"] {
+  width: 200px;
+}
+
+.containerpw {
+  background-color: #ffffffd0;
+  max-width: 100%;
+  width: 450px;
+  padding: 20px;
+  box-shadow: 0px 20px 80px rgba(0, 0, 0, 0.42), 0px 10.7776px 10.4221px rgba(0, 0, 0, 0.301919);
+  border-radius: 5px;
+}
+
+.containerCU {
+  background-color: #ffffffd0;
+  max-width: 100%;
+  width: 350px;
+  padding: 20px;
+  box-shadow: 0px 20px 80px rgba(0, 0, 0, 0.42), 0px 10.7776px 10.4221px rgba(0, 0, 0, 0.301919);
+  border-radius: 5px;
+}
+
+
+
+.result-containerpw {
+  background-color: rgb(255, 255, 255);
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  position: relative;
+  font-size: 18px;
+  letter-spacing: 1px;
+  padding: 12px 10px;
+  height: 50px;
+  width: 100%;
+}
+
+.result-containerpw #result {
+  word-wrap: break-word;
+  max-width: calc(100% - 40px);
+}
+
+.result-containerpw .btnpw {
+  font-size: 20px;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  height: 40px;
+  width: 40px;
+}
+
+.btnpw {
+  border: none;
+  color: #000;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 8px 12px;
+  background-color: #fec136;
+  border-radius: 5px;
+}
+
+.btnpw:hover{
+    color:#000;
+    background-color: #dbb14e;
+}
+
+.btn-largepw {
+  width: 100%;
+  display: block;
+}
+
+.settingpw {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 15px 0;
+}
+
+@media screen and (max-width: 400px) {
+  .result-container {
+    font-size: 14px;
+  }
+}
