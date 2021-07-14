@@ -13,6 +13,10 @@ import PwGen from './pwgen/pwgen';
 import { Row,Col} from 'reactstrap';
 import PersonIcon from '@material-ui/icons/Person';
 import Search from './search';
+import BugReportIcon from '@material-ui/icons/BugReport';
+import HelpIcon from '@material-ui/icons/Help';
+import TicketSubmissionsList from './Ticket_System/Ticket_Listing';
+import TicketInput from './Ticket_System/Ticket_Input';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -85,6 +89,8 @@ export default function AdminPanel() {
         >
           <Tab label="Create New Doctor" icon={<SupervisorAccountIcon />} {...a11yProps(0)} />
           <Tab label="Patient Records" icon={ <PersonIcon/> } {...a11yProps(1)} />
+          <Tab label="Submit Ticket" icon={ <HelpIcon/> } {...a11yProps(2)} />
+          <Tab label="View Tickets" icon={ <BugReportIcon/> } {...a11yProps(3)} />
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
@@ -107,6 +113,30 @@ export default function AdminPanel() {
                   <Col>
                     <div className={classes.root}>
                       <EnhancedTable/>   {/* User Table*/} 
+                    </div>
+                        <hr class="yellow"/>
+                  </Col>
+            </Row>
+      </TabPanel>
+      <TabPanel value={value} index={2}>
+          <br/>
+            <hr class="yellow"/>
+            <Row>
+                  <Col>
+                    <div className={classes.root}>
+                      <TicketInput/>   {/* Submit Ticket*/} 
+                    </div>
+                        <hr class="yellow"/>
+                  </Col>
+            </Row>
+      </TabPanel>
+      <TabPanel value={value} index={3}>
+          <br/>
+            <hr class="yellow"/>
+            <Row>
+                  <Col>
+                    <div className={classes.root}>
+                      <TicketSubmissionsList/>   {/* View Ticket*/} 
                     </div>
                         <hr class="yellow"/>
                   </Col>
