@@ -1,5 +1,6 @@
 {
   "name": "groupdemrsystem",
+  "author": "David Duchesneau-Hart,Steven David White,Chris Germishuys,Mathi Mahalingam,Nhi Nguyen,Balam",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
