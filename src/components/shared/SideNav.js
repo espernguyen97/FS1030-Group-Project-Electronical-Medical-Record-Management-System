@@ -2,11 +2,13 @@ import React, { useState } from "react";
 import { Link as RouterLink } from "react-router-dom";
 import clsx from "clsx";
 import {CssBaseline,Drawer,Divider,List, ListItem,ListItemIcon,ListItemText,makeStyles} from "@material-ui/core";
-import SettingsIcon from "@material-ui/icons/Settings";
-import ArchiveIcon from "@material-ui/icons/Archive";
 import HomeIcon from '@material-ui/icons/Home';
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import Search from '../search';
+import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
+import BugReportIcon from '@material-ui/icons/BugReport';
+import AllInboxIcon from '@material-ui/icons/AllInbox';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 const drawerWidth = 240;
 
@@ -87,18 +89,23 @@ const SideNav = (props) => {
     },
     {
       text: "Tickets",
-      icon: <SettingsIcon />,
+      icon: <AllInboxIcon />,
       path: "/Tickets"
     },
     {
+      text: "Submit Ticket",
+      icon: <BugReportIcon />,
+      path: "/Submit_Ticket"
+    },
+    {
       text: "Care Givers",
-      icon: <SettingsIcon />,
+      icon: <SupervisorAccountIcon />,
       path: "/CareGivers"
     },
     {
       text: "Logout",
-      icon: <ArchiveIcon />,
-      path: "#"
+      icon: <ExitToAppIcon />,
+      path: "/logout"
     }
   ];
 

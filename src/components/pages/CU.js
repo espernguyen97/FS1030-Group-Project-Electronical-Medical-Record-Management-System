@@ -48,7 +48,7 @@ const CU = () => {
         <main>
             <Container className="containerCU">
                 <center>
-                <h2>New Doctor</h2>
+                <h2>New Care Giver</h2>
                 <Form className="my-5" onSubmit={formSubmit}>
                     <FormGroup row>
                         <Col sm={10}>
