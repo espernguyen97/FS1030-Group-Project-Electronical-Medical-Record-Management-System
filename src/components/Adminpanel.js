@@ -12,7 +12,6 @@ import CU from './pages/CU';
 import PwGen from './pwgen/pwgen';
 import { Row,Col} from 'reactstrap';
 import PersonIcon from '@material-ui/icons/Person';
-import Search from './search';
 import BugReportIcon from '@material-ui/icons/BugReport';
 import HelpIcon from '@material-ui/icons/Help';
 import TicketSubmissionsList from './Ticket_System/Ticket_Listing';
@@ -77,7 +76,6 @@ export default function AdminPanel() {
     <div className={classes.root}>
       <AppBar position="static" color="default">
         <br/>
-      <center><Search/></center>{/* search bar*/}
         <Tabs
           value={value}
           onChange={handleChange}
