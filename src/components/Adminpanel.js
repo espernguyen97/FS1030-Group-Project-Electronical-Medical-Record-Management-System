@@ -1,11 +1,12 @@
 import React from 'react';
 import { Doughnut } from 'react-chartjs-2';
+import { Row,Col} from 'reactstrap';
 
 const data = {
   labels: ['New Tickets', 'New Users', 'New Patients'],
   datasets: [
     {
-      label: '# of Votes',
+      label: 'New Events',
       data: [12, 19, 3],
       backgroundColor: [
         'rgba(255, 99, 132, 0.2)',
@@ -29,7 +30,13 @@ const AdminPanel = () => (
       <div className='links'>
       </div>
     </div>
-    <Doughnut data={data} />
+    <Row className="my-5">
+                <Col>
+                  <Doughnut data={data} /> {/* Create User Section*/}
+                </Col>
+                <Col>
+                </Col>
+            </Row>
   </>
 );
 
