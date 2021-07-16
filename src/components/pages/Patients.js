@@ -14,15 +14,13 @@ export default function Patients() {
             <Row className="my-5">
                 <Col>
                   <Search/>{/* search bar*/}
-                  <br/>
                   <EnhancedTable/> {/* Create User Section*/}
                 </Col>
             </Row>
             <PatientCreateModal/>
         <hr class="yellow"/>
-          </center>
+        </center>
         </Container>
       </React.Fragment>
     );
   }
-  
