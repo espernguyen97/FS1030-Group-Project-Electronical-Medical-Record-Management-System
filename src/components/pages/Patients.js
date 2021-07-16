@@ -5,6 +5,7 @@ import { Row,Col} from 'reactstrap';
 import EnhancedTable from '../userlist/list';
 import SideNav from '../shared/SideNav';
 import Search from '../search';
+import PatientCreateModal from '../Patients/Create_Modal';
 
 export default function Patients() {
     return (
@@ -12,16 +13,18 @@ export default function Patients() {
           <SideNav/>
         <CssBaseline />
         <Container fixed>
+          <center>
         <hr class="yellow"/>
             <Row className="my-5">
                 <Col>
+                  <Search/>{/* search bar*/}
+                  <br/>
                   <EnhancedTable/> {/* Create User Section*/}
                 </Col>
-                <Col>
-                  <Search/>{/* search bar*/}
-                </Col>
             </Row>
+            <PatientCreateModal/>
         <hr class="yellow"/>
+          </center>
         </Container>
       </React.Fragment>
     );

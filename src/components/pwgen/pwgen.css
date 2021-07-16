@@ -18,10 +18,16 @@ input[classname="passwordCU"] {
 .containerCU {
   background-color: #ffffffd0;
   max-width: 100%;
-  width: 350px;
+  width: 100%;
   padding: 20px;
   box-shadow: 0px 20px 80px rgba(0, 0, 0, 0.42), 0px 10.7776px 10.4221px rgba(0, 0, 0, 0.301919);
   border-radius: 5px;
+}
+
+.containerPatient_Create {
+  background-color: #ffffffd0;
+  max-width: 100%;
+  width: 550px;
 }
 
 
