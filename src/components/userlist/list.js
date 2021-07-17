@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import parseJwt from '../../helpers/authHelper'
 import {Container} from 'reactstrap'
-import { Table } from 'reactstrap';
+import { Table,Col,Row } from 'reactstrap';
 
 const UserList = () => {
     const token = sessionStorage.getItem('token')
@@ -35,28 +35,24 @@ const UserList = () => {
                           
                           <Table>
                           <tbody>
-                          <tr>
-                          <td><b>First Name</b></td>
-                          <td><b>Last Name</b></td>
-                          <td><b>Date Of Birth</b></td>
-                          <td><b>O.H.I.P Number</b></td>
-                          <td><b>Address</b></td>
-                          <td><b>Phone Number</b></td>
-                          <td><b>Email Address</b></td>
-                          <td><b>Age</b></td>
-                          </tr>
-                       </tbody>
-                          <tbody>
-                          <tr>
-                          <td>{entry.name}</td>
-                          <td>{entry.Last_Name}</td>
-                          <td>{entry.DOB}</td>
-                          <td>{entry.OHIP}</td>
-                          <td>{entry.Address}</td>
-                          <td>{entry.Phone_Number}</td>
-                          <td>{entry.email}</td>
-                          <td>{entry.Age}</td>
-                          </tr>
+                          <Row>
+                          <Col><b>First Name</b></Col>
+                          <Col><b>Last Name</b></Col>
+                          <Col><b>Date Of Birth</b></Col>
+                          <Col><b>O.H.I.P Number</b></Col>
+                          <Col><b>Phone Number</b></Col>
+                          <Col><b>Email Address</b></Col>
+                          <Col><b>Age</b></Col>
+                          </Row>
+                          <Row>
+                          <Col>{entry.name}</Col>
+                          <Col>{entry.Last_Name}</Col>
+                          <Col>{entry.DOB}</Col>
+                          <Col>{entry.OHIP}</Col>
+                          <Col>{entry.Phone_Number}</Col>
+                          <Col>{entry.email}</Col>
+                          <Col>{entry.Age}</Col>
+                          </Row>
                           </tbody>
                           </Table>)
                     }
