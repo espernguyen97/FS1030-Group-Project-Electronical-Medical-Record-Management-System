@@ -59,7 +59,7 @@ const PatientCreate = () => {
         setEmail("")
         setAge("")
     }
-
+  //*I tried to move the first last name together etc but the icons did not fit nicley so i removed em for now still not 100% happy with the layout if sombody wants to take a crack at it.- Dave
     return (
         <main>
             <Container className="containerPatient_Create">

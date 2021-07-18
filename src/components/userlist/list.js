@@ -21,7 +21,7 @@ const UserList = () => {
         }
         getData()
     }, [token])
-   
+   //*This is not displaying the right way it loads the top section everytime a new entry is loaded if anyone has a quick solution i'm all ears!- Dave      
     return (
         <Container>{user}
         <center><h2 className="display-5">Total Patients:{listing.length}</h2></center><br/>
@@ -29,10 +29,10 @@ const UserList = () => {
                         <tr><td colSpan="4" className="text-center"><i>No Users Found/Somthing Went Wrong/Make Sure API is Running</i></td></tr>
                     }  
                           
-                    
+
                     {listing.length > 0 &&
                         listing.map(entry => 
-                          
+                            
                           <Table>
                           <tbody>
                           <Row>

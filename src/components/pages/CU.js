@@ -6,12 +6,19 @@ import LockIcon from '@material-ui/icons/Lock';
 import InputLabel from '@material-ui/core/InputLabel';
 import AlternateEmailIcon from '@material-ui/icons/AlternateEmail';
 import Tooltip from '@material-ui/core/Tooltip';
+import Checkbox from '@material-ui/core/Checkbox';
+import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
+import LocalHospitalIcon from '@material-ui/icons/LocalHospital';
 
 
 const CU = () => {
     const token = sessionStorage.getItem('token')
-    const [name, setName] = useState("")
+    const [firstName, setfirstName] = useState("")
     const [email, setEmail] = useState("")
+    const [jobPosition, setjobPosition] = useState("")
+    const [username, setusername] = useState("")
+    const [Admin_Flag, setAdmin_Flag] = useState("")
+    const [lastName, setlastName] = useState("")
     const [password, setPassword] = useState("")
     const [alertContent, setAlertContent] = useState(null)
     const Ddate =  new Date();
@@ -26,24 +33,28 @@ const CU = () => {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({name, email, password,Ddate})
+            body: JSON.stringify({username,firstName,lastName, email,jobPosition, password,Admin_Flag,Ddate})
         })
         const payload = await response.json()
         if (response.status >= 400) {
             setAlertContent(`Error with fields: ${payload.invalid.join(",")}`)
         } else {
             setAlertContent(null)
-            alert(`Doctor Was Created!`)
+            alert(`Care Giver Was Created!`)
             resetForm()
         }
     }
 
     const resetForm = () => {
-        setName("")
+        setfirstName("")
         setEmail("")
+        setlastName("")
+        setusername("")
         setPassword("")
+        setAdmin_Flag("")
+        setjobPosition("")
     }
-
+   
     return (
         <main>
             <Container className="containerCU">
@@ -52,10 +63,28 @@ const CU = () => {
                 <Form className="my-5" onSubmit={formSubmit}>
                     <FormGroup row>
                         <Col sm={10}>
-                           <InputLabel htmlFor="input-with-icon-adornment">Doctors Name</InputLabel>
+                           <InputLabel htmlFor="input-with-icon-adornment">User Name</InputLabel>
+                                <PersonIcon/> 
+                            <Tooltip title="Enter The User Name Here">
+                           <Input  name="username" id="username" placeholder="Enter The User Name Here" required value={username} onChange={e => setusername(e.target.value)}/>
+                            </Tooltip>
+                        </Col>
+                    </FormGroup>
+                    <FormGroup row>
+                        <Col sm={10}>
+                           <InputLabel htmlFor="input-with-icon-adornment">First Name</InputLabel>
                                 <PersonIcon/> 
                             <Tooltip title="Enter The Doctors Name Here">
-                           <Input type="name" name="name" id="nameEntry" placeholder="Doctors Name Here" required value={name} onChange={e => setName(e.target.value)}/>
+                           <Input  name="firstName" id="firstName" placeholder="Doctors First Name Here" required value={firstName} onChange={e => setfirstName(e.target.value)}/>
+                            </Tooltip>
+                        </Col>
+                    </FormGroup>
+                    <FormGroup row>
+                        <Col sm={10}>
+                           <InputLabel htmlFor="input-with-icon-adornment">Last Name</InputLabel>
+                                <PersonIcon/> 
+                            <Tooltip title="Enter The Doctors Name Here">
+                           <Input name="lastName" id="lastName" placeholder="Doctors Last Name Here" required value={lastName} onChange={e => setlastName(e.target.value)}/>
                             </Tooltip>
                         </Col>
                     </FormGroup>
@@ -70,10 +99,29 @@ const CU = () => {
                     </FormGroup>
                     <FormGroup row>
                         <Col sm={10}>
+                           <InputLabel htmlFor="input-with-icon-adornment">Job Position</InputLabel>
+                                <LocalHospitalIcon/>
+                            <Tooltip title="Enter Users Job Position">
+                            <Input name="jobPosition" id="jobPosition" placeholder="Enter Users Job Position"  required value={jobPosition} onChange={e => setjobPosition(e.target.value) }/>
+                            </Tooltip>
+                        </Col>
+                    </FormGroup>
+                    <FormGroup row>
+                        <Col sm={10}>
                            <InputLabel htmlFor="input-with-icon-adornment">Password</InputLabel>
                                 <LockIcon/>
-                            <Tooltip title="Enter The Password That Will Be Used To Login">
+                            <Tooltip title="12 Character Minimum">
                             <Input classname="pwfield" type="password" name="password" id="passwordEntry"  placeholder="12 Character Minimum"   value={password} onChange={e => setPassword(e.target.value)}/>
+                            </Tooltip>
+                        </Col>
+                    </FormGroup>
+                    {/*Admin flag is not registering full I belive we need to set a state for it when it is clicked and not and push that somehow getting Tired lol- Dave*/}
+                    <FormGroup row>
+                        <Col sm={10}>
+                           <InputLabel htmlFor="input-with-icon-adornment">Is Admin</InputLabel>
+                                <SupervisorAccountIcon/>
+                            <Tooltip title="Is this user a Admin?">
+                            <Checkbox color="primary" classname="Admin_Flag" name="Admin_Flag" id="Admin_Flag" value={Admin_Flag} onChange={e => setAdmin_Flag(e.target.value)}/>
                             </Tooltip>
                         </Col>
                     </FormGroup>
