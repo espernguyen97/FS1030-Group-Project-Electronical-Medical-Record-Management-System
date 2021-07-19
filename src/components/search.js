@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Col,Button } from 'reactstrap';
 
 class Search extends Component {
   state = {
@@ -28,7 +27,7 @@ class Search extends Component {
     return (
       <div>
         <input type="text" name="search" onChange={this.handleSearch} />
-        <Button color="warning">Search</Button>
+        <button>Search</button>
         {query && <p>Results for: {query}</p>}
 
         <div style={{ marginTop: 10 }}>
