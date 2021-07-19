@@ -5,6 +5,11 @@
   opacity: 80%;
 }
 
+/*Custom css properties*/
+:root {
+  --sidenav-width: 230px;
+}
+
   body::-webkit-scrollbar {
   width: 7.5px;
 }
@@ -83,8 +88,12 @@ input[type="password"] {
   border: 0px 20px 80px rgba(0, 0, 0, 0.42), 0px 10.7776px 10.4221px rgba(0, 0, 0, 0.301919);
 }
 
-  input[type="password"]:focus {
+input[type="password"]:focus {
   background-color: #ece1e18e;
   /* border: none; */
   outline: none;
+}
+
+.main-panel {
+  margin-left: var(--sidenav-width);
 }

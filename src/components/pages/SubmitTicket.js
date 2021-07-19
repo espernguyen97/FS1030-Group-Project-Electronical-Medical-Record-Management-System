@@ -5,7 +5,7 @@ import TicketInput from '../Ticket_System/Ticket_Input';
 
 export default function SubmitTicket() {
     return (
-      <React.Fragment>
+      <div className="main-panel">
         <Container fixed>
         <hr class="yellow"/>
             <Row className="my-5">
@@ -15,7 +15,7 @@ export default function SubmitTicket() {
             </Row>
         <hr class="yellow"/>
         </Container>
-      </React.Fragment>
+      </div>
     );
   }
   

@@ -6,7 +6,7 @@ import PwGen from '../pwgen/pwgen';
 
 export default function Caregivers() {
     return (
-      <React.Fragment>
+      <div className="main-panel">
         <Container fixed>
         <hr class="yellow"/>
             <Row className="my-5">
@@ -19,7 +19,7 @@ export default function Caregivers() {
             </Row>
         <hr class="yellow"/>
         </Container>
-      </React.Fragment>
+      </div>
     );
   }
   

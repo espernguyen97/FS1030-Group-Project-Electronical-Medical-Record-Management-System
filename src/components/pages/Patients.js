@@ -7,7 +7,7 @@ import PatientCreateModal from '../Patients/Create_Modal';
 
 export default function Patients() {
     return (
-      <React.Fragment>
+      <div className="main-panel">
         <Container fixed>
           <center>
         <hr class="yellow"/>
@@ -21,6 +21,6 @@ export default function Patients() {
         <hr class="yellow"/>
         </center>
         </Container>
-      </React.Fragment>
+      </div>
     );
   }

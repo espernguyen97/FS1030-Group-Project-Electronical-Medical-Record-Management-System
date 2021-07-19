@@ -26,7 +26,7 @@ const UserList = () => {
         <Container>{user}
         <center><h2 className="display-5">Total Patients:{listing.length}</h2></center><br/>
                     {listing.length === 0 &&
-                        <tr><td colSpan="4" className="text-center"><i>No Users Found/Somthing Went Wrong/Make Sure API is Running</i></td></tr>
+                        <tr><td colSpan="4" className="text-center"><i>No Users Found/Something Went Wrong/Make Sure API is Running</i></td></tr>
                     }  
                           
 

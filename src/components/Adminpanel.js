@@ -24,20 +24,20 @@ const data = {
 };
 
 const AdminPanel = () => (
-  <>
+  <div className="main-panel">
     <div className='header'>
       <h1 className='title'>New Events</h1>
       <div className='links'>
       </div>
     </div>
     <Row className="my-5">
-                <Col>
-                  <Doughnut data={data} /> {/* Create User Section*/}
-                </Col>
-                <Col>
-                </Col>
-            </Row>
-  </>
+        <Col>
+          <Doughnut data={data} /> {/* Create User Section*/}
+        </Col>
+        <Col>
+        </Col>
+    </Row>
+  </div>
 );
 
 export default AdminPanel;

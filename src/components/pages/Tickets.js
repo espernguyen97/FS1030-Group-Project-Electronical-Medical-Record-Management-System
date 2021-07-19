@@ -5,7 +5,7 @@ import TicketSubmissionsList from '../Ticket_System/Ticket_Listing';
 
 export default function TicketList() {
     return (
-      <React.Fragment>
+      <div className="main-panel">
         <Container fixed>
         <hr class="yellow"/>
             <Row className="my-5">
@@ -15,7 +15,7 @@ export default function TicketList() {
             </Row>
         <hr class="yellow"/>
         </Container>
-      </React.Fragment>
+      </div>
     );
   }
   

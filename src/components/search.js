@@ -8,8 +8,8 @@ export default function Search() {
       id="combo-box-demo"
       options={top100Films}
       getOptionLabel={(option) => option.OHIP}
-      style={{ width: 300 }}
-      renderInput={(params) => <TextField {...params} label="OHIP Search" variant="outlined" />}
+      style={{ width: 220, marginTop: "0.5rem" }} 
+      renderInput={(params) => <TextField {...params} label="OHIP Search" variant="outlined"/>}
     />
   );
 }
