@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import parseJwt from '../../helpers/authHelper'
 import {Container} from 'reactstrap'
-import { Table,Col,Row } from 'reactstrap';
+import { Table,Button,Row } from 'reactstrap';
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
+import EditIcon from '@material-ui/icons/Edit';
 
 const UserList = () => {
     const token = sessionStorage.getItem('token')
@@ -21,43 +23,41 @@ const UserList = () => {
         }
         getData()
     }, [token])
-   //*This is not displaying the right way it loads the top section everytime a new entry is loaded if anyone has a quick solution i'm all ears!- Dave      
-    return (
-        <Container>{user}
-        <center><h2 className="display-5">Total Patients:{listing.length}</h2></center><br/>
-                    {listing.length === 0 &&
-                        <tr><td colSpan="4" className="text-center"><i>No Users Found/Something Went Wrong/Make Sure API is Running</i></td></tr>
-                    }  
-                          
 
-                    {listing.length > 0 &&
-                        listing.map(entry => 
-                            
-                          <Table>
-                          <tbody>
-                          <Row>
-                          <Col><b>First Name</b></Col>
-                          <Col><b>Last Name</b></Col>
-                          <Col><b>Date Of Birth</b></Col>
-                          <Col><b>O.H.I.P Number</b></Col>
-                          <Col><b>Phone Number</b></Col>
-                          <Col><b>Email Address</b></Col>
-                          <Col><b>Age</b></Col>
-                          </Row>
-                          <Row>
-                          <Col>{entry.name}</Col>
-                          <Col>{entry.Last_Name}</Col>
-                          <Col>{entry.DOB}</Col>
-                          <Col>{entry.OHIP}</Col>
-                          <Col>{entry.Phone_Number}</Col>
-                          <Col>{entry.email}</Col>
-                          <Col>{entry.Age}</Col>
-                          </Row>
-                          </tbody>
-                          </Table>)
-                    }
-        </Container>
-    )
+   return (
+    <Container className="mainContent">
+        <Row className="userTitle">
+        <h2 className="display-5">Total Patients:{listing.length}{user}</h2>
+        </Row>
+        <Table responsive className="content">
+            <thead>
+                <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Date Of Birth</th>
+                <th>O.H.I.P Number</th>
+                <th>Phone Number</th>
+                <th>Email Address</th>
+                <th>Age</th>
+                <th>Edit</th>
+                
+                </tr>
+            </thead>
+            <tbody>
+                {listing.length === 0 &&
+                    <tr><td colSpan="4" className="text-center"><i>No Patients found</i></td></tr>
+                }
+                {listing.length > 0 &&
+                    listing.map(entry => <tr><td>{entry.name}</td><td>{entry.Last_Name}</td><td>{entry.DOB}</td><td>{entry.OHIP}</td><td>{entry.Phone_Number}</td><td>{entry.email}</td><td>{entry.Age}</td><td> <Button color="warning" type="submit"><EditIcon/></Button> <Button color="warning" type="submit"><DeleteForeverIcon/></Button></td></tr>)
+                }
+            </tbody>
+
+           
+
+
+        </Table>
+    </Container>
+)
 }
 
 export default UserList
