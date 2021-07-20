@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import "./pwgen.css";
 import generator from "generate-password";
 import {Button} from 'reactstrap'
 import LockOpenIcon from '@material-ui/icons/LockOpen';

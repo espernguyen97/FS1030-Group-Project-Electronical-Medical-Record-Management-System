@@ -2,6 +2,7 @@ import React from 'react';
 import { Doughnut } from 'react-chartjs-2';
 import { Row,Col} from 'reactstrap';
 
+
 const data = {
   labels: ['New Tickets', 'New Users', 'New Patients'],
   datasets: [
@@ -39,5 +40,6 @@ const AdminPanel = () => (
     </Row>
   </div>
 );
+
 
 export default AdminPanel;
