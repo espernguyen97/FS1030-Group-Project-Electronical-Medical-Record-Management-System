@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './App.css'
 import Navigation from './components/shared/Navigation'
 import Footer from './components/shared/footer'
@@ -15,14 +15,17 @@ import SideNav from './components/shared/SideNav'
 import CssBaseline from '@material-ui/core/CssBaseline';
 
 
-
 function App() {
+  const [token, setToken] = useState(false)
+
   return (
    <BrowserRouter>
         <CssBaseline />
-        <Navigation />
+        <Navigation token={token} setToken={setToken}/>
         <Switch>
-          <Route exact path="/login" component={Login} />
+          <Route exact path="/login">
+            <Login setToken={setToken}/>
+          </Route>
           <PrivateRoute>
             <SideNav />
             <PrivateRoute component={Listing} path="/submissions" />

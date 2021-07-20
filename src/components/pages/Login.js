@@ -8,7 +8,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import LockIcon from '@material-ui/icons/Lock';
 import Flip from 'react-reveal/Flip';
 
-const Login = () => {
+const Login = (props) => {
     let history = useHistory();
     let location = useLocation();
     const [email, setEmail] = useState("")
@@ -33,7 +33,8 @@ const Login = () => {
             sessionStorage.setItem('token', payload.token)
             let { from } = location.state || { from: { pathname: "/submissions" } }
             history.replace(from)
-            window.location.reload()
+            let status = sessionStorage.getItem('token')
+            props.setToken(status)
         }
     }
 
@@ -41,7 +42,7 @@ const Login = () => {
       <main><center>
         <br/><br/>
         <Container>
-        <div class="backgroundjumbo">
+        <div className="backgroundjumbo">
           <center><img className="loginimg" src="./Assets/login.png" alt="Doctor Logo" /></center>
           <h1>Login</h1>
           <Form className="my-5" onSubmit={loginSubmit}>

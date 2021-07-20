@@ -121,7 +121,7 @@ const CU = () => {
                            <InputLabel htmlFor="input-with-icon-adornment">Is Admin</InputLabel>
                                 <SupervisorAccountIcon/>
                             <Tooltip title="Is this user a Admin?">
-                            <Checkbox color="primary" classname="Admin_Flag" name="Admin_Flag" id="Admin_Flag" value={Admin_Flag} onChange={e => setAdmin_Flag(e.target.value)}/>
+                            <Checkbox color="primary" className="Admin_Flag" name="Admin_Flag" id="Admin_Flag" value={Admin_Flag} onChange={e => setAdmin_Flag(e.target.checked)}/>
                             </Tooltip>
                         </Col>
                     </FormGroup>
