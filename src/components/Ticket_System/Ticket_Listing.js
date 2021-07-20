@@ -53,24 +53,18 @@ const TicketSubmissionsList = () => {
                               <Col>
                               <Card className={classes.root}>
                               <CardActionArea>
-                                <CardMedia
-                                  className={classes.media}
-                                  image="https://i.ibb.co/9hb9Skn/newmail.png"
-                                  title= {entry.Title}
-                                />
                                 <CardContent>
                                   <Typography gutterBottom variant="h5" component="h2">
-                                  {entry.Title}<br/>
+                                  Ticket ID:{entry.TicketID}<br/>
                                   </Typography>
                                   <Typography variant="body2" color="textSecondary" component="p">
-                                  {entry.Ddate}<br/><br/>
-                                  {entry.email}<br/><br/>
+                                  {entry.Date}<br/>
+                                  {entry.Username}<br/>
+                                  {entry.email}<br/>
                                   {entry.content}
                                   </Typography>
                                 </CardContent>
                               </CardActionArea>
-                              <CardActions>
-                              </CardActions>
                               </Card>
                               </Col>
                               </Bounce>

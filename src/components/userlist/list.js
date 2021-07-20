@@ -48,7 +48,7 @@ const UserList = () => {
                     <tr><td colSpan="4" className="text-center"><i>No Patients found</i></td></tr>
                 }
                 {listing.length > 0 &&
-                    listing.map(entry => <tr><td>{entry.name}</td><td>{entry.Last_Name}</td><td>{entry.DOB}</td><td>{entry.OHIP}</td><td>{entry.Phone_Number}</td><td>{entry.email}</td><td>{entry.Age}</td><td> <Button color="warning" type="submit"><EditIcon/></Button> <Button color="warning" type="submit"><DeleteForeverIcon/></Button></td></tr>)
+                    listing.map(entry => <tr><td>{entry.First_Name}</td><td>{entry.Last_Name}</td><td>{entry.DOB}</td><td>{entry.OHIP}</td><td>{entry.Phone_Number}</td><td>{entry.Email}</td><td>{entry.Age}</td><td> <Button color="warning" type="submit"><EditIcon/></Button> <Button color="warning" type="submit"><DeleteForeverIcon/></Button></td></tr>)
                 }
             </tbody>
 
