@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { Container,Col,Button} from 'reactstrap'
+import { Container,Col} from 'reactstrap'
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import Bounce from 'react-reveal/Bounce';
-import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
-
 
 const useStyles = makeStyles({
     root: {
@@ -48,6 +46,7 @@ const TicketSubmissionsList = () => {
                     {listing.length > 0 &&
                         listing.map(entry => 
                           <section>
+                            <center>
                             <Bounce left>
                               <Col>
                               <Card className={classes.root}>
@@ -64,10 +63,10 @@ const TicketSubmissionsList = () => {
                                   </Typography>
                                 </CardContent>
                               </CardActionArea>
-                              <Button color="warning" type="submit"><DeleteForeverIcon/></Button>
                               </Card>
                               </Col>
                               </Bounce>
+                            </center>
                             <br/>
                             <br/>
                           </section>)
