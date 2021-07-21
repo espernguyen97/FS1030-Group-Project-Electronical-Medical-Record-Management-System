@@ -1,35 +1,39 @@
 import React, { useState } from 'react'
 import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink, Container } from 'reactstrap'
 import { NavLink as RouteLink } from 'react-router-dom'
-import { useHistory,Redirect,Route } from "react-router-dom"
+import { useHistory, Redirect, Route } from "react-router-dom"
 
+let timeout
 
-
-
-const Navigation = () => {
-    let status = sessionStorage.getItem('token') 
+const Navigation = (props) => {
     const [isOpen, setIsOpen] = useState(false)
     const toggle = () => setIsOpen(!isOpen)
-    const [token, setToken] = useState(status)
     let history = useHistory()
 
     const logout = event => {
         event.preventDefault()
         sessionStorage.removeItem('token')
-        setToken(false)
+        props.setToken(false)
         history.push("/")
-    }
+        function stopTimeout(){
+            clearTimeout(timeout)
+        }
+        stopTimeout()
+    } 
 
-    if (status){
-        setTimeout(function (){
-            sessionStorage.removeItem('token')
-            setToken(false)
-            history.push("/login")
-            setTimeout(function(){
-                alert("Quit AFKing for so long, log back in to continue you session.")
-            }, 2000)          
-        }, 8000*10*10) 
-      }
+    if (props.token && !timeout){
+        function startTimeout(){
+            timeout = setTimeout(function (){
+                sessionStorage.removeItem('token')         
+                history.push("/login")
+                props.setToken(false)   
+                setTimeout(function(){
+                    alert("Sorry, your session has timed out. You have been logged out and returned to the login page.")
+                }, 1000) //Add small delay to alert to ensure previous lines run and complete first.      
+            }, 1000*60*60*2) //token expires after two hours
+        }
+        startTimeout()
+    } 
 
 return (
     <Navbar style={{backgroundColor: '#000', opacity: '95%'}} expand="md" fixed="top">
@@ -41,7 +45,7 @@ return (
                 <Route exact path="/">
                      <Redirect to="/submissions" />
                 </Route>
-                {token
+                {props.token
                 ? (
                 <>
                 <NavItem className="private">

@@ -1,33 +1,54 @@
-import React from 'react';
-import TextField from '@material-ui/core/TextField';
-import Autocomplete from '@material-ui/lab/Autocomplete';
+import React, { Component } from 'react'
 
-export default function Search() {
-  return (
-    <Autocomplete
-      id="combo-box-demo"
-      options={top100Films}
-      getOptionLabel={(option) => option.OHIP}
-      style={{ width: 300 }}
-      renderInput={(params) => <TextField {...params} label="OHIP Search" variant="outlined" />}
-    />
-  );
+class Search extends Component {
+  state = {
+    query: '',
+    users: []
+  }
+
+  handleSearch = event => {
+    const query = event.target.value
+
+    setTimeout(() => {
+      fetch(`https://api.github.com/search/users?q=${query}`)
+        .then(response => response.json())
+        .then(users => {
+          this.setState({
+            query,
+            users: users.items
+          })
+        })
+    }, 200)
+  }
+
+  render() {
+    const { query, users } = this.state
+
+    return (
+      <div>
+        <input type="text" name="search" onChange={this.handleSearch} />
+        <button>Search</button>
+        {query && <p>Results for: {query}</p>}
+
+        <div style={{ marginTop: 10 }}>
+          {users &&
+            users.map(user => (
+              <div key={user.id}>
+                <ul>
+                  <li>{user.login}</li>
+                  <li>
+                    <a href={user.url}>{user.url}</a>
+                  </li>
+                  <li>
+                    <img alt="Avatar" src={user.avatar_url} width={50} />
+                  </li>
+                </ul>
+              </div>
+            ))}
+        </div>
+      </div>
+    )
+  }
 }
 
-// This will eventually to loaded with Data from the DB
-const top100Films = [
-  { OHIP: '00654a6s5as6d5as6ASDASD654', DOB: 1994 },
-  { OHIP: '1654a6s5as6d5as6ASDASD654', DOB: 1972 },
-  { OHIP: '2654a6s5as6d5as6ASDASD654', DOB: 1972 },
-  { OHIP: '3654a6s5as6d5as6ASDASD654', DOB: 1973 },
-  { OHIP: '4654a6s5as6d5as6ASDASD654', DOB: 1975 },
-  { OHIP: '5654a6s5as6d5as6ASDASD654', DOB: 1977 },
-  { OHIP: '6654a6s5as6d5as6ASDASD654', DOB: 1978 },
-  { OHIP: '7654a6s5as6d5as6ASDASD654', DOB: 1970 },
-  { OHIP: '8654a6s5as6d5as6ASDASD654', DOB: 1985 },
-  { OHIP: '9654a6s5as6d5as6ASDASD654', DOB: 1982 },
-  { OHIP: '0654a6s5as6d5as6ASDASD654', DOB: 1970 },
-  { OHIP: '11654a6s5as6d5as6ASDASD654', DOB: 1955 },
-  { OHIP: '12654a6s5as6d5as6ASDASD654', DOB: 1905 },
-  { OHIP: '13654a6s5as6d5as6ASDASD654', DOB: 1912 },
-];
+export default Search

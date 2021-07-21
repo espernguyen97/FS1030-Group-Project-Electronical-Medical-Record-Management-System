@@ -4,9 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
-import CardActions from '@material-ui/core/CardActions';
 import Bounce from 'react-reveal/Bounce';
 
 const useStyles = makeStyles({
@@ -53,24 +51,18 @@ const TicketSubmissionsList = () => {
                               <Col>
                               <Card className={classes.root}>
                               <CardActionArea>
-                                <CardMedia
-                                  className={classes.media}
-                                  image="https://i.ibb.co/9hb9Skn/newmail.png"
-                                  title= {entry.Title}
-                                />
                                 <CardContent>
                                   <Typography gutterBottom variant="h5" component="h2">
-                                  {entry.Title}<br/>
+                                  Ticket ID:{entry.TicketID}<br/>
                                   </Typography>
                                   <Typography variant="body2" color="textSecondary" component="p">
-                                  {entry.Ddate}<br/><br/>
-                                  {entry.email}<br/><br/>
+                                  {entry.Date}<br/>
+                                  {entry.Username}<br/>
+                                  {entry.email}<br/>
                                   {entry.content}
                                   </Typography>
                                 </CardContent>
                               </CardActionArea>
-                              <CardActions>
-                              </CardActions>
                               </Card>
                               </Col>
                               </Bounce>
