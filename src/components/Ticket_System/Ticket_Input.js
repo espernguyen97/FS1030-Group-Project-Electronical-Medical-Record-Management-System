@@ -2,11 +2,27 @@ import React, { useState } from 'react'
 import { Form, FormGroup, Col, Input, Label, Button, Container} from 'reactstrap'
 import Tooltip from '@material-ui/core/Tooltip';
 
+const SQLDateParsed = () => {
+
+    // MySQL formatted UTC 
+    let d = new Date()
+    let SQLDate = new Date(
+    d.getFullYear(),
+    d.getMonth(),
+    d.getDate(),
+    d.getHours(),
+    (d.getMinutes()), 
+    d.getSeconds(),
+    d.getMilliseconds()
+    ).toISOString().slice(0, 19).replace('T', ' ')
+    return(SQLDate)
+    }
+
 const TicketInput = () => {
     const [email, setEmail] = useState("")
-    const [Title, setTitle] = useState("")
+    const [Username, setUsername] = useState("")
     const [content, setContent] = useState("")
-    const Ddate =  new Date();
+    const Date =  SQLDateParsed();
 
     const formSubmit = async event => {
         event.preventDefault()
@@ -16,7 +32,7 @@ const TicketInput = () => {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
               },
-            body: JSON.stringify({email,Title,content,Ddate})
+            body: JSON.stringify({email,Username,content,Date})
         })
         const payload = await response.json()
         if (response.status >= 400) {
@@ -28,7 +44,7 @@ const TicketInput = () => {
     }
     const resetForm = () => {
         setEmail("")
-        setTitle("")
+        setUsername("")
         setContent("")
     }
     return (
@@ -38,23 +54,23 @@ const TicketInput = () => {
                 <FormGroup row>
                     <Label for="emailEntry" sm={2}>Email</Label>
                     <Col sm={10}>
-                    <Tooltip title="Enter Your Email so we can contact you.">
+                    <Tooltip Username="Enter Your Email so we can contact you.">
                     <Input type="email" name="email" id="emailEntry" placeholder="Enter Your Email for records"  required value={email} onChange={e => setEmail(e.target.value) }/>
                     </Tooltip>
                     </Col>
                 </FormGroup>
                 <FormGroup row>
-                    <Label for="TitleEntry" sm={2}>Title</Label>
+                    <Label for="UsernameEntry" sm={2}>Username</Label>
                     <Col sm={10}>
-                    <Tooltip title="Enter The Title Of The ticket Here">
-                    <Input type="Title" name="Title" id="TitleEntry" placeholder="Enter the Title of your ticket" value={Title} onChange={e => setTitle(e.target.value)}/>
+                    <Tooltip Username="Enter The Username Of The ticket Here">
+                    <Input type="Username" name="Username" id="UsernameEntry" placeholder="Enter the Username of your ticket" value={Username} onChange={e => setUsername(e.target.value)}/>
                     </Tooltip>
                     </Col>
                 </FormGroup>
                 <FormGroup row>
                     <Label for="messageEntry" sm={2}>Message</Label>
                     <Col sm={10}>
-                    <Tooltip title="Fill In The Content Of Your ticket Here">
+                    <Tooltip Username="Fill In The Content Of Your ticket Here">
                     <Input type="textarea" name="text" id="messageEntry" placeholder="Enter Your ticket/Issue here"   required value={content} onChange={e => setContent(e.target.value)}/>
                     </Tooltip>
                     </Col>

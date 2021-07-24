@@ -7,14 +7,14 @@ import PersonAddIcon from '@material-ui/icons/PersonAdd';
 
 const SQLDateParsed = () => {
 
-    // MySQL formatted UTC timestamp +30 minutes
+    // MySQL formatted UTC 
     let d = new Date()
     let SQLDate = new Date(
     d.getFullYear(),
     d.getMonth(),
     d.getDate(),
     d.getHours(),
-    (d.getMinutes() + 30), // add 30 minutes
+    (d.getMinutes()), 
     d.getSeconds(),
     d.getMilliseconds()
     ).toISOString().slice(0, 19).replace('T', ' ')
