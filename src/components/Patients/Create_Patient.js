@@ -4,21 +4,39 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Tooltip from '@material-ui/core/Tooltip';
 import PersonAddIcon from '@material-ui/icons/PersonAdd';
 
+
+const SQLDateParsed = () => {
+
+    // MySQL formatted UTC timestamp +30 minutes
+    let d = new Date()
+    let SQLDate = new Date(
+    d.getFullYear(),
+    d.getMonth(),
+    d.getDate(),
+    d.getHours(),
+    (d.getMinutes() + 30), // add 30 minutes
+    d.getSeconds(),
+    d.getMilliseconds()
+    ).toISOString().slice(0, 19).replace('T', ' ')
+    return(SQLDate)
+    }
+
 const PatientCreate = () => {
     const token = sessionStorage.getItem('token')
-    const [name, setName] = useState("")
+    const [First_Name, setFirst_Name] = useState("")
     const [Last_Name, setLast_Name] = useState("")
     const [DOB, setDOB] = useState("")
     const [OHIP, setOHIP] = useState("")
     const [Address, setAddress] = useState("")
     const [City, setCity] = useState("")
     const [Province, setProvince] = useState("")
-    const [Postal, setPostal] = useState("")
+    const [PostalCode, setPostalCode] = useState("")
     const [Phone_Number, setPhone_Number] = useState("")
-    const [email, setEmail] = useState("")
+    const [Email, setEmail] = useState("")
     const [Age, setAge] = useState("")
     const [alertContent, setAlertContent] = useState(null)
-    const Ddate =  new Date();
+    const Last_edit =  SQLDateParsed();
+
 
     const formSubmit = async (event) => {
         event.preventDefault()
@@ -30,7 +48,7 @@ const PatientCreate = () => {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({name, Last_Name, DOB,OHIP,Address,City,Province,Postal,Phone_Number,email,Age,Ddate})
+            body: JSON.stringify({First_Name, Last_Name, DOB,OHIP,Address,City,Province,PostalCode,Phone_Number,Email,Age,Last_edit})
         })
         const payload = await response.json()
         if (response.status >= 400) {
@@ -43,14 +61,14 @@ const PatientCreate = () => {
     }
 
     const resetForm = () => {
-        setName("")
+        setFirst_Name("")
         setLast_Name("")
         setDOB("")
         setOHIP("")
         setAddress("")
         setCity("")
         setProvince("")
-        setPostal("")
+        setPostalCode("")
         setPhone_Number("")
         setEmail("")
         setAge("")
@@ -68,7 +86,7 @@ const PatientCreate = () => {
                         <Col>
                            <InputLabel><b>First Name</b></InputLabel>
                             <Tooltip title="Enter The Patients First Name Here">
-                           <Input type="name" name="name" id="nameEntry" placeholder="First Name Here" required value={name} onChange={e => setName(e.target.value)}/>
+                           <Input type="First_Name" name="First_Name" id="First_Name" placeholder="First Name Here" required value={First_Name} onChange={e => setFirst_Name(e.target.value)}/>
                             </Tooltip>
                         </Col>
                     </FormGroup>
@@ -130,7 +148,7 @@ const PatientCreate = () => {
                         <Col>
                            <InputLabel><b>Postal Code</b></InputLabel>
                             <Tooltip title="Enter The Patients Postal Code">
-                            <Input type="Postal"  name="Postal" id="Postal" placeholder=" Postal Code Here"  required value={Postal} onChange={e => setPostal(e.target.value) }/>
+                            <Input type="PostalCode"  name="PostalCode" id="PostalCode" placeholder=" Postal Code Here"  required value={PostalCode} onChange={e => setPostalCode(e.target.value) }/>
                             </Tooltip>
                         </Col>
                     </FormGroup>
@@ -148,7 +166,7 @@ const PatientCreate = () => {
                         <Col>
                            <InputLabel><b>Email Address</b></InputLabel>
                             <Tooltip title="Enter the Patient Contact Email">
-                            <Input type="email" name="email" id="emailEntry" placeholder="Patient Email"  required value={email} onChange={e => setEmail(e.target.value) }/>
+                            <Input type="Email" name="Email" id="EmailEntry" placeholder="Patient Email"  required value={Email} onChange={e => setEmail(e.target.value) }/>
                             </Tooltip>
                         </Col>
                     </FormGroup>
