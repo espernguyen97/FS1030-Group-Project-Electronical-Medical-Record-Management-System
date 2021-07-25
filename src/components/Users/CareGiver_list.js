@@ -48,7 +48,7 @@ const CareGiverList = () => {
                     <tr><td colSpan="4" className="text-center"><i>No Users found</i></td></tr>
                 }
                 {listing.length > 0 &&
-                    listing.map(entry => <tr><td>{entry.First_Name}</td><td>{entry.Last_Name}</td><td>{entry.Email}</td><td>{entry.Username}</td><td>{entry.Email}</td><td>{entry.Job_Position}</td><td>{entry.Admin_Flag}</td><td> <Button color="warning" type="submit"><EditIcon/></Button> <Button color="warning" type="submit"><DeleteForeverIcon/></Button></td></tr>)
+                    listing.map(entry => <tr><td>{entry.First_Name}</td><td>{entry.Last_Name}</td><td>{entry.Email}</td><td>{entry.Username}</td><td>{entry.Email}</td><td>{entry.Job_Position}</td><td>{entry.Admin_Flag}</td><td> <Button color="primary" type="submit"><EditIcon/></Button> <Button color="danger" type="submit"><DeleteForeverIcon/></Button></td></tr>)
                 }
             </tbody>
 

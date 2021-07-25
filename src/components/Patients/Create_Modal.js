@@ -53,7 +53,7 @@ export default function PatientCreateModal() {
 
   return (
     <div>
-      <Button color="warning" type="button" onClick={handleOpen}>
+      <Button color="primary" type="button" onClick={handleOpen}>
        <PersonAddIcon/> Create New Patient
       </Button>
       <Modal

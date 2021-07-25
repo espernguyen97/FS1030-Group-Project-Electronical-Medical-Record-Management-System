@@ -50,6 +50,7 @@ const TicketInput = () => {
     return (
         <Container className="container">
           <center>
+                <img className="banner" src="assets/supportbanner.png" alt="#" />
                 <Form className="my-5" onSubmit={formSubmit}>
                 <FormGroup row>
                     <Label for="emailEntry" sm={2}>Email</Label>
@@ -77,7 +78,7 @@ const TicketInput = () => {
                 </FormGroup>
                 <FormGroup check row>
                     <Col sm={{ size: 10, offset: 2 }}>
-                    <center><Button color="warning" >Submit</Button></center>
+                    <center><Button color="primary" >Submit</Button></center>
                     </Col>
                 </FormGroup>
             </Form>

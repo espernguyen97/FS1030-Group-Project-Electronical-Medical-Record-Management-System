@@ -140,7 +140,7 @@ export default function App() {
         <p style={{fontStyle: "italic"}}>Strong passwords are longer than eight characters, are hard to guess and contain a variety of characters, numbers and special symbols. The best ones can be difficult to remember, especially if you're using a distinct login for every site (which is recommended).</p>
         <center>
           <Tooltip title="Enable at least 1 of the options above then click This button to generate a password">
-              <Button color="warning"  onClick={handleGeneration}>
+              <Button color="primary"  onClick={handleGeneration}>
                 {Object.values(settings).every(isFalse)
                   ? "SELECT AN OPTION"
                   : "GENERATE PASSWORD"}

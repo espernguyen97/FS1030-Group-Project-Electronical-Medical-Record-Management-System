@@ -2,8 +2,8 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import {Button} from 'reactstrap'
-import PersonAddIcon from '@material-ui/icons/PersonAdd';
-import CareGiverList from '../userlist/CareGiver_list';
+import CareGiverList from './CareGiver_list';
+import FormatListBulletedIcon from '@material-ui/icons/FormatListBulleted';
 
 function rand() {
   return Math.round(Math.random() * 1) - 1;
@@ -53,8 +53,8 @@ export default function UserlistModal() {
 
   return (
     <div>
-      <Button color="warning" type="button" onClick={handleOpen}>
-       <PersonAddIcon/> View UserList
+      <Button color="primary" type="button" onClick={handleOpen}>
+       <FormatListBulletedIcon/> View UserList
       </Button>
       <Modal
         open={open}

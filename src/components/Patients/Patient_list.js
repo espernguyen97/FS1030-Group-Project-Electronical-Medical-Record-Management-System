@@ -5,7 +5,7 @@ import { Table,Button,Row } from 'reactstrap';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import EditIcon from '@material-ui/icons/Edit';
 
-const UserList = () => {
+const PatientList = () => {
     const token = sessionStorage.getItem('token')
     const user = parseJwt(token).username
     const [listing, setListing] = useState([])
@@ -48,7 +48,7 @@ const UserList = () => {
                     <tr><td colSpan="4" className="text-center"><i>No Patients found</i></td></tr>
                 }
                 {listing.length > 0 &&
-                    listing.map(entry => <tr><td>{entry.First_Name}</td><td>{entry.Last_Name}</td><td>{entry.DOB}</td><td>{entry.OHIP}</td><td>{entry.Phone_Number}</td><td>{entry.Email}</td><td>{entry.Age}</td><td> <Button color="warning" type="submit"><EditIcon/></Button> <Button color="warning" type="submit"><DeleteForeverIcon/></Button></td></tr>)
+                    listing.map(entry => <tr><td>{entry.First_Name}</td><td>{entry.Last_Name}</td><td>{entry.DOB}</td><td>{entry.OHIP}</td><td>{entry.Phone_Number}</td><td>{entry.Email}</td><td>{entry.Age}</td><td> <Button color="primary" type="submit"><EditIcon/></Button> <Button color="danger" type="submit"><DeleteForeverIcon/></Button></td></tr>)
                 }
             </tbody>
 
@@ -60,4 +60,4 @@ const UserList = () => {
 )
 }
 
-export default UserList
+export default PatientList

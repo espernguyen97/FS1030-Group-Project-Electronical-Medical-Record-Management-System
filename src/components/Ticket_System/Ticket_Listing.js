@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import { Container,Col} from 'reactstrap'
+import { Container,Col,Button} from 'reactstrap'
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import Bounce from 'react-reveal/Bounce';
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 
 const useStyles = makeStyles({
     root: {
@@ -52,7 +53,7 @@ const TicketSubmissionsList = () => {
                               <Card className={classes.root}>
                               <CardActionArea>
                                 <CardContent>
-                                  <Typography gutterBottom variant="h5" component="h2">
+                                  <Typography gutterBottom variant="h5" component="h2"><Button color="danger" type="submit"><DeleteForeverIcon/></Button>
                                   Ticket ID:{entry.TicketID}<br/>
                                   </Typography>
                                   <Typography variant="body2" color="textSecondary" component="p">
@@ -65,6 +66,7 @@ const TicketSubmissionsList = () => {
                               </CardActionArea>
                               </Card>
                               </Col>
+                                
                               </Bounce>
                             </center>
                             <br/>

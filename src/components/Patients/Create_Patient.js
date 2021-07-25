@@ -185,7 +185,7 @@ const PatientCreate = () => {
                     <FormGroup check row>
                         <Col>
                             <p style={{fontStyle: "italic"}}>Fill out all fields to create a Patient</p>
-                            <Button color="warning" type="submit"><PersonAddIcon/>Create Patient</Button>
+                            <Button color="primary" type="submit"><PersonAddIcon/>Create Patient</Button>
                         </Col>
                     </FormGroup>
                 </Form>

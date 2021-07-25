@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Container, Col,Button, Form, FormGroup} from 'reactstrap'
+import { Container, Col,Button, Form, FormGroup,Row} from 'reactstrap'
 import Input from '@material-ui/core/Input';
 import { useHistory, useLocation } from 'react-router-dom'
 import Tooltip from '@material-ui/core/Tooltip';
@@ -7,6 +7,7 @@ import PersonIcon from '@material-ui/icons/Person';
 import InputLabel from '@material-ui/core/InputLabel';
 import LockIcon from '@material-ui/icons/Lock';
 import Flip from 'react-reveal/Flip';
+import ForgotPassword from '../Forgotpw';
 
 const Login = (props) => {
     let history = useHistory();
@@ -64,8 +65,15 @@ const Login = (props) => {
                         <Input type="password" name="password" id="passwordEntry" placeholder="Valid password" onChange={e => setPassword(e.target.value)}/>
                         </Tooltip>
               </Col>
-            </FormGroup>
-            <Button color="warning">Sign in</Button>
+            </FormGroup><br/><br/>
+            <Row>
+              <Col>
+            <Button color="primary">Sign in</Button>
+              </Col>
+              <Col>
+            <ForgotPassword buttonLabel="Forgot Password" />
+              </Col>
+            </Row>
           </Form>
           </div>
         </Container>

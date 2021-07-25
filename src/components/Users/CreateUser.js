@@ -10,18 +10,33 @@ import Checkbox from '@material-ui/core/Checkbox';
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 import LocalHospitalIcon from '@material-ui/icons/LocalHospital';
 
+const SQLDateParsed = () => {
 
-const CU = () => {
+    // MySQL formatted UTC 
+    let d = new Date()
+    let SQLDate = new Date(
+    d.getFullYear(),
+    d.getMonth(),
+    d.getDate(),
+    d.getHours(),
+    (d.getMinutes()), 
+    d.getSeconds(),
+    d.getMilliseconds()
+    ).toISOString().slice(0, 19).replace('T', ' ')
+    return(SQLDate)
+    }
+
+const CreateUser = () => {
     const token = sessionStorage.getItem('token')
-    const [firstName, setfirstName] = useState("")
-    const [email, setEmail] = useState("")
-    const [jobPosition, setjobPosition] = useState("")
-    const [username, setusername] = useState("")
+    const [First_Name, setFirst_Name] = useState("")
+    const [Email, setEmail] = useState("")
+    const [Job_Position, setJob_Position] = useState("")
+    const [Username, setUsername] = useState("")
     const [Admin_Flag, setAdmin_Flag] = useState("")
-    const [lastName, setlastName] = useState("")
-    const [password, setPassword] = useState("")
+    const [Last_Name, setLast_Name] = useState("")
+    const [Password, setPassword] = useState("")
     const [alertContent, setAlertContent] = useState(null)
-    const Ddate =  new Date();
+    const Last_Login =  SQLDateParsed();
 
     const formSubmit = async (event) => {
         event.preventDefault()
@@ -33,11 +48,11 @@ const CU = () => {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({username,firstName,lastName, email,jobPosition, password,Admin_Flag,Ddate})
+            body: JSON.stringify({Username,First_Name,Last_Name, Email,Job_Position, Password,Admin_Flag,Last_Login})
         })
         const payload = await response.json()
         if (response.status >= 400) {
-            setAlertContent(`Error with fields: ${payload.invalid.join(",")}`)
+            setAlertContent(`Error with fields: ${payload.invalid(",")}`)
         } else {
             setAlertContent(null)
             alert(`Care Giver Was Created!`)
@@ -46,27 +61,27 @@ const CU = () => {
     }
 
     const resetForm = () => {
-        setfirstName("")
+        setFirst_Name("")
         setEmail("")
-        setlastName("")
-        setusername("")
+        setLast_Name("")
+        setUsername("")
         setPassword("")
         setAdmin_Flag("")
-        setjobPosition("")
+        setJob_Position("")
     }
    
     return (
         <main>
             <Container className="containerCU">
                 <center>
-                <h2>New Care Giver</h2>
+                <img className="banner" src="assets/caregiverbanner.png" alt="#" />
                 <Form className="my-5" onSubmit={formSubmit}>
                     <FormGroup row>
                         <Col sm={10}>
                            <InputLabel htmlFor="input-with-icon-adornment">User Name</InputLabel>
                                 <PersonIcon/> 
                             <Tooltip title="Enter The User Name Here">
-                           <Input  name="username" id="username" placeholder="Enter The User Name Here" required value={username} onChange={e => setusername(e.target.value)}/>
+                           <Input  name="Username" id="Username" placeholder="Enter The User Name Here" required value={Username} onChange={e => setUsername(e.target.value)}/>
                             </Tooltip>
                         </Col>
                     </FormGroup>
@@ -75,7 +90,7 @@ const CU = () => {
                            <InputLabel htmlFor="input-with-icon-adornment">First Name</InputLabel>
                                 <PersonIcon/> 
                             <Tooltip title="Enter The Doctors Name Here">
-                           <Input  name="firstName" id="firstName" placeholder="Doctors First Name Here" required value={firstName} onChange={e => setfirstName(e.target.value)}/>
+                           <Input  name="First_Name" id="First_Name" placeholder="Doctors First Name Here" required value={First_Name} onChange={e => setFirst_Name(e.target.value)}/>
                             </Tooltip>
                         </Col>
                     </FormGroup>
@@ -84,7 +99,7 @@ const CU = () => {
                            <InputLabel htmlFor="input-with-icon-adornment">Last Name</InputLabel>
                                 <PersonIcon/> 
                             <Tooltip title="Enter The Doctors Name Here">
-                           <Input name="lastName" id="lastName" placeholder="Doctors Last Name Here" required value={lastName} onChange={e => setlastName(e.target.value)}/>
+                           <Input name="Last_Name" id="Last_Name" placeholder="Doctors Last Name Here" required value={Last_Name} onChange={e => setLast_Name(e.target.value)}/>
                             </Tooltip>
                         </Col>
                     </FormGroup>
@@ -93,7 +108,7 @@ const CU = () => {
                            <InputLabel htmlFor="input-with-icon-adornment">Email Address</InputLabel>
                                 <AlternateEmailIcon/>
                             <Tooltip title="Enter The Email That Will Be Used To Login">
-                            <Input type="email" name="email" id="emailEntry" placeholder="This is used to Login"  required value={email} onChange={e => setEmail(e.target.value) }/>
+                            <Input type="Email" name="Email" id="EmailEntry" placeholder="This is used to Login"  required value={Email} onChange={e => setEmail(e.target.value) }/>
                             </Tooltip>
                         </Col>
                     </FormGroup>
@@ -102,7 +117,7 @@ const CU = () => {
                            <InputLabel htmlFor="input-with-icon-adornment">Job Position</InputLabel>
                                 <LocalHospitalIcon/>
                             <Tooltip title="Enter Users Job Position">
-                            <Input name="jobPosition" id="jobPosition" placeholder="Enter Users Job Position"  required value={jobPosition} onChange={e => setjobPosition(e.target.value) }/>
+                            <Input name="Job_Position" id="Job_Position" placeholder="Enter Users Job Position"  required value={Job_Position} onChange={e => setJob_Position(e.target.value) }/>
                             </Tooltip>
                         </Col>
                     </FormGroup>
@@ -111,11 +126,10 @@ const CU = () => {
                            <InputLabel htmlFor="input-with-icon-adornment">Password</InputLabel>
                                 <LockIcon/>
                             <Tooltip title="12 Character Minimum">
-                            <Input classname="pwfield" type="password" name="password" id="passwordEntry"  placeholder="12 Character Minimum"   value={password} onChange={e => setPassword(e.target.value)}/>
+                            <Input classname="pwfield" type="Password" name="Password" id="Password"  placeholder="12 Character Minimum"   value={Password} onChange={e => setPassword(e.target.value)}/>
                             </Tooltip>
                         </Col>
                     </FormGroup>
-                    {/*Admin flag is not registering full I belive we need to set a state for it when it is clicked and not and push that somehow getting Tired lol- Dave*/}
                     <FormGroup row>
                         <Col sm={10}>
                            <InputLabel htmlFor="input-with-icon-adornment">Is Admin</InputLabel>
@@ -129,7 +143,7 @@ const CU = () => {
                     <FormGroup check row>
                         <Col>
                             <p style={{fontStyle: "italic"}}>Fill out all fields to create a new Admin</p>
-                            <Button color="warning" type="submit">Create New Doctor</Button>
+                            <Button color="primary" type="submit">Create New Doctor</Button>
                         </Col>
                     </FormGroup>
                 </Form>
@@ -139,4 +153,4 @@ const CU = () => {
     )
 }
 
-export default CU
+export default CreateUser

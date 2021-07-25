@@ -1,7 +1,7 @@
 import React from 'react';
 import Container from '@material-ui/core/Container';
 import { Row,Col} from 'reactstrap';
-import UserList from '../userlist/Patient_list';
+import PatientList from '../Patients/Patient_list';
 import Search from '../search';
 import PatientCreateModal from '../Patients/Create_Modal';
 
@@ -17,7 +17,7 @@ export default function Patients() {
             <Row className="my-5">
                 <Col>
                   <Search/>{/* search bar*/}
-                  <UserList/> {/* userlist*/}
+                  <PatientList/> {/* userlist*/}
                 </Col>
             </Row>
         <hr class="yellow"/>
