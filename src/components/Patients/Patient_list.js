@@ -29,7 +29,7 @@ const PatientList = () => {
   const patientEditRoute = (event, patient) => {
       event.preventDefault();
       let path = `/patients/${patient.PatientID}`
-      history.push(path);
+      history.push(path, patient);
   }
 
   return (

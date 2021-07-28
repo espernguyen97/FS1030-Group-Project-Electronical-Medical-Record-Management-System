@@ -1,90 +1,216 @@
 import React, { useEffect, useState } from "react";
+import { useHistory } from "react-router";
 import Container from "@material-ui/core/Container";
-import { Row, Col, FormGroup, Label, Input } from "reactstrap";
+import {
+  Form,
+  ButtonToggle,
+  Row,
+  Col,
+  FormGroup,
+  Label,
+  Input,
+} from "reactstrap";
 
 const EditPatient = (props) => {
   let id = props.match.params.id;
+  let editPatient = props.location.state;
+  const history = useHistory();
   const token = sessionStorage.getItem("token");
-  const [patient, setPatient] = useState([]);
-   
+  // const [patient, setPatient] = useState([]);
+  const [patient, setPatient] = useState({
+    DOB: `${editPatient.DOB}`,
+    OHIP: `${editPatient.OHIP}`,
+    First_Name: `${editPatient.First_Name}`,
+    Last_Name: `${editPatient.Last_Name}`,
+    Email: `${editPatient.Email}`,
+    Address: `${editPatient.Address}`,
+    City: `${editPatient.City}`,
+    Province: `${editPatient.Province}`,
+    PostalCode: `${editPatient.PostalCode}`,
+    Phone_Number: `${editPatient.Phone_Number}`,
+  });
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await fetch(`http://localhost:4000/patients/${id}`, {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      const data = await response.json();
-      setPatient(data);
-    };
-    fetchData();
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     const response = await fetch(`http://localhost:4000/patients/${id}`, {
+  //       method: "GET",
+  //       headers: {
+  //         Authorization: `Bearer ${token}`,
+  //       },
+  //     });
+  //     const data = await response.json();
+  //     setPatient(data);
+  //   };
+  //   fetchData();
+  //   console.log(patient);
+  // }, [id]);
+
+  const handleSubmit = (event) => {
+    console.log(patient);
+    event.preventDefault();
+    fetch(`http://localhost:4000/patients/${id}`, {
+      method: "PATCH",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+
+      //make sure to serialize your JSON body
+      body: JSON.stringify(patient),
+    }).then((response) => response.json());
+    history.push("/Patients");
+  };
+
+  const handleChange = (event) => {
+    event.persist();
+    console.log(event.target.name)
+    console.log(event.target.value)
+    setPatient((prevState) => ({
+      ...prevState,
+      [event.target.name]: event.target.value,
+    }));
+    console.log(event.target.name)
+    console.log(event.target.value)
+    console.log(event.target)
     console.log(patient)
-  }, [id]);
+  };
 
   return (
     <div className="main-panel">
-      {patient.map((patient) => (
+      {/* {patient.map((patient) => ( */}
         <Container className="my-5" fixed>
-          <Row form>
-            <Col md={6}>
-              <FormGroup>
-                <Label>Date of Birth</Label>
-                <Input type="text" name="dateofbirth" id="dob" value={patient.DOB}/>
-              </FormGroup>
-            </Col>
-            <Col md={6}>
-              <FormGroup>
-                <Label>OHIP Number</Label>
-                <Input type="text" name="ohip" id="ohip" value={patient.OHIP}/>
-              </FormGroup>
-            </Col>
-          </Row>
-          <Row form>
-            <Col md={6}>
-              <FormGroup>
-                <Label>First Name</Label>
-                <Input type="text" name="firstName" id="firstName" defaultValue={patient.First_Name} onChange={(e) => e.target.value}/>
-              </FormGroup>
-            </Col>
-            <Col md={6}>
-              <FormGroup>
-                <Label>Last Name</Label>
-                <Input type="text" name="lastName" id="lastName" value={patient.Last_Name}/>
-              </FormGroup>
-            </Col>
-          </Row>
-          <FormGroup>
-            <Label>Email</Label>
-            <Input type="email" name="email" id="email" value={patient.Email}/>
-          </FormGroup>
-          <FormGroup>
-            <Label>Address</Label>
-            <Input type="text" name="address" id="address" value={patient.Address}/>
-          </FormGroup>
-          <Row form>
-            <Col md={6}>
-              <FormGroup>
-                <Label>City</Label>
-                <Input type="text" name="city" id="city" value={patient.City}/>
-              </FormGroup>
-            </Col>
-            <Col md={4}>
-              <FormGroup>
-                <Label>Province</Label>
-                <Input type="text" name="province" id="province" value={patient.Province}/>
-              </FormGroup>
-            </Col>
-            <Col md={2}>
-              <FormGroup>
-                <Label>Postal Code</Label>
-                <Input type="text" name="postalcode" id="postalcode" value={patient.PostalCode}/>
-              </FormGroup>
-            </Col>
-          </Row>
+          <Form onSubmit={(e) => handleSubmit(e)}>
+            <Row form>
+              <Col md={6}>
+                <FormGroup>
+                  <Label>Date of Birth</Label>
+                  <Input
+                    type="text"
+                    name="DOB"
+                    id="dob"
+                    defaultValue={patient.DOB}
+                    onChange={handleChange}
+                  />
+                </FormGroup>
+              </Col>
+              <Col md={6}>
+                <FormGroup>
+                  <Label>OHIP Number</Label>
+                  <Input
+                    type="text"
+                    name="OHIP"
+                    id="ohip"
+                    defaultValue={patient.OHIP}
+                    onChange={handleChange}
+                  />
+                </FormGroup>
+              </Col>
+            </Row>
+            <Row form>
+              <Col md={6}>
+                <FormGroup>
+                  <Label>First Name</Label>
+                  <Input
+                    type="text"
+                    name="First_Name"
+                    id="firstName"
+                    defaultValue={patient.First_Name}
+                    onChange={handleChange}
+                  />
+                </FormGroup>
+              </Col>
+              <Col md={6}>
+                <FormGroup>
+                  <Label>Last Name</Label>
+                  <Input
+                    type="text"
+                    name="Last_Name"
+                    id="lastName"
+                    defaultValue={patient.Last_Name}
+                    onChange={handleChange}
+                  />
+                </FormGroup>
+              </Col>
+            </Row>
+            <Row form>
+              <Col md={6}>
+                <FormGroup>
+                  <Label>Email</Label>
+                  <Input
+                    type="email"
+                    name="Email"
+                    id="email"
+                    defaultValue={patient.Email}
+                    onChange={handleChange}
+                  />
+                </FormGroup>
+              </Col>
+              <Col md={6}>
+                <FormGroup>
+                  <Label>Phone Number</Label>
+                  <Input
+                    type="tel"
+                    name="Phone_Number"
+                    id="tel"
+                    defaultValue={patient.Phone_Number}
+                    onChange={handleChange}
+                  />
+                </FormGroup>
+              </Col>
+            </Row>
+            <FormGroup>
+              <Label>Address</Label>
+              <Input
+                type="text"
+                name="Address"
+                id="address"
+                defaultValue={patient.Address}
+                onChange={handleChange}
+              />
+            </FormGroup>
+            <Row form>
+              <Col md={6}>
+                <FormGroup>
+                  <Label>City</Label>
+                  <Input
+                    type="text"
+                    name="City"
+                    id="city"
+                    defaultValue={patient.City}
+                    onChange={handleChange}
+                  />
+                </FormGroup>
+              </Col>
+              <Col md={4}>
+                <FormGroup>
+                  <Label>Province</Label>
+                  <Input
+                    type="text"
+                    name="Province"
+                    id="province"
+                    defaultValue={patient.Province}
+                    onChange={handleChange}
+                  />
+                </FormGroup>
+              </Col>
+              <Col md={2}>
+                <FormGroup>
+                  <Label>Postal Code</Label>
+                  <Input
+                    type="text"
+                    name="PostalCode"
+                    id="postalcode"
+                    defaultValue={patient.PostalCode}
+                    onChange={handleChange}
+                  />
+                </FormGroup>
+              </Col>
+            </Row>
+            <ButtonToggle type="submit" color="primary">Submit</ButtonToggle>
+          </Form>
         </Container>
-      ))}
+      {/* ))} */}
     </div>
   );
 };

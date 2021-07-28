@@ -10,7 +10,7 @@ export default function Patients() {
       <div className="main-panel">
         <Container fixed>
           <center>
-        <hr class="yellow"/>
+        <hr className="yellow"/>
             <Col>
               <PatientCreateModal/>
             </Col>
@@ -20,7 +20,7 @@ export default function Patients() {
                   <PatientList/> {/* userlist*/}
                 </Col>
             </Row>
-        <hr class="yellow"/>
+        <hr className="yellow"/>
         </center>
         </Container>
       </div>
