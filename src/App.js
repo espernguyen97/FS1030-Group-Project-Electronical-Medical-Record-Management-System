@@ -9,6 +9,7 @@ import Caregivers from './components/pages/CareGivers'
 import SubmitTicket from './components/pages/SubmitTicket'
 import TicketList from './components/pages/Tickets'
 import Patients from './components/pages/Patients'
+import EditPatient from './components/pages/EditPatient'
 import PrivateRoute from './components/shared/PrivateRoute'
 import NotFound from './components/404';
 import SideNav from './components/shared/SideNav'
@@ -28,12 +29,13 @@ function App() {
           </Route>
           <PrivateRoute>
             <SideNav />
-            <PrivateRoute component={Listing} path="/submissions" />
-            <PrivateRoute component={Caregivers} path="/CareGivers" />
-            <PrivateRoute component={SubmitTicket} path="/Submit_Ticket" />
-            <PrivateRoute component={TicketList} path="/Tickets" />
-            <PrivateRoute component={Patients} path="/Patients" />
-            <PrivateRoute component={Caregivers} path="/logout" />
+            <PrivateRoute component={Listing} exact path="/submissions" />
+            <PrivateRoute component={Caregivers} exact path="/caregivers" />
+            <PrivateRoute component={SubmitTicket} exact path="/submit_ticket" />
+            <PrivateRoute component={TicketList} exact path="/tickets" />
+            <PrivateRoute component={EditPatient} exact path="/patients/:id" />
+            <PrivateRoute component={Patients} exact path="/patients" />
+            <PrivateRoute component={Caregivers} exact path="/logout" />
           </PrivateRoute>
           <Route path="*" component={NotFound} />
         </Switch>
