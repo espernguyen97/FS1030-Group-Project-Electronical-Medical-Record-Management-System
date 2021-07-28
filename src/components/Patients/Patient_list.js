@@ -33,6 +33,22 @@ const PatientList = () => {
       history.push(path, patient);
   }
 
+  const patientDelete = async (event, patient) => {
+    event.preventDefault()
+    console.log(patient)
+    const response = await fetch(`http://localhost:4000/patients/${patient.PatientID}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    })
+    const data = await response.json();
+    console.log(data)
+    window.location.reload();
+  }
+
   return (
     <Container className="mainContent">
       <Row className="userTitle">
@@ -77,7 +93,7 @@ const PatientList = () => {
                   <Button color="primary" onClick={(e) => patientEditRoute(e, patient)}>
                     <EditIcon />
                   </Button>
-                  <Button color="danger">
+                  <Button color="danger" onClick={(e) => patientDelete(e, patient)}>
                     <DeleteForeverIcon />
                   </Button>
                 </td>
