@@ -13,6 +13,7 @@ const Navigation = (props) => {
     const logout = event => {
         event.preventDefault()
         sessionStorage.removeItem('token')
+        sessionStorage.removeItem('currentUser')
         props.setToken(false)
         props.setUser(false)
         history.push("/")
@@ -25,7 +26,8 @@ const Navigation = (props) => {
     if (props.token && !timeout){
         function startTimeout(){
             timeout = setTimeout(function (){
-                sessionStorage.removeItem('token')         
+                sessionStorage.removeItem('token')   
+                sessionStorage.removeItem('currentUser')      
                 history.push("/login")
                 props.setToken(false)  
                 props.setUser(false) 

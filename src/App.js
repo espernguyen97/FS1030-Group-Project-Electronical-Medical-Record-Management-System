@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import './App.css'
 import Navigation from './components/shared/Navigation'
 import Footer from './components/shared/footer'
@@ -21,13 +21,18 @@ function App() {
   const [token, setToken] = useState(false)
   const [user, setUser] = useState(false)
 
+  useEffect(() => {
+    setToken(sessionStorage.getItem('token'))
+    setUser(JSON.parse(sessionStorage.getItem('currentUser')))
+  }, []) //I added this effect to prevent any window refresh from resetting the states above back to their default false values. SW
+
   return (
    <BrowserRouter>
         <CssBaseline />
         <Navigation token={token} setToken={setToken} user={user} setUser={setUser}/>
         <Switch>
           <Route exact path="/login">
-            <Login token={token} setToken={setToken} setUser={setUser}/>
+            <Login setToken={setToken} setUser={setUser}/>
           </Route>
           <PrivateRoute>
             <SideNav />

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Container, Col,Button, Form, FormGroup,Row} from 'reactstrap'
 import Input from '@material-ui/core/Input';
-import { useHistory, useLocation } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import Tooltip from '@material-ui/core/Tooltip';
 import PersonIcon from '@material-ui/icons/Person';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -11,7 +11,6 @@ import ForgotPassword from '../Forgotpw';
 
 const Login = (props) => {
     let history = useHistory();
-    let location = useLocation();
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [alertContent, setAlertContent] = useState(null)
@@ -33,8 +32,6 @@ const Login = (props) => {
             setAlertContent('Wrong Info Given Please Try Again')
         } else {
             sessionStorage.setItem('token', payload.token)
-            let { from } = location.state || { from: { pathname: "/submissions" } }
-            history.replace(from)
             let status = sessionStorage.getItem('token')
             props.setToken(status)
             //Second fetch request to get current user by email
@@ -50,7 +47,13 @@ const Login = (props) => {
             }
             const currentUser = await response2.json()
             delete currentUser.Password
+            sessionStorage.setItem('currentUser', JSON.stringify(currentUser))
             props.setUser(currentUser)
+            if (currentUser.Admin_Flag) {
+              history.push("/CareGivers")
+            } else {
+              history.push("/Patients")
+            }
         }
     }
 

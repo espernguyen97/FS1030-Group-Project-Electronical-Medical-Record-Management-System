@@ -47,9 +47,6 @@ export default function App() {
     <div className="containerpw">
       <form className="generator-form">
         <h2 className="title"> Password Generator</h2>
-        <div className="card">
-          <h3 className="generatedPassword"><LockOpenIcon/>{generatedPassword}</h3>
-        </div>
         <div className="password-length">
           <p>LENGTH: {length}</p>
         </div>
@@ -138,6 +135,10 @@ export default function App() {
         </div>
         <br/>
         <p style={{fontStyle: "italic"}}>Strong passwords are longer than eight characters, are hard to guess and contain a variety of characters, numbers and special symbols. The best ones can be difficult to remember, especially if you're using a distinct login for every site (which is recommended).</p>
+        <div className="card">
+          <h3 className="generatedPassword"><LockOpenIcon/>{generatedPassword}</h3>
+        </div>
+        <br/>
         <center>
           <Tooltip title="Enable at least 1 of the options above then click This button to generate a password">
               <Button color="primary"  onClick={handleGeneration}>

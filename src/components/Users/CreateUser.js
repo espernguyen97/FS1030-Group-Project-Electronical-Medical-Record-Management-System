@@ -32,7 +32,7 @@ const CreateUser = () => {
     const [Email, setEmail] = useState("")
     const [Job_Position, setJob_Position] = useState("")
     const [Username, setUsername] = useState("")
-    const [Admin_Flag, setAdmin_Flag] = useState("")
+    const [Admin_Flag, setAdmin_Flag] = useState(false)
     const [Last_Name, setLast_Name] = useState("")
     const [Password, setPassword] = useState("")
     const [alertContent, setAlertContent] = useState(null)
@@ -48,7 +48,7 @@ const CreateUser = () => {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({Username,First_Name,Last_Name, Email,Job_Position, Password,Admin_Flag,Last_Login})
+            body: JSON.stringify({Username, First_Name, Last_Name, Email, Job_Position, Password, Admin_Flag, Last_Login})
         })
         const payload = await response.json()
         if (response.status >= 400) {

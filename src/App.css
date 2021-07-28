@@ -79,9 +79,14 @@ p#user-info {
   margin: 0;
   padding-right: 2.5rem;
   line-height: 2.5;
+  width: max-content;
 }
 
-
+a.navbar-brand {
+  text-align: center;
+  margin: 0 auto;
+  width: 100vw;
+}
 
 
   /* BELOW IS CONSOLIDATED FROM PWGEN.CSS*/
