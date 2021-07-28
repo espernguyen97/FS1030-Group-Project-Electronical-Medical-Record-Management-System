@@ -14,6 +14,7 @@ const Navigation = (props) => {
         event.preventDefault()
         sessionStorage.removeItem('token')
         props.setToken(false)
+        props.setUser(false)
         history.push("/")
         function stopTimeout(){
             clearTimeout(timeout)
@@ -26,7 +27,8 @@ const Navigation = (props) => {
             timeout = setTimeout(function (){
                 sessionStorage.removeItem('token')         
                 history.push("/login")
-                props.setToken(false)   
+                props.setToken(false)  
+                props.setUser(false) 
                 setTimeout(function(){
                     alert("Sorry, your session has timed out. You have been logged out and returned to the login page.")
                 }, 1000) //Add small delay to alert to ensure previous lines run and complete first.      
@@ -45,6 +47,11 @@ return (
                 <Route exact path="/">
                      <Redirect to="/submissions" />
                 </Route>
+                {props.user &&
+                    <NavItem>
+                        <p id="user-info"><span style={{fontStyle: "italic"}}>logged in as</span>{String.fromCharCode(8194)}<span style={{fontWeight: "bold"}}>{props.user.Job_Position} {props.user.First_Name} {props.user.Last_Name}</span></p>
+                    </NavItem>
+                }
                 {props.token
                 ? (
                 <>

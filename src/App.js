@@ -18,14 +18,15 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 
 function App() {
   const [token, setToken] = useState(false)
+  const [user, setUser] = useState(false)
 
   return (
    <BrowserRouter>
         <CssBaseline />
-        <Navigation token={token} setToken={setToken}/>
+        <Navigation token={token} setToken={setToken} user={user} setUser={setUser}/>
         <Switch>
           <Route exact path="/login">
-            <Login setToken={setToken}/>
+            <Login token={token} setToken={setToken} setUser={setUser}/>
           </Route>
           <PrivateRoute>
             <SideNav />

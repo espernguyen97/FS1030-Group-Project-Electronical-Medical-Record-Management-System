@@ -18,6 +18,7 @@ const Login = (props) => {
 
     const loginSubmit = async event => { 
         event.preventDefault()
+        //First fetch request to get JWT
         const response = await fetch('http://localhost:4000/auth', {
             method: 'POST',
             mode: 'cors',
@@ -36,6 +37,20 @@ const Login = (props) => {
             history.replace(from)
             let status = sessionStorage.getItem('token')
             props.setToken(status)
+            //Second fetch request to get current user by email
+            const response2 = await fetch(`http://localhost:4000/users/${email}`, {
+              method: 'GET',
+              mode: 'cors',
+              headers: {
+                  'Authorization': `Bearer ${status}`
+              }
+            })
+            if (response2.status >= 400){
+              return
+            }
+            const currentUser = await response2.json()
+            delete currentUser.Password
+            props.setUser(currentUser)
         }
     }
 

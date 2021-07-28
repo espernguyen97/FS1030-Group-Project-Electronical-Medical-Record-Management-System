@@ -72,6 +72,15 @@
 
 }
 
+/*Top navigation bar*/
+
+p#user-info {
+  color: white;
+  margin: 0;
+  padding-right: 2.5rem;
+  line-height: 2.5;
+}
+
 
 
 
