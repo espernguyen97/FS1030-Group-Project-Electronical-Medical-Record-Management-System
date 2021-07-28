@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router";
 import Container from "@material-ui/core/Container";
+import moment from "moment";
 import {
   Form,
   ButtonToggle,
@@ -16,9 +17,8 @@ const EditPatient = (props) => {
   let editPatient = props.location.state;
   const history = useHistory();
   const token = sessionStorage.getItem("token");
-  // const [patient, setPatient] = useState([]);
   const [patient, setPatient] = useState({
-    DOB: `${editPatient.DOB}`,
+    DOB: `${moment(editPatient.DOB).format("YYYY-MM-DD")}`,
     OHIP: `${editPatient.OHIP}`,
     First_Name: `${editPatient.First_Name}`,
     Last_Name: `${editPatient.Last_Name}`,
@@ -30,23 +30,7 @@ const EditPatient = (props) => {
     Phone_Number: `${editPatient.Phone_Number}`,
   });
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     const response = await fetch(`http://localhost:4000/patients/${id}`, {
-  //       method: "GET",
-  //       headers: {
-  //         Authorization: `Bearer ${token}`,
-  //       },
-  //     });
-  //     const data = await response.json();
-  //     setPatient(data);
-  //   };
-  //   fetchData();
-  //   console.log(patient);
-  // }, [id]);
-
   const handleSubmit = (event) => {
-    console.log(patient);
     event.preventDefault();
     fetch(`http://localhost:4000/patients/${id}`, {
       method: "PATCH",
@@ -55,8 +39,6 @@ const EditPatient = (props) => {
         Accept: "application/json",
         "Content-Type": "application/json",
       },
-
-      //make sure to serialize your JSON body
       body: JSON.stringify(patient),
     }).then((response) => response.json());
     history.push("/Patients");
@@ -64,21 +46,14 @@ const EditPatient = (props) => {
 
   const handleChange = (event) => {
     event.persist();
-    console.log(event.target.name)
-    console.log(event.target.value)
     setPatient((prevState) => ({
       ...prevState,
       [event.target.name]: event.target.value,
     }));
-    console.log(event.target.name)
-    console.log(event.target.value)
-    console.log(event.target)
-    console.log(patient)
   };
 
   return (
     <div className="main-panel">
-      {/* {patient.map((patient) => ( */}
         <Container className="my-5" fixed>
           <Form onSubmit={(e) => handleSubmit(e)}>
             <Row form>
@@ -86,7 +61,7 @@ const EditPatient = (props) => {
                 <FormGroup>
                   <Label>Date of Birth</Label>
                   <Input
-                    type="text"
+                    type="date"
                     name="DOB"
                     id="dob"
                     defaultValue={patient.DOB}
@@ -210,7 +185,6 @@ const EditPatient = (props) => {
             <ButtonToggle type="submit" color="primary">Submit</ButtonToggle>
           </Form>
         </Container>
-      {/* ))} */}
     </div>
   );
 };

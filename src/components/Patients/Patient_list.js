@@ -5,6 +5,7 @@ import { Table, Button, Row } from "reactstrap";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import EditIcon from "@material-ui/icons/Edit";
 import { useHistory } from "react-router";
+import moment from "moment";
 
 const PatientList = () => {
   const token = sessionStorage.getItem("token");
@@ -66,7 +67,7 @@ const PatientList = () => {
               <tr>
                 <td>{patient.First_Name}</td>
                 <td>{patient.Last_Name}</td>
-                <td>{patient.DOB}</td>
+                <td>{moment(patient.DOB).format("YYYY-MM-DD")}</td>
                 <td>{patient.OHIP}</td>
                 <td>{patient.Phone_Number}</td>
                 <td>{patient.Email}</td>
