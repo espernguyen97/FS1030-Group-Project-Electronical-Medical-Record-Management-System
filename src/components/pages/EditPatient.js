@@ -12,6 +12,7 @@ import {
   Input,
 } from "reactstrap";
 
+
 const EditPatient = (props) => {
   let id = props.match.params.id;
   let editPatient = props.location.state;
@@ -28,6 +29,7 @@ const EditPatient = (props) => {
     Province: `${editPatient.Province}`,
     PostalCode: `${editPatient.PostalCode}`,
     Phone_Number: `${editPatient.Phone_Number}`,
+    Last_Edit: `${moment(editPatient.Last_Edit).format("YYYY-MM-DD")}`,
   });
 
   const handleSubmit = (event) => {
@@ -177,6 +179,19 @@ const EditPatient = (props) => {
                     name="PostalCode"
                     id="postalcode"
                     defaultValue={patient.PostalCode}
+                    onChange={handleChange}
+                  />
+                </FormGroup>
+              </Col>
+              <Col md={2}>
+                <FormGroup>
+                  <Label>Last Edit</Label>
+                  <Input
+                    type="text"
+                    name="Last_Edit"
+                    id="Last_Edit"
+                    disabled = {true}
+                    defaultValue={patient.Last_Edit}
                     onChange={handleChange}
                   />
                 </FormGroup>
