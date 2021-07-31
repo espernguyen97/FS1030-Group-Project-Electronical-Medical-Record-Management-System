@@ -15,7 +15,6 @@ import Pulse from 'react-reveal/Pulse';
 
 const SQLDateParsed = new Date().toLocaleString();
 
-
 const EditPatient = (props) => {
   let id = props.match.params.id;
   let editPatient = props.location.state;
@@ -35,17 +34,44 @@ const EditPatient = (props) => {
     Last_Edit: `${moment(SQLDateParsed).format("YYYY-MM-DD")}`,
   });
 
+  const saveRevisions = () => {
+    let PatientID = props.match.params.id
+    let currentUser = JSON.parse(sessionStorage.getItem('currentUser'))
+    let UserID = currentUser.UserID
+    let Editor = `${currentUser.First_Name} ${currentUser.Last_Name}`
+    let Revisions = []
+    for (let key in patient) {
+      if (key !== "Last_Edit" && patient[key] !== editPatient[key]) {
+        Revisions.push(`${key} changed from ${editPatient[key]} to ${patient[key]} by ${Editor}`)
+      }
+    }
+    if (Revisions.length) {
+      fetch('http://localhost:4000/patient-revisions', {
+        method: 'POST',
+        mode: 'cors',
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({UserID, PatientID, Revisions})
+      }).then((response) => response.json());
+    }
+  }
+
   const handleSubmit = (event) => {
     event.preventDefault();
     fetch(`http://localhost:4000/patients/${id}`, {
       method: "PATCH",
+      mode: 'cors',
       headers: {
-        Authorization: `Bearer ${token}`,
-        Accept: "application/json",
-        "Content-Type": "application/json",
+        'Authorization': `Bearer ${token}`,
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify(patient),
     }).then((response) => response.json());
+    saveRevisions()
     history.push("/Patients");
   };
 

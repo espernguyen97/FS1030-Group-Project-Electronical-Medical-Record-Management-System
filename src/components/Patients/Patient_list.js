@@ -17,6 +17,7 @@ const PatientList = () => {
     const getData = async () => {
       const response = await fetch("http://localhost:4000/patients/", {
         method: "GET",
+        mode: 'cors',
         headers: {
           Authorization: `Bearer ${token}`,
         },
