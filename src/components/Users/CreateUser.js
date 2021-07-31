@@ -9,6 +9,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 import Checkbox from '@material-ui/core/Checkbox';
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 import LocalHospitalIcon from '@material-ui/icons/LocalHospital';
+import Pulse from 'react-reveal/Pulse';
 
 const SQLDateParsed = () => {
 
@@ -72,6 +73,7 @@ const CreateUser = () => {
    
     return (
         <main>
+            <Pulse>
             <Container className="containerCU">
                 <center>
                 <img className="banner" src="assets/caregiverbanner.png" alt="#" />
@@ -149,6 +151,7 @@ const CreateUser = () => {
                 </Form>
           </center>
             </Container>
+            </Pulse>
         </main>
     )
 }

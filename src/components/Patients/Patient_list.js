@@ -88,6 +88,7 @@ const PatientList = () => {
                 <td>{patient.Phone_Number}</td>
                 <td>{patient.Email}</td>
                 <td>{patient.Age}</td>
+                <td>{moment(patient.Last_Edit).format("YYYY-MM-DD")}</td>
                 <td>
                   {" "}
                   <Button color="primary" onClick={(e) => patientEditRoute(e, patient)}>

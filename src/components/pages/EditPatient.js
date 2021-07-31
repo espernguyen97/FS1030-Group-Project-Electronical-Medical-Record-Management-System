@@ -11,6 +11,9 @@ import {
   Label,
   Input,
 } from "reactstrap";
+import Pulse from 'react-reveal/Pulse';
+
+const SQLDateParsed = new Date().toLocaleString();
 
 
 const EditPatient = (props) => {
@@ -29,7 +32,7 @@ const EditPatient = (props) => {
     Province: `${editPatient.Province}`,
     PostalCode: `${editPatient.PostalCode}`,
     Phone_Number: `${editPatient.Phone_Number}`,
-    Last_Edit: `${moment(editPatient.Last_Edit).format("YYYY-MM-DD")}`,
+    Last_Edit: `${moment(SQLDateParsed).format("YYYY-MM-DD")}`,
   });
 
   const handleSubmit = (event) => {
@@ -56,7 +59,11 @@ const EditPatient = (props) => {
 
   return (
     <div className="main-panel">
-        <Container className="my-5" fixed>
+    <br/>
+      <br/>
+        <Pulse>
+        <Container className="containerCU" fixed>
+      <h1>Edit Patient: {patient.First_Name} {patient.Last_Name}</h1>
           <Form onSubmit={(e) => handleSubmit(e)}>
             <Row form>
               <Col md={6}>
@@ -185,7 +192,7 @@ const EditPatient = (props) => {
               </Col>
               <Col md={2}>
                 <FormGroup>
-                  <Label>Last Edit</Label>
+                  <Label>Date submitted for Edit:</Label>
                   <Input
                     type="text"
                     name="Last_Edit"
@@ -200,6 +207,7 @@ const EditPatient = (props) => {
             <ButtonToggle type="submit" color="primary">Submit</ButtonToggle>
           </Form>
         </Container>
+        </Pulse>
     </div>
   );
 };

@@ -3,46 +3,48 @@ import { useHistory } from "react-router";
 import Container from "@material-ui/core/Container";
 import {
   Form,
-  ButtonToggle,
   Row,
   Col,
   FormGroup,
   Label,
   Input,
 } from "reactstrap";
+import moment from "moment";
 import Pulse from 'react-reveal/Pulse';
 
-const EditUser = (props) => {
+
+const SQLDateParsed = new Date().toLocaleString();
+
+const EditTicket = (props) => {
   let id = props.match.params.id;
-  let EditUser = props.location.state;
+  let EditTicket = props.location.state;
   const history = useHistory();
   const token = sessionStorage.getItem("token");
-  const [User, setUser] = useState({
-    Username: `${EditUser.Username}`,
-    First_Name: `${EditUser.First_Name}`,
-    Last_Name: `${EditUser.Last_Name}`,
-    Email: `${EditUser.Email}`,
-    Job_Position: `${EditUser.Job_Position}`,
-    Admin_Flag: `${EditUser.Admin_Flag}`,
+  const [Ticket, setTicket] = useState({
+    Username: `${EditTicket.Username}`,
+    email: `${EditTicket.email}`,
+    Date: `${moment(SQLDateParsed).format("YYYY-MM-DD")}`,
+    content: `${EditTicket.content}`,
+    
   });
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    fetch(`http://localhost:4000/users/${id}`, {
+    fetch(`http://localhost:4000/tickets/entries/${id}`, {
       method: "PATCH",
       headers: {
         Authorization: `Bearer ${token}`,
         Accept: "application/json",
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(User),
+      body: JSON.stringify(Ticket),
     }).then((response) => response.json());
-    history.push("/CareGivers");
+    history.push("/tickets");
   };
 
   const handleChange = (event) => {
     event.persist();
-    setUser((prevState) => ({
+    setTicket((prevState) => ({
       ...prevState,
       [event.target.name]: event.target.value,
     }));
@@ -54,7 +56,7 @@ const EditUser = (props) => {
       <br/>
         <Pulse>
         <Container className="containerCU" fixed>
-      <h1>Edit User: {User.First_Name} {User.Last_Name}</h1>
+      <h1>Ticket From User: {EditTicket.Username}</h1>
           <Form onSubmit={(e) => handleSubmit(e)}>
             <Row form>
               <Col md={6}>
@@ -64,7 +66,8 @@ const EditUser = (props) => {
                     type="text"
                     name="Username"
                     id="Username"
-                    defaultValue={User.Username}
+                    disabled = {true}
+                    defaultValue={EditTicket.Username}
                     onChange={handleChange}
                   />
                 </FormGroup>
@@ -73,38 +76,13 @@ const EditUser = (props) => {
             <Row form>
               <Col md={6}>
                 <FormGroup>
-                  <Label>First Name</Label>
-                  <Input
-                    type="text"
-                    name="First_Name"
-                    id="firstName"
-                    defaultValue={User.First_Name}
-                    onChange={handleChange}
-                  />
-                </FormGroup>
-              </Col>
-              <Col md={6}>
-                <FormGroup>
-                  <Label>Last Name</Label>
-                  <Input
-                    type="text"
-                    name="Last_Name"
-                    id="Last_Name"
-                    defaultValue={User.Last_Name}
-                    onChange={handleChange}
-                  />
-                </FormGroup>
-              </Col>
-            </Row>
-            <Row form>
-              <Col md={6}>
-                <FormGroup>
-                  <Label>Email</Label>
+                  <Label>email</Label>
                   <Input
                     type="email"
                     name="Email"
-                    id="Email"
-                    defaultValue={User.Email}
+                    id="email"
+                    disabled = {true}
+                    defaultValue={EditTicket.email}
                     onChange={handleChange}
                   />
                 </FormGroup>
@@ -114,25 +92,26 @@ const EditUser = (props) => {
                   <Label>Job Position</Label>
                   <Input
                     type="text"
-                    name="Job_Position"
-                    id="Job_Position"
-                    defaultValue={User.Job_Position}
+                    name="content"
+                    id="content"
+                    disabled = {true}
+                    defaultValue={EditTicket.content}
                     onChange={handleChange}
                   />
                 </FormGroup>
               </Col>
             </Row>
             <FormGroup>
-              <Label>Admin Flag</Label>
+              <Label>Date</Label>
               <Input
                 type="text"
-                name="Admin_Flag"
-                id="Admin_Flag"
-                defaultValue={User.Admin_Flag}
+                name="Date"
+                id="Date"
+                disabled = {true}
+                defaultValue={moment(EditTicket.Date).format("YYYY-MM-DD")}
                 onChange={handleChange}
               />
             </FormGroup>
-            <ButtonToggle type="submit" color="primary">Submit</ButtonToggle>
           </Form>
         </Container>
         </Pulse>
@@ -140,4 +119,4 @@ const EditUser = (props) => {
   );
 };
 
-export default EditUser;
+export default EditTicket;

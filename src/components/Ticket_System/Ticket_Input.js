@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Form, FormGroup, Col, Input, Label, Button, Container} from 'reactstrap'
 import Tooltip from '@material-ui/core/Tooltip';
+import Pulse from 'react-reveal/Pulse';
 
 const SQLDateParsed = () => {
 
@@ -48,7 +49,8 @@ const TicketInput = () => {
         setContent("")
     }
     return (
-        <Container className="container">
+        <Pulse>
+        <Container className="containerCU">
           <center>
                 <img className="banner" src="assets/supportbanner.png" alt="#" />
                 <Form className="my-5" onSubmit={formSubmit}>
@@ -84,6 +86,7 @@ const TicketInput = () => {
             </Form>
           </center>
         </Container>
+        </Pulse>
       )
     }
 
