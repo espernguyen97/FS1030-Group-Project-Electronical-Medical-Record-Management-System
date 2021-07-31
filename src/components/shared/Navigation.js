@@ -42,7 +42,7 @@ const Navigation = (props) => {
 return (
     <Navbar style={{backgroundColor: '#000', opacity: '95%'}} expand="md" fixed="top">
         <Container>
-        <NavbarBrand href=""><img className="navimg" src="assets/login.png" alt="#" /> EMR SYSTEM</NavbarBrand>
+        <NavbarBrand href=""><img className="navimg" src="./assets/login.png" alt="#" /> EMR SYSTEM</NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
             <Nav className="ml-auto" navbar>

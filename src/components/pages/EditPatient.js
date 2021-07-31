@@ -13,7 +13,20 @@ import {
 } from "reactstrap";
 import Pulse from 'react-reveal/Pulse';
 
-const SQLDateParsed = new Date().toLocaleString();
+const SQLDateParsed = () => {
+  // MySQL formatted UTC 
+  let d = new Date()
+  let SQLDate = new Date(
+    d.getFullYear(),
+    d.getMonth(),
+    d.getDate(),
+    d.getHours(),
+    (d.getMinutes()), 
+    d.getSeconds(),
+    d.getMilliseconds()
+  ).toISOString().slice(0, 19).replace('T', ' ')
+  return(SQLDate)
+}
 
 const EditPatient = (props) => {
   let id = props.match.params.id;
@@ -31,7 +44,7 @@ const EditPatient = (props) => {
     Province: `${editPatient.Province}`,
     PostalCode: `${editPatient.PostalCode}`,
     Phone_Number: `${editPatient.Phone_Number}`,
-    Last_Edit: `${moment(SQLDateParsed).format("YYYY-MM-DD")}`,
+    Last_Edit: `${SQLDateParsed()}`,
   });
 
   const saveRevisions = () => {
