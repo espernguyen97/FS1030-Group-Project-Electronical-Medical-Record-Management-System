@@ -10,6 +10,7 @@ import SubmitTicket from './components/pages/SubmitTicket'
 import TicketList from './components/pages/Tickets'
 import Patients from './components/pages/Patients'
 import EditPatient from './components/pages/EditPatient'
+import ViewPatient from './components/pages/ViewPatient'
 import EditUser from './components/pages/EditUser'
 import EditTicket from './components/Ticket_System/Ticket_Profile'
 import PrivateRoute from './components/shared/PrivateRoute'
@@ -41,7 +42,8 @@ function App() {
             <PrivateRoute component={Caregivers} exact path="/caregivers" />
             <PrivateRoute component={SubmitTicket} exact path="/submit_ticket" />
             <PrivateRoute component={TicketList} exact path="/tickets" />
-            <PrivateRoute component={EditPatient} exact path="/patients/:id" />
+            <PrivateRoute component={EditPatient} exact path="/edit-patient/:id" />
+            <PrivateRoute component={ViewPatient} exact path="/patient/:id" />
             <PrivateRoute component={EditUser} exact path="/users/:id" />
             <PrivateRoute component={EditTicket} exact path="/tickets/entries/:id" />
             <PrivateRoute component={Patients} exact path="/patients" />
