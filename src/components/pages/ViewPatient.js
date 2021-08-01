@@ -1,13 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { useHistory } from "react-router";
+import React from "react";
 import { Container, Row, Col } from "reactstrap";
 import { Card, CardContent } from '@material-ui/core';
 
 const ViewPatient = (props) => {
-    let id = props.match.params.id;
     let patient = props.location.state;
-    const history = useHistory();
-    const token = sessionStorage.getItem("token");
 
     function getAge() {
         let today = new Date();

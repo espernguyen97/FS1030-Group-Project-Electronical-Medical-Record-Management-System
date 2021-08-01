@@ -82,7 +82,7 @@ const UserList = () => {
               <tr>
                 <td>{User.First_Name}</td>
                 <td>{User.Last_Name}</td>
-                <td>{moment(User.Last_login).format("YYYY-MM-DD")}</td>
+                <td>{moment(User.Last_Login).format("YYYY-MM-DD")}</td>
                 <td>{User.Username}</td>
                 <td>{User.Job_Position}</td>
                 <td>{User.Email}</td>
