@@ -10,6 +10,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 import LocalHospitalIcon from '@material-ui/icons/LocalHospital';
 import Pulse from 'react-reveal/Pulse';
+import Swal from 'sweetalert2'
 
 const SQLDateParsed = () => {
 
@@ -56,7 +57,13 @@ const CreateUser = () => {
             setAlertContent(`Error with fields: ${payload.invalid(",")}`)
         } else {
             setAlertContent(null)
-            alert(`Care Giver Was Created!`)
+            Swal.fire({
+                icon: 'success',
+                titleText: 'Success' ,
+                title: 'Success!',
+                text: 'A New CareGiver/Admin Has been Created.',
+                confirmButtonColor: '#4BB543',
+              })
             resetForm()
         }
     }

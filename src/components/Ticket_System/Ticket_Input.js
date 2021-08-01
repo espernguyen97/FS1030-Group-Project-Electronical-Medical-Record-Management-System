@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Form, FormGroup, Col, Input, Label, Button, Container} from 'reactstrap'
 import Tooltip from '@material-ui/core/Tooltip';
 import Pulse from 'react-reveal/Pulse';
+import Swal from 'sweetalert2'
 
 const SQLDateParsed = () => {
 
@@ -39,7 +40,13 @@ const TicketInput = () => {
         if (response.status >= 400) {
             alert(`woops! Error: ${payload.message} for fields: ${payload.invalid.join(",")}`)
         } else {
-            alert(`Your Ticket has been made`)
+            Swal.fire({
+                icon: 'info',
+                title: 'Success!',
+                titleText: 'Success' ,
+                text: 'A New Ticket Has been Created. A Admin Will Be In Touch In The Next 24Hrs',
+                confirmButtonColor: '#4BB543',
+              })
             resetForm()
         }
     }

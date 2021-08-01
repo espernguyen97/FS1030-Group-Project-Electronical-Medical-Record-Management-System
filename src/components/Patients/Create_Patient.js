@@ -3,6 +3,7 @@ import {Input, Form, FormGroup, Col,Row, Button, Container} from 'reactstrap'
 import InputLabel from '@material-ui/core/InputLabel';
 import Tooltip from '@material-ui/core/Tooltip';
 import PersonAddIcon from '@material-ui/icons/PersonAdd';
+import Swal from 'sweetalert2'
 
 
 const SQLDateParsed = () => {
@@ -55,7 +56,13 @@ const PatientCreate = () => {
             setAlertContent(`Error with fields: ${payload.invalid.join(",")}`)
         } else {
             setAlertContent(null)
-            alert(`Patient Was Created!`)
+            Swal.fire({
+                icon: 'success',
+                title: 'Success!',
+                titleText: 'Success' ,
+                text: 'A New Patient Has been Created.',
+                confirmButtonColor: '#4BB543',
+              })
             resetForm()
         }
     }

@@ -8,12 +8,13 @@ import InputLabel from '@material-ui/core/InputLabel';
 import LockIcon from '@material-ui/icons/Lock';
 import Flip from 'react-reveal/Flip';
 import ForgotPassword from '../Forgotpw';
+import Swal from 'sweetalert2'
 
 const Login = (props) => {
     let history = useHistory();
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
-    const [alertContent, setAlertContent] = useState(null)
+    const [alertContent, ] = useState(null)
 
     const loginSubmit = async event => { 
         event.preventDefault()
@@ -29,7 +30,13 @@ const Login = (props) => {
         })
         const payload = await response.json()
         if (response.status >= 400) {
-            setAlertContent('Wrong Info Given Please Try Again')
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            titleText: 'Error' ,
+            text: 'Something went wrong! The Password or Email is Incorrect.',
+            confirmButtonColor: '#4BB543',
+          })
         } else {
             sessionStorage.setItem('token', payload.token)
             let status = sessionStorage.getItem('token')

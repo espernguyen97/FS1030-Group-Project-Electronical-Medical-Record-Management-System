@@ -15,7 +15,6 @@
     "chart.js": "^3.4.1",
     "generate-password": "^1.6.0",
     "moment": "^2.29.1",
-    "notistack": "^1.0.9",
     "react": "^16.13.1",
     "react-chartjs-2": "^3.0.3",
     "react-dom": "^16.13.1",
@@ -23,7 +22,8 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "^4.0.3",
     "reactstrap": "^8.4.1",
-    "rsuite": "^4.10.2"
+    "rsuite": "^4.10.2",
+    "sweetalert2": "^11.1.0"
   },
   "scripts": {
     "start": "react-scripts start",
