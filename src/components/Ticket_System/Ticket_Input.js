@@ -73,7 +73,12 @@ const TicketInput = () => {
                     <Label for="UsernameEntry" sm={2}>Username</Label>
                     <Col sm={10}>
                     <Tooltip Username="Enter The Username Of The ticket Here">
-                    <Input type="Username" name="Username" id="UsernameEntry" placeholder="Enter the Username of your ticket" value={Username} onChange={e => setUsername(e.target.value)}/>
+                    <Input type="select" name="Username" id="UsernameEntry" placeholder="Enter the Username of your ticket" value={Username} onChange={e => setUsername(e.target.value)}>
+                    <option>testusername</option>
+                    <option>Dave</option>
+                    <option>Chris</option>
+                    <option>Steven</option>
+                    </Input>
                     </Tooltip>
                     </Col>
                 </FormGroup>
