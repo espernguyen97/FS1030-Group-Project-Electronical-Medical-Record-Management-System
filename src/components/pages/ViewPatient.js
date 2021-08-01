@@ -1,6 +1,7 @@
 import React from "react";
 import { Container, Row, Col } from "reactstrap";
 import { Card, CardContent } from '@material-ui/core';
+import moment from "moment";
 
 const ViewPatient = (props) => {
     let patient = props.location.state;
@@ -29,7 +30,7 @@ const ViewPatient = (props) => {
                             <Col>
                                 <p><span style={{color: "grey"}}>ID:</span> {patient.PatientID}</p>
                                 <p><span style={{color: "grey"}}>OHIP #:</span> {patient.OHIP}</p>
-                                <p><span style={{color: "grey"}}>Last edit:</span> {patient.Last_Edit}</p>
+                                <p><span style={{color: "grey"}}>Last edit:</span> {moment(patient.Last_Edit).format("YYYY-MM-DD")}</p>
                             </Col>
                             <Col>
                                 <p style={{color: "grey", textDecoration: "underline"}}>Contact Details:</p>

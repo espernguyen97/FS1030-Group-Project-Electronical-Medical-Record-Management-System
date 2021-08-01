@@ -5,7 +5,7 @@ import { Table, Button, Row } from "reactstrap";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import { useHistory } from "react-router";
 import moment from "moment";
-import VisibilityIcon from '@material-ui/icons/Visibility';
+import PageviewIcon from '@material-ui/icons/Pageview';
 
 const TicketSubmissionsList = () => {
   const token = sessionStorage.getItem("token");
@@ -81,8 +81,8 @@ const TicketSubmissionsList = () => {
                 <td>{ticket.content}</td>
                 <td>
                   {" "}
-                  <Button color="primary" onClick={(e) => ticketEditRoute(e, ticket)}>
-                    <VisibilityIcon />
+                  <Button color="success" onClick={(e) => ticketEditRoute(e, ticket)}>
+                    <PageviewIcon />
                   </Button>
                   <Button color="danger" onClick={(e) => ticketDelete(e, ticket)}>
                     <DeleteForeverIcon />
