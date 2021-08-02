@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect,useState } from 'react'
 import {Input, Form, FormGroup, Col, Button, Container} from 'reactstrap'
 import InputLabel from '@material-ui/core/InputLabel';
 import Tooltip from '@material-ui/core/Tooltip';
-import Swal from 'sweetalert2'
 import NoteAddIcon from '@material-ui/icons/NoteAdd';
+import parseJwt from "../../helpers/authHelper";
+import Swal from 'sweetalert2'
 
 
 
@@ -35,11 +36,12 @@ const MedicalHistoryCreate = () => {
     const [Prescriptions, setPrescriptions] = useState("")
     const [alertContent, setAlertContent] = useState(null)
     const Date =  SQLDateParsed();
-    const [medical_history, setmedical_history] = useState([]);
+    const user = parseJwt(token).username;
+    const [patients, setPatients] = useState([]);
   
     useEffect(() => {
       const getData = async () => {
-        const response = await fetch("http://localhost:4000/medical_history", {
+        const response = await fetch("http://localhost:4000/medical_history/", {
           method: "GET",
           mode: 'cors',
           headers: {
@@ -47,14 +49,15 @@ const MedicalHistoryCreate = () => {
           },
         });
         const data = await response.json();
-        setmedical_history(data);
+        setPatients(data);
       };
       getData();
     }, [token]);
 
+
     const formSubmit = async (event) => {
         event.preventDefault()
-        const response = await fetch('http://localhost:4000//medical_history', {
+        const response = await fetch('http://localhost:4000/medical_history', {
             method: 'POST',
             mode: 'cors',
             headers: {
@@ -62,7 +65,7 @@ const MedicalHistoryCreate = () => {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({Fever, PatientID, Username,Allergies,XrayURL,Covid_Checked,LabResults,Prescriptions,Date})
+            body: JSON.stringify({Fever, PatientID, Username,Date, Allergies, XrayURL, Covid_Checked, Prescriptions, LabResults})
         })
         const payload = await response.json()
         if (response.status >= 400) {
@@ -74,7 +77,7 @@ const MedicalHistoryCreate = () => {
                 icon: 'success',
                 title: 'Success!',
                 titleText: 'Success' ,
-                text: 'A New Medical History Entry Has been Created.',
+                text: 'A New Medical Entry Has been Created.',
                 confirmButtonColor: '#4BB543',
                 timer: 1500
               })
