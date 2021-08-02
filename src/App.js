@@ -12,6 +12,7 @@ import Patients from './components/pages/Patients'
 import EditPatient from './components/pages/EditPatient'
 import ViewPatient from './components/pages/ViewPatient'
 import EditUser from './components/pages/EditUser'
+import ViewPatientMedicalHistory from './components/pages/ViewPatientMedicalHistory'
 import EditTicket from './components/Ticket_System/Ticket_Profile'
 import PrivateRoute from './components/shared/PrivateRoute'
 import NotFound from './components/404';
@@ -45,6 +46,7 @@ function App() {
             <PrivateRoute component={EditPatient} exact path="/edit-patient/:id" />
             <PrivateRoute component={ViewPatient} exact path="/patient/:id" />
             <PrivateRoute component={EditUser} exact path="/users/:id" />
+            <PrivateRoute component={ViewPatientMedicalHistory} exact path="/medical_history/:id" />
             <PrivateRoute component={EditTicket} exact path="/tickets/entries/:id" />
             <PrivateRoute component={Patients} exact path="/patients" />
             <PrivateRoute component={Caregivers} exact path="/logout" />

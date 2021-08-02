@@ -11,6 +11,7 @@ import PatientCreateNoteModal from '../Patients/Create_Note_Modal';
 import NotesIcon from '@material-ui/icons/Notes';
 import LocalHospitalIcon from '@material-ui/icons/LocalHospital';
 import HistoryIcon from '@material-ui/icons/History';
+import MedicalHistory from './Patient_Medical_History_List';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -85,7 +86,7 @@ export default function PatientTab() {
         <Notes/>
       </TabPanel>
       <TabPanel value={value} index={1}>
-        MEDICAL HISTORY COMPONENT GOES IN THERE
+        <MedicalHistory/>
       </TabPanel>
       <TabPanel value={value} index={2}>
         MEDICAL REVISION HISTORY COMPONENT GOES IN THERE

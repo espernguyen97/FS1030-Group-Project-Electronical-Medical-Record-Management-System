@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
-import CreateNote from './Create_Note';
+import MedicalHistoryCreate from './Create_New_Medical_History_Entry';
 import {Button} from 'reactstrap'
 import NoteAddIcon from '@material-ui/icons/NoteAdd';
 
@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function PatientCreateNoteModal() {
+export default function PatientCreateMedHistModal() {
   const classes = useStyles();
   // getModalStyle is not a pure function, we roll the style only on the first render
   const [modalStyle] = React.useState(getModalStyle);
@@ -49,14 +49,14 @@ export default function PatientCreateNoteModal() {
 
   const body = (
     <div style={modalStyle} className={classes.paper}>
-      <CreateNote/>
+      <MedicalHistoryCreate/>
     </div>
   );
 
   return (
     <div>
       <Button color="warning" type="button" onClick={handleOpen}>
-       <NoteAddIcon/> Add New Note
+       <NoteAddIcon/> Add New Medical History Entry
       </Button>
       <Modal
         open={open}
