@@ -1,9 +1,11 @@
-import React, { useState } from 'react'
+import React, { useEffect,useState } from 'react'
 import {Input, Form, FormGroup, Col, Button, Container} from 'reactstrap'
 import InputLabel from '@material-ui/core/InputLabel';
 import Tooltip from '@material-ui/core/Tooltip';
-import PersonAddIcon from '@material-ui/icons/PersonAdd';
+import NoteAddIcon from '@material-ui/icons/NoteAdd';
+import parseJwt from "../../helpers/authHelper";
 import Swal from 'sweetalert2'
+
 
 
 const SQLDateParsed = () => {
@@ -29,6 +31,23 @@ const PatientCreate = () => {
     const [Note, setNote] = useState("")
     const [alertContent, setAlertContent] = useState(null)
     const Date =  SQLDateParsed();
+    const user = parseJwt(token).username;
+    const [patients, setPatients] = useState([]);
+  
+    useEffect(() => {
+      const getData = async () => {
+        const response = await fetch("http://localhost:4000/patients/", {
+          method: "GET",
+          mode: 'cors',
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        const data = await response.json();
+        setPatients(data);
+      };
+      getData();
+    }, [token]);
 
 
     const formSubmit = async (event) => {
@@ -66,7 +85,6 @@ const PatientCreate = () => {
         setUsername("")
         setNote("")
     }
-  //*I tried to move the first last name together etc but the icons did not fit nicley so i removed em for now still not 100% happy with the layout if sombody wants to take a crack at it.- Dave
     return (
         <main>
             <Container className="containerPatient_Create">
@@ -77,7 +95,7 @@ const PatientCreate = () => {
                         <Col>
                            <InputLabel><b>PatientID</b></InputLabel>
                             <Tooltip title="Enter The Patients First Name Here">
-                           <Input type="PatientID" name="PatientID" id="PatientID" placeholder="First Name Here" required value={PatientID} onChange={e => setPatientID(e.target.value)}/>
+                           <Input type="PatientID" name="PatientID" id="PatientID" placeholder="Enter The Patient ID" required value={PatientID} onChange={e => setPatientID(e.target.value)}/>
                             </Tooltip>
                         </Col>
                     </FormGroup>
@@ -105,8 +123,8 @@ const PatientCreate = () => {
                     <div className={`alert ${!alertContent ? "hidden" : ""}`}>{alertContent}</div>
                     <FormGroup check row>
                         <Col>
-                            <p style={{fontStyle: "italic"}}>Fill out all fields to create a Patient</p>
-                            <Button color="primary" type="submit"><PersonAddIcon/>Add Note</Button>
+                            <p style={{fontStyle: "italic"}}>Fill out all fields to add a patient note</p>
+                            <Button color="primary" type="submit"><NoteAddIcon/>Add Note</Button>
                         </Col>
                     </FormGroup>
                 </Form>

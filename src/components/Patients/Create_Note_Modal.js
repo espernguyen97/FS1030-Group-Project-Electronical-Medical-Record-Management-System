@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import CreateNote from './Create_Note';
 import {Button} from 'reactstrap'
-import PersonAddIcon from '@material-ui/icons/PersonAdd';
+import NoteAddIcon from '@material-ui/icons/NoteAdd';
 
 function rand() {
   return Math.round(Math.random() * 1) - 1;
@@ -56,7 +56,7 @@ export default function PatientCreateModal() {
   return (
     <div>
       <Button color="warning" type="button" onClick={handleOpen}>
-       <PersonAddIcon/> Add New Note
+       <NoteAddIcon/> Add New Note
       </Button>
       <Modal
         open={open}
