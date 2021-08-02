@@ -57,11 +57,13 @@ const PatientCreate = () => {
         } else {
             setAlertContent(null)
             Swal.fire({
+                position: 'top-end',
                 icon: 'success',
                 title: 'Success!',
                 titleText: 'Success' ,
                 text: 'A New Patient Has been Created.',
                 confirmButtonColor: '#4BB543',
+                timer: 1500
               })
             resetForm()
         }

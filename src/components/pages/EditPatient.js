@@ -12,6 +12,8 @@ import {
   Input,
 } from "reactstrap";
 import Pulse from 'react-reveal/Pulse';
+import Notes from "../Patients/Patient_Notes";
+import PatientCreateModal from '../Patients/Create_Note_Modal';
 
 const SQLDateParsed = () => {
   // MySQL formatted UTC 
@@ -244,7 +246,10 @@ const EditPatient = (props) => {
               </Col>
             </Row>
             <ButtonToggle type="submit" color="primary">Submit</ButtonToggle>
-          </Form>
+          </Form><br/><br/>
+          <PatientCreateModal/>
+          <br/><br/>
+        <Notes/>
         </Container>
         </Pulse>
     </div>
