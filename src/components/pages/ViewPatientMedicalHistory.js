@@ -2,7 +2,7 @@ import React from "react";
 import { Container, Row, Col } from "reactstrap";
 import { Card, CardContent } from '@material-ui/core';
 import moment from "moment";
-import CreateNewMedicalHistoryModal from '../Patients/Create_New_Medical_History_Modal';import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import Accordion from '@material-ui/core/Accordion';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
@@ -38,7 +38,7 @@ const ViewMedicalHistoryMedicalHistory = (props) => {
                                 <p><span style={{color: "grey"}}>Allergies:</span> {MedicalHistory.Allergies}</p>
                                 <p><span style={{color: "grey"}}>Covid Check:</span> {MedicalHistory.Covid_Checked}</p>
                                 <p><span style={{color: "grey"}}>Last Entry:</span> {moment(MedicalHistory.Date).format("YYYY-MM-DD")}</p>
-                                <p><span style={{color: "grey"}}>Prescreptions:</span> {MedicalHistory.Prescriptions}</p>
+                                <p><span style={{color: "grey"}}>Prescriptions:</span> {MedicalHistory.Prescriptions}</p>
                             </Col>
                         </Row>
                             <br/>
@@ -76,7 +76,6 @@ const ViewMedicalHistoryMedicalHistory = (props) => {
                             </Col>
                             <br/>
                             <br/>
-                        <center><CreateNewMedicalHistoryModal/></center>
                     </Container>
                 </CardContent>
             </Card>

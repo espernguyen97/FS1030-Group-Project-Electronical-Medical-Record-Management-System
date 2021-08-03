@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect} from "react";
 import { useHistory } from "react-router";
 import Container from "@material-ui/core/Container";
 import moment from "moment";
@@ -13,6 +13,11 @@ import {
 } from "reactstrap";
 import Pulse from 'react-reveal/Pulse';
 import PatientTab from "../Patients/Edit_Patient_Tab";
+
+
+const url = "https://randomuser.me/api/";
+const defaultImage = "https://randomuser.me/api/portraits/men/75.jpg";
+
 
 const SQLDateParsed = () => {
   // MySQL formatted UTC 
@@ -72,6 +77,32 @@ const EditPatient = (props) => {
       }).then((response) => response.json());
     }
   }
+  const [loading, setLoading] = useState(true);
+  const [person, setPerson] = useState(null);
+  const [value, setValue] = useState("random person");
+  const [title, setTitle] = useState("name");
+
+  const getPerson = async () => {
+    setLoading(true);
+    const response = await fetch(url);
+    const data = await response.json();
+    const person = data.results[0];
+    const { large: image } = person.picture;
+
+    const newPerson = {
+      image,
+    };
+    setPerson(newPerson);
+    setLoading(false);
+    setTitle("name");
+    setValue(newPerson.name);
+  };
+
+  useEffect(() => {
+    getPerson();
+  }, []);
+
+
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -103,7 +134,18 @@ const EditPatient = (props) => {
       <br/>
         <Pulse>
         <Container className="containerCU" fixed>
-      <h1>Edit Patient: {patient.First_Name} {patient.Last_Name}</h1>
+          <Row>
+            <Col>
+                <h1>Edit Patient: {patient.First_Name} {patient.Last_Name}</h1>
+            </Col>
+            <Col>
+              <img
+                src={(person && person.image) || defaultImage}
+                alt="random user"
+                className="patient-img"
+              />
+            </Col>
+          </Row>
           <Form onSubmit={(e) => handleSubmit(e)}>
             <Row form>
               <Col md={6}>
