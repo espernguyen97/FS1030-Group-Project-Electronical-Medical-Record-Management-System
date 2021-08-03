@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, Container } from 'reactstrap'
 import { Redirect, Route } from "react-router-dom"
+import Scroll from '../backtotop'
+
 
 const Navigation = (props) => {
     const [isOpen, setIsOpen] = useState(false)
@@ -23,6 +25,7 @@ return (
                 }          
             </Nav>
         </Collapse>
+        <Scroll showBelow={250} />
         </Container>
         
     </Navbar>

@@ -37,8 +37,9 @@ const Notes = () => {
       <Table responsive className="content">
         <thead>
           <tr>
+            <th>Created By</th>
             <th>Date</th>
-            <th>Notes</th>
+            <th>Note</th>
           </tr>
         </thead>
         <tbody>
@@ -52,6 +53,7 @@ const Notes = () => {
           {notes.length > 0 &&
             notes.map((Notes) => (
               <tr>
+                <td>{Notes.Username}</td>
                 <td>{moment(Notes.Date).format("YYYY-MM-DD")}</td>
                 <td>{Notes.Note}</td>
                 <td>

@@ -6,6 +6,8 @@ import PageviewIcon from '@material-ui/icons/Pageview';
 import { useHistory } from "react-router";
 import moment from "moment";
 
+
+
 const MedicalHistory = () => {
   const token = sessionStorage.getItem("token");
   const user = parseJwt(token).username;
@@ -32,6 +34,7 @@ const MedicalHistory = () => {
     let path = `/medical_history/${medical_history.Medical_H}`
     history.push(path, medical_history);
   }
+ 
 
   return (
     <Container className="mainContent">
@@ -44,10 +47,14 @@ const MedicalHistory = () => {
       <Table responsive className="content">
         <thead>
           <tr>
+            <th>Created By</th>
             <th>Last Update</th>
             <th>Fever</th>
             <th>Covid Check</th>
+            <th>Imunizations</th>
             <th>Prescriptions</th>
+            <th>Allergies</th>
+            <th>View More</th>
           </tr>
         </thead>
         <tbody>
@@ -61,10 +68,13 @@ const MedicalHistory = () => {
           {medical_history.length > 0 &&
             medical_history.map((medical_history) => (
               <tr>
+                <td>{medical_history.Username}</td>
                 <td>{moment(medical_history.Date).format("YYYY-MM-DD")}</td>
                 <td>{medical_history.Fever}</td>
                 <td>{medical_history.Covid_Checked}</td>
+                <td>{medical_history.Imunizations}</td>
                 <td>{medical_history.Prescriptions}</td>
+                <td>{medical_history.Allergies}</td>
                 <td>
                   {" "}
                   <Button color="success" onClick={(e) => medical_historyViewRoute(e, medical_history)}>

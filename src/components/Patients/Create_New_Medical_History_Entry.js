@@ -1,5 +1,5 @@
 import React, { useEffect,useState } from 'react'
-import {Input, Form, FormGroup, Col, Button, Container} from 'reactstrap'
+import {Input, Form, Col,Row, Button, Container} from 'reactstrap'
 import InputLabel from '@material-ui/core/InputLabel';
 import Tooltip from '@material-ui/core/Tooltip';
 import NoteAddIcon from '@material-ui/icons/NoteAdd';
@@ -34,6 +34,14 @@ const MedicalHistoryCreate = () => {
     const [Covid_Checked, setCovid_Checked] = useState("")
     const [LabResults, setLabResults] = useState("")
     const [Prescriptions, setPrescriptions] = useState("")
+    const [InsuredStatus, setInsuredStatus] = useState("")
+    const [Insurance_Provider, setInsurance_Provider] = useState("")
+    const [Imunizations, setImunizations] = useState("")
+    const [BillStatus, setBillStatus] = useState("")
+    const [Smoker, setSmoker] = useState("")
+    const [Chronic_Pain, setChronic_Pain] = useState("")
+    const [Past_Procedures, setPast_Procedures] = useState("")
+    const [Weight, setWeight] = useState("")
     const [alertContent, setAlertContent] = useState(null)
     const Date =  SQLDateParsed();
     const user = parseJwt(token).username;
@@ -65,7 +73,7 @@ const MedicalHistoryCreate = () => {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({Fever, PatientID, Username,Date, Allergies, XrayURL, Covid_Checked, Prescriptions, LabResults})
+            body: JSON.stringify({Fever, PatientID, Username,Date, Allergies, XrayURL, Covid_Checked, Prescriptions, LabResults, BillStatus, Insurance_Provider, InsuredStatus, Smoker, Chronic_Pain, Past_Procedures, Weight,Imunizations})
         })
         const payload = await response.json()
         if (response.status >= 400) {
@@ -94,22 +102,41 @@ const MedicalHistoryCreate = () => {
         setCovid_Checked("")
         setLabResults("")
         setPrescriptions("")
+        setInsuredStatus("")
+        setInsurance_Provider("")
+        setImunizations("")
+        setBillStatus("")
+        setSmoker("")
+        setChronic_Pain("")
+        setPast_Procedures("")
+        setWeight("")
     }
     return (
         <main>
             <Container className="containerPatient_Create">
                 <center>
-                <h2>Add New Medical History Entry</h2>
+                <h2>New Medical History Entry</h2>
                 <Form className="my-5" onSubmit={formSubmit}>
-                    <FormGroup>
+                    <Row>
+                        <Col>
+                           <InputLabel><b>Billing Status</b></InputLabel>
+                            <Tooltip title="Select if the patient has Paid Invoice">
+                            <Input type="select" name="BillStatus" id="BillStatus" placeholder="Select Your BillStatus"  required value={BillStatus} onChange={e => setBillStatus(e.target.value) }>
+                            <option>Make A Selection</option>
+                            <option>Paid</option>
+                            <option>OutStanding</option>
+                            </Input>
+                            </Tooltip>
+                        </Col>
+                    </Row>
+                    <br/>
+                    <Row>
                         <Col>
                            <InputLabel><b>PatientID</b></InputLabel>
-                            <Tooltip title="Enter The Patients First Name Here">
+                            <Tooltip title="Enter The Patients  ID Here">
                            <Input type="PatientID" name="PatientID" id="PatientID" placeholder="Enter The Patient ID" required value={PatientID} onChange={e => setPatientID(e.target.value)}/>
                             </Tooltip>
                         </Col>
-                    </FormGroup>
-                    <FormGroup>
                         <Col>
                            <InputLabel><b>Username</b></InputLabel>
                             <Tooltip title="Select Your Username">
@@ -121,68 +148,120 @@ const MedicalHistoryCreate = () => {
                             </Input>
                             </Tooltip>
                         </Col>
-                    </FormGroup>
-                    <FormGroup>
+                    </Row>
+                    <br/>
+                    <Row>
                         <Col>
-                           <InputLabel><b>Fever</b></InputLabel>
-                            <Tooltip title="Select if the patient has signs of a fever">
-                            <Input type="select" name="Fever" id="Fever" placeholder="Select Your Username"  required value={Fever} onChange={e => setFever(e.target.value) }>
+                           <InputLabel><b>Covid Check</b></InputLabel>
+                            <Tooltip title="Was This Patient Screened for Covid?">
+                            <Input type="select" name="Covid_Checked" id="Covid_Checked" placeholder="Yes Or No"  required value={Covid_Checked} onChange={e => setCovid_Checked(e.target.value) }>
+                            <option>Make A Selection</option>
                             <option>Yes</option>
                             <option>No</option>
                             </Input>
                             </Tooltip>
                         </Col>
-                    </FormGroup>
-                    <FormGroup>
+                        <Col>
+                           <InputLabel><b>Fever</b></InputLabel>
+                            <Tooltip title="Select if the patient has signs of a fever">
+                            <Input type="select" name="Fever" id="Fever" placeholder="Select Your Username"  required value={Fever} onChange={e => setFever(e.target.value) }>
+                            <option>Make A Selection</option>
+                            <option>Yes</option>
+                            <option>No</option>
+                            </Input>
+                            </Tooltip>
+                        </Col>
+                        <Col>
+                           <InputLabel><b>Smoker</b></InputLabel>
+                            <Tooltip title="Select if the patient is a Smoker">
+                            <Input type="select" name="Smoker" id="Smoker" placeholder="Select Your Smoker Status"  required value={Smoker} onChange={e => setSmoker(e.target.value) }>
+                            <option>Make A Selection</option>
+                            <option>Yes</option>
+                            <option>No</option>
+                            </Input>
+                            </Tooltip>
+                        </Col>
+                        <Col>
+                           <InputLabel><b>Chronic Pain</b></InputLabel>
+                            <Tooltip title="Select if the Paitient has Chronic Pain">
+                            <Input type="select" name="Chronic_Pain" id="Chronic_Pain" placeholder="Select Your Chronic Pain Status "  required value={Chronic_Pain} onChange={e => setChronic_Pain(e.target.value) }>
+                            <option>Make A Selection</option>
+                            <option>Yes</option>
+                            <option>No</option>
+                            </Input>
+                            </Tooltip>
+                        </Col>
+                    </Row>
+                    <br/>
+                    <Row>
                         <Col>
                            <InputLabel><b>Allergies</b></InputLabel>
                             <Tooltip title="Enter The Allergies For the Patient">
                             <Input type="textarea" name="Allergies" id="Allergies" placeholder="Allergy 1, Allergy 2, ..."  required value={Allergies} onChange={e => setAllergies(e.target.value) }/>
                             </Tooltip>
                         </Col>
-                    </FormGroup>
-                    <FormGroup>
-                        <Col>
-                           <InputLabel><b>X-ray URL</b></InputLabel>
-                            <Tooltip title="Enter The Note For the Patient">
-                            <Input type="text" name="XrayURL" id="XrayURL" placeholder="Xray URL goes here Here"  required value={XrayURL} onChange={e => setXrayURL(e.target.value) }/>
-                            </Tooltip>
-                        </Col>
-                    </FormGroup>
-                    <FormGroup>
-                        <Col>
-                           <InputLabel><b>Covid Check</b></InputLabel>
-                            <Tooltip title="Was This Patient Screened for Covid">
-                            <Input type="select" name="Covid_Checked" id="Covid_Checked" placeholder="Yes Or No"  required value={Covid_Checked} onChange={e => setCovid_Checked(e.target.value) }>
-                            <option>Yes</option>
-                            <option>No</option>
-                            </Input>
-                            </Tooltip>
-                        </Col>
-                    </FormGroup>
-                    <FormGroup>
-                        <Col>
-                           <InputLabel><b>Lab Results</b></InputLabel>
-                            <Tooltip title="Enter The Note For the Patient">
-                            <Input type="text" name="LabResults" id="LabResults" placeholder="Lab Results Go here"  required value={LabResults} onChange={e => setLabResults(e.target.value) }/>
-                            </Tooltip>
-                        </Col>
-                    </FormGroup>
-                    <FormGroup>
+                    </Row>
+                    <br/>
+                    <Row>
                         <Col>
                            <InputLabel><b>Prescriptions</b></InputLabel>
-                            <Tooltip title="Enter The Note For the Patient">
+                            <Tooltip title="Enter The Prescriptions For the Patient">
                             <Input type="textarea" name="Prescriptions" id="Prescriptions" placeholder="Prescription 1, Prescription 2 ... "  required value={Prescriptions} onChange={e => setPrescriptions(e.target.value) }/>
                             </Tooltip>
                         </Col>
-                    </FormGroup>
-                    <div className={`alert ${!alertContent ? "hidden" : ""}`}>{alertContent}</div>
-                    <FormGroup check row>
+                    </Row>
+                    <br/>
+                    <Row>
                         <Col>
-                            <p style={{fontStyle: "italic"}}>Fill out all fields to add a patient note</p>
+                           <InputLabel><b>Imunizations</b></InputLabel>
+                            <Tooltip title="Enter The Imunizations For the Patient">
+                            <Input type="textarea" name="Imunizations" id="Imunizations" placeholder="Imunization 1, Imunization 2 ... "  required value={Imunizations} onChange={e => setImunizations(e.target.value) }/>
+                            </Tooltip>
+                        </Col>
+                    </Row>
+                    <br/>
+                    <Row>
+                        <Col>
+                           <InputLabel><b>Insurance Provider</b></InputLabel>
+                            <Tooltip title="Enter The Patients Insurance Provider">
+                            <Input type="text" name="Insurance_Provider" id="Insurance_Provider" placeholder="Enter the Name of The Insurance Company"  required value={Insurance_Provider} onChange={e => setInsurance_Provider(e.target.value) }/>
+                            </Tooltip>
+                        </Col>
+                        <Col>
+                           <InputLabel><b>Insured Status</b></InputLabel>
+                            <Tooltip title="Select Insured Status of the Patient">
+                            <Input type="select" name="InsuredStatus" id="InsuredStatus" placeholder="Select Your Insured Status "  required value={InsuredStatus} onChange={e => setInsuredStatus(e.target.value) }>
+                            <option>Make A Selection</option>
+                            <option>Insured</option>
+                            <option>Not Insured</option>
+                            </Input>
+                            </Tooltip>
+                        </Col>
+                    </Row>
+                    <br/>
+                    <Row>
+                        <Col>
+                           <InputLabel><b>Past Procedures</b></InputLabel>
+                            <Tooltip title="Enter The Note For the Patient">
+                            <Input type="textarea" name="Past_Procedures" id="Past_Procedures" placeholder="Procedure 1,Procedure 2 ..."  required value={Past_Procedures} onChange={e => setPast_Procedures(e.target.value) }/>
+                            </Tooltip>
+                        </Col>
+                    </Row>
+                    <br/>
+                    <Row>
+                        <Col>
+                           <InputLabel><b>Weight</b></InputLabel>
+                            <Tooltip title="Enter The Note For the Patient">
+                            <Input type="text" name="Weight" id="Weight" placeholder="Enter Patient Weight"  required value={Weight} onChange={e => setWeight(e.target.value) }/>
+                            </Tooltip>
+                        </Col>
+                    </Row>
+                    <br/>
+                    <div className={`alert ${!alertContent ? "hidden" : ""}`}>{alertContent}</div>
+                        <Col>
+                            <p style={{fontStyle: "italic"}}>Fill out all fields to add a new Medical Entry</p>
                             <Button color="primary" type="submit"><NoteAddIcon/>Add Medical History Entry</Button>
                         </Col>
-                    </FormGroup>
                 </Form>
           </center>
             </Container>

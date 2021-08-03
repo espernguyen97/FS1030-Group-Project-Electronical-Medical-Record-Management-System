@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Row, Col } from "reactstrap";
+import { Container, Row, Col} from "reactstrap";
 import { Card, CardContent } from '@material-ui/core';
 import moment from "moment";
 import { makeStyles } from '@material-ui/core/styles';
@@ -19,28 +19,40 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
 const ViewMedicalHistoryMedicalHistory = (props) => {
-  const classes = useStyles();
+    const classes = useStyles();
     let MedicalHistory = props.location.state;
 
+    
     return (
         <div className="main-panel">
             <Card>               
                 <CardContent>
-                    <br/>
-                    <h2>MedicalHistory:</h2>
-                    <br/>
+                <div style={{display: "flex", justifyContent: "space-between"}}>
+                        <h2>Medical History:</h2>
+                    </div>
                     <Container>
                         <Row>
                             <Col>
                                 <p><span style={{color: "grey"}}>Fever:</span> {MedicalHistory.Fever}</p>
                                 <p><span style={{color: "grey"}}>Allergies:</span> {MedicalHistory.Allergies}</p>
                                 <p><span style={{color: "grey"}}>Covid Check:</span> {MedicalHistory.Covid_Checked}</p>
-                                <p><span style={{color: "grey"}}>Last Entry:</span> {moment(MedicalHistory.Date).format("YYYY-MM-DD")}</p>
                                 <p><span style={{color: "grey"}}>Prescriptions:</span> {MedicalHistory.Prescriptions}</p>
                             </Col>
+                            <Col>
+                                <p><span style={{color: "grey"}}>Insured Status:</span> {MedicalHistory.InsuredStatus}</p>
+                                <p><span style={{color: "grey"}}>Insurance Provider:</span> {MedicalHistory.Insurance_Provider}</p>
+                                <p><span style={{color: "grey"}}>Imunizations:</span> {MedicalHistory.Imunizations}</p>
+                                <p><span style={{color: "grey"}}>BillStatus:</span> {MedicalHistory.BillStatus}</p>
+                            </Col>
+                            <Col>
+                                <p><span style={{color: "grey"}}>Smoker:</span> {MedicalHistory.Smoker}</p>
+                                <p><span style={{color: "grey"}}>Chronic Pain:</span> {MedicalHistory.Chronic_Pain}</p>
+                                <p><span style={{color: "grey"}}>Past Procedures:</span> {MedicalHistory.Past_Procedures}</p>
+                                <p><span style={{color: "grey"}}>Weight:</span> {MedicalHistory.Weight}</p>
+                            </Col>
                         </Row>
+                                <p><span style={{color: "grey"}}><i><b>Last Edit:</b></i></span> {moment(MedicalHistory.Date).format("YYYY-MM-DD")}</p>
                             <br/>
                             <Col>
                                 <div className={classes.root}>
