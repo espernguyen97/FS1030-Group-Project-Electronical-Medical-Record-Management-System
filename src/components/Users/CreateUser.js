@@ -38,7 +38,7 @@ const CreateUser = () => {
     const [Last_Name, setLast_Name] = useState("")
     const [Password, setPassword] = useState("")
     const [alertContent, setAlertContent] = useState(null)
-    const Last_Login =  SQLDateParsed();
+    const Last_Login =  SQLDateParsed(); 
 
     const formSubmit = async (event) => {
         event.preventDefault()
@@ -53,8 +53,10 @@ const CreateUser = () => {
             body: JSON.stringify({Username, First_Name, Last_Name, Email, Job_Position, Password, Admin_Flag, Last_Login})
         })
         const payload = await response.json()
-        if (response.status >= 400) {
-            setAlertContent(`Error with fields: ${payload.invalid(",")}`)
+        if (response.status === 400) {
+            setAlertContent(payload)
+        } else if (response.status === 404) {
+            setAlertContent("Error 404: not found")
         } else {
             setAlertContent(null)
             Swal.fire({
@@ -148,7 +150,7 @@ const CreateUser = () => {
                             </Tooltip>
                         </Col>
                     </FormGroup>
-                    <div className={`alert ${!alertContent ? "hidden" : ""}`}>{alertContent}</div>
+                    <div style={{color: "red"}} className={`alert ${!alertContent ? "hidden" : ""}`}>{alertContent}</div>
                     <FormGroup check row>
                         <Col>
                             <p style={{fontStyle: "italic"}}>Fill out all fields to create a new Admin</p>
