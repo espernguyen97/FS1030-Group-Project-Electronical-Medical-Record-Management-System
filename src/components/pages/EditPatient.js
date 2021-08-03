@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from "react";
+import React, { useState} from "react";
 import { useHistory } from "react-router";
 import Container from "@material-ui/core/Container";
 import moment from "moment";
@@ -12,10 +12,6 @@ import {
   Input,
 } from "reactstrap";
 import Pulse from 'react-reveal/Pulse';
-
-
-const url = "https://randomuser.me/api/";
-const defaultImage = "https://randomuser.me/api/portraits/men/75.jpg";
 
 
 const SQLDateParsed = () => {
@@ -77,26 +73,6 @@ const EditPatient = (props) => {
       }).then((response) => response.json());
     }
   }
-  const [loading, setLoading] = useState(true);
-  const [person, setPerson] = useState(null);
-
-  const getPerson = async () => {
-    setLoading(true);
-    const response = await fetch(url);
-    const data = await response.json();
-    const person = data.results[0];
-    const { large: image } = person.picture;
-
-    const newPerson = {
-      image,
-    };
-    setPerson(newPerson);
-    setLoading(false);
-  };
-
-  useEffect(() => {
-    getPerson();
-  }, []);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -131,14 +107,6 @@ const EditPatient = (props) => {
             <Col>
               <br/>
               <h1>Edit Patient: {patient.First_Name} {patient.Last_Name}</h1>
-            </Col>
-            <Col>
-              <br/>
-              <img
-                src={(person && person.image) || defaultImage}
-                alt="random user"
-                className="patient-img"
-              />
             </Col>
           </Row>
           <Form onSubmit={(e) => handleSubmit(e)}>

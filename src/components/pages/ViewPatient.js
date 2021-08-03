@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useState, useEffect} from "react";
 import { useHistory } from "react-router";
 import { Container, Row, Col, Button } from "reactstrap";
 import { Card, CardContent } from '@material-ui/core';
 import EditIcon from "@material-ui/icons/Edit";
 import moment from "moment";
 import PatientTab from "../Patients/Patient_Tab";
+
+//profile Picture
+const url = "https://randomuser.me/api/";
+const defaultImage = "https://randomuser.me/api/portraits/men/75.jpg";
 
 const ViewPatient = (props) => {
     let patient = props.location.state;
@@ -28,6 +32,27 @@ const ViewPatient = (props) => {
         let path = `/edit-patient/${patient.PatientID}`
         history.push(path, patient);
     }
+//profile Picture
+    const [loading, setLoading] = useState(true);
+    const [person, setPerson] = useState(null);
+
+    const getPerson = async () => {
+        setLoading(true);
+        const response = await fetch(url);
+        const data = await response.json();
+        const person = data.results[0];
+        const { large: image } = person.picture;
+
+        const newPerson = {
+        image,
+        };
+        setPerson(newPerson);
+        setLoading(false);
+    };
+
+    useEffect(() => {
+        getPerson();
+    }, []);
 
     return (
         <div className="main-panel">
@@ -43,6 +68,12 @@ const ViewPatient = (props) => {
                     <br/>
                     <Container>
                         <Row>
+                                <br/>
+                                <img
+                                    src={(person && person.image) || defaultImage}
+                                    alt="random user"
+                                    className="patient-img"
+                                />
                             <Col>
                                 <p><span style={{color: "grey"}}>ID:</span> {patient.PatientID}</p>
                                 <p><span style={{color: "grey"}}>OHIP #:</span> {patient.OHIP}</p>
