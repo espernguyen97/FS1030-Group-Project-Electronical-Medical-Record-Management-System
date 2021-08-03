@@ -79,8 +79,6 @@ const EditPatient = (props) => {
   }
   const [loading, setLoading] = useState(true);
   const [person, setPerson] = useState(null);
-  const [value, setValue] = useState("random person");
-  const [title, setTitle] = useState("name");
 
   const getPerson = async () => {
     setLoading(true);
@@ -94,8 +92,6 @@ const EditPatient = (props) => {
     };
     setPerson(newPerson);
     setLoading(false);
-    setTitle("name");
-    setValue(newPerson.name);
   };
 
   useEffect(() => {
