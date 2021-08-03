@@ -6,19 +6,18 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
-import Notes from "../Patients/Patient_Notes";
-import PatientCreateNoteModal from '../Patients/Create_Note_Modal';
+import Notes from "./Patient_Notes";
+import PatientCreateNoteModal from './Create_Note_Modal';
 import NotesIcon from '@material-ui/icons/Notes';
 import LocalHospitalIcon from '@material-ui/icons/LocalHospital';
 import HistoryIcon from '@material-ui/icons/History';
 import MedicalHistory from './Patient_Medical_History_List';
-import CreateNewMedicalHistoryModal from '../Patients/Create_New_Medical_History_Modal';
+import CreateNewMedicalHistoryModal from './Create_New_Medical_History_Modal';
+import PatientRevisionHistory from './Patient_Revision_History';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
-
-
-
+  
   return (
     <div
       role="tabpanel"
@@ -91,7 +90,7 @@ export default function PatientTab() {
         <MedicalHistory/>
       </TabPanel>
       <TabPanel value={value} index={2}>
-        MEDICAL REVISION HISTORY COMPONENT GOES IN THERE
+        <PatientRevisionHistory/>
       </TabPanel>
     </div>
   );

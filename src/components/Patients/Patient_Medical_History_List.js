@@ -37,7 +37,7 @@ const MedicalHistory = () => {
     <Container className="mainContent">
       <Row className="userTitle">
         <h2 className="display-5">
-          Total medical_history:{medical_history.length}
+          Total medical_history: {medical_history.length}
           {user}
         </h2>
       </Row>

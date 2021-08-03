@@ -4,7 +4,7 @@ import { Container, Row, Col, Button } from "reactstrap";
 import { Card, CardContent } from '@material-ui/core';
 import EditIcon from "@material-ui/icons/Edit";
 import moment from "moment";
-import PatientTab from "../Patients/Edit_Patient_Tab";
+import PatientTab from "../Patients/Patient_Tab";
 
 const ViewPatient = (props) => {
     let patient = props.location.state;
