@@ -4,6 +4,7 @@ import { Container, Row, Col, Button } from "reactstrap";
 import { Card, CardContent } from '@material-ui/core';
 import EditIcon from "@material-ui/icons/Edit";
 import moment from "moment";
+import PatientTab from "../Patients/Edit_Patient_Tab";
 
 const ViewPatient = (props) => {
     let patient = props.location.state;
@@ -61,6 +62,7 @@ const ViewPatient = (props) => {
                     </Container>
                 </CardContent>
             </Card>
+            <PatientTab/>
         </div>
     )
 }

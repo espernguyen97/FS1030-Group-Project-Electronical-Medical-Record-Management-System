@@ -12,7 +12,6 @@ import {
   Input,
 } from "reactstrap";
 import Pulse from 'react-reveal/Pulse';
-import PatientTab from "../Patients/Edit_Patient_Tab";
 
 
 const url = "https://randomuser.me/api/";
@@ -126,15 +125,15 @@ const EditPatient = (props) => {
 
   return (
     <div className="main-panel">
-    <br/>
-      <br/>
         <Pulse>
         <Container className="containerCU" fixed>
           <Row>
             <Col>
-                <h1>Edit Patient: {patient.First_Name} {patient.Last_Name}</h1>
+              <br/>
+              <h1>Edit Patient: {patient.First_Name} {patient.Last_Name}</h1>
             </Col>
             <Col>
+              <br/>
               <img
                 src={(person && person.image) || defaultImage}
                 alt="random user"
@@ -284,7 +283,6 @@ const EditPatient = (props) => {
             </Row>
             <ButtonToggle type="submit" color="primary">Submit</ButtonToggle>
           </Form><br/><br/>
-          <PatientTab/>
         </Container>
         </Pulse>
     </div>
