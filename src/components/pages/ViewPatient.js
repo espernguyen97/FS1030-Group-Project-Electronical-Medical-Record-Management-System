@@ -1,10 +1,14 @@
 import React from "react";
-import { Container, Row, Col } from "reactstrap";
+import { useHistory } from "react-router";
+import { Container, Row, Col, Button } from "reactstrap";
 import { Card, CardContent } from '@material-ui/core';
+import EditIcon from "@material-ui/icons/Edit";
 import moment from "moment";
 
 const ViewPatient = (props) => {
     let patient = props.location.state;
+
+    const history = useHistory();
 
     function getAge() {
         let today = new Date();
@@ -18,12 +22,23 @@ const ViewPatient = (props) => {
         return age;
     }
 
+    const patientEditRoute = (event, patient) => {
+        event.preventDefault();
+        let path = `/edit-patient/${patient.PatientID}`
+        history.push(path, patient);
+    }
+
     return (
         <div className="main-panel">
             <Card>               
                 <CardContent>
                     <br/>
-                    <h2>Patient: {patient.First_Name} {patient.Last_Name}</h2>
+                    <div style={{display: "flex", justifyContent: "space-between"}}>
+                        <h2>{patient.First_Name} {patient.Last_Name}</h2>
+                        <Button color="primary" title="Edit Patient Details" onClick={(e) => patientEditRoute(e, patient)}>
+                            <EditIcon />
+                        </Button>
+                    </div>
                     <br/>
                     <Container>
                         <Row>

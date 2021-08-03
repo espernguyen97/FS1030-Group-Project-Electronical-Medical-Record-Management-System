@@ -3,7 +3,6 @@ import parseJwt from "../../helpers/authHelper";
 import { Container } from "reactstrap";
 import { Table, Button, Row } from "reactstrap";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
-import EditIcon from "@material-ui/icons/Edit";
 import PageviewIcon from '@material-ui/icons/Pageview';
 import { useHistory } from "react-router";
 import moment from "moment";
@@ -28,12 +27,6 @@ const PatientList = () => {
     };
     getData();
   }, [token]);
-
-  const patientEditRoute = (event, patient) => {
-      event.preventDefault();
-      let path = `/edit-patient/${patient.PatientID}`
-      history.push(path, patient);
-  }
 
   const patientViewRoute = (event, patient) => {
     event.preventDefault();
@@ -101,11 +94,7 @@ const PatientList = () => {
                   {" "}
                   <Button color="success" onClick={(e) => patientViewRoute(e, patient)}>
                     <PageviewIcon/>
-                  </Button>
-                  {String.fromCharCode(160)}
-                  <Button color="primary" onClick={(e) => patientEditRoute(e, patient)}>
-                    <EditIcon />
-                  </Button>
+                  </Button>                 
                   {String.fromCharCode(160)}
                   <Button color="danger" onClick={(e) => patientDelete(e, patient)}>
                     <DeleteForeverIcon />

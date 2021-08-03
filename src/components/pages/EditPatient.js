@@ -51,6 +51,7 @@ const EditPatient = (props) => {
     PostalCode: `${editPatient.PostalCode}`,
     Phone_Number: `${editPatient.Phone_Number}`,
     Last_Edit: `${SQLDateParsed()}`,
+    PatientID: `${editPatient.PatientID}` //not editable in form. I included this for pushing back to the patient view page with the full updated info. SW
   });
 
   const saveRevisions = () => {
@@ -98,8 +99,6 @@ const EditPatient = (props) => {
     getPerson();
   }, []);
 
-
-
   const handleSubmit = (event) => {
     event.preventDefault();
     fetch(`http://localhost:4000/patients/${id}`, {
@@ -113,7 +112,8 @@ const EditPatient = (props) => {
       body: JSON.stringify(patient),
     }).then((response) => response.json());
     saveRevisions()
-    history.push("/Patients");
+    let path = `/patient/${patient.PatientID}`
+    history.push(path, patient);
   };
 
   const handleChange = (event) => {
