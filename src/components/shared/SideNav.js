@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link as RouterLink } from "react-router-dom";
+import { useHistory } from "react-router-dom"
 import clsx from "clsx";
 import {CssBaseline,Drawer,Divider,List, ListItem,ListItemIcon,ListItemText,makeStyles} from "@material-ui/core";
 import HomeIcon from '@material-ui/icons/Home';
@@ -72,9 +73,12 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
+let timeout;
+
 const SideNav = (props) => {
   const classes = useStyles();
   const [open] = useState(true);
+  let history = useHistory()
 
   const items = [
     {
@@ -105,9 +109,37 @@ const SideNav = (props) => {
     {
       text: "Logout",
       icon: <ExitToAppIcon />,
-      path: "/logout"
+      path: "/logout",
+      logout: function(event){
+        event.preventDefault()
+        sessionStorage.removeItem('token')
+        sessionStorage.removeItem('currentUser')
+        props.setToken(false)
+        props.setUser(false)
+        history.push("/login")
+        function stopTimeout(){
+          clearTimeout(timeout)
+        }
+        stopTimeout()
+      }
     }
   ];
+
+  if (props.token && !timeout){
+    function startTimeout(){
+        timeout = setTimeout(function (){
+            sessionStorage.removeItem('token')   
+            sessionStorage.removeItem('currentUser')      
+            history.push("/login")
+            props.setToken(false)  
+            props.setUser(false) 
+            setTimeout(function(){
+                alert("Sorry, your session has timed out. You have been logged out and returned to the login page.")
+            }, 1000) //Add small delay to alert to ensure previous lines run and complete first.      
+        }, 1000*60*60*2) //token expires after two hours
+    }
+    startTimeout()
+  } 
 
   return (
     <div className={classes.root}>
@@ -125,18 +157,27 @@ const SideNav = (props) => {
           })
         }}
       >
-        <div className={classes.toolbar}>
-         
-        </div>
-                    <Search/>{/* search bar*/}
+        <div className={classes.toolbar}></div>
+        <Search/>{/* search bar*/}
         <Divider />
         <List>
-          {items.map((item, index) => (
-            <ListItem button component={RouterLink} to={item.path} key={index}>
-              <ListItemIcon>{item.icon}</ListItemIcon>
-              <ListItemText primary={item.text} />
-            </ListItem>
-          ))}
+          {items.map((item, index) => {
+            if (item.text === "Logout"){
+              return (
+                <ListItem button key={index} onClick={item.logout}>
+                  <ListItemIcon>{item.icon}</ListItemIcon>
+                  <ListItemText primary={item.text} />
+                </ListItem>
+              )
+            } else {
+              return (
+                <ListItem button component={RouterLink} to={item.path} key={index}>
+                  <ListItemIcon>{item.icon}</ListItemIcon>
+                  <ListItemText primary={item.text} />
+                </ListItem>
+              )
+            }
+          })}
         </List>
       </Drawer>
     </div>

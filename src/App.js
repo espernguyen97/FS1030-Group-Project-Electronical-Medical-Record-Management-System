@@ -32,13 +32,13 @@ function App() {
   return (
    <BrowserRouter>
         <CssBaseline />
-        <Navigation token={token} setToken={setToken} user={user} setUser={setUser}/>
+        <Navigation user={user}/>
         <Switch>
           <Route exact path="/login">
             <Login setToken={setToken} setUser={setUser}/>
           </Route>
           <PrivateRoute>
-            <SideNav />
+            <SideNav token={token} setToken={setToken} setUser={setUser}/>
             <PrivateRoute component={Listing} exact path="/submissions" />
             <PrivateRoute component={Caregivers} exact path="/caregivers" />
             <PrivateRoute component={SubmitTicket} exact path="/submit_ticket" />
@@ -49,7 +49,6 @@ function App() {
             <PrivateRoute component={ViewPatientMedicalHistory} exact path="/medical_history/:id" />
             <PrivateRoute component={EditTicket} exact path="/tickets/entries/:id" />
             <PrivateRoute component={Patients} exact path="/patients" />
-            <PrivateRoute component={Caregivers} exact path="/logout" />
           </PrivateRoute>
           <Route path="*" component={NotFound} />
         </Switch>
