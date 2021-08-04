@@ -11,7 +11,7 @@ import BugReportIcon from '@material-ui/icons/BugReport';
 import AllInboxIcon from '@material-ui/icons/AllInbox';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
-const drawerWidth = 300;
+const drawerWidth = 230;
 
 const useStyles = makeStyles((theme) => ({
   root: {
