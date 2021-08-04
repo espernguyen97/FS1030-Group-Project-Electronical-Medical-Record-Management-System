@@ -5,6 +5,7 @@ import { Table, Button, Row } from "reactstrap";
 import PageviewIcon from '@material-ui/icons/Pageview';
 import { useHistory } from "react-router";
 import moment from "moment";
+import { useLocation } from "react-router-dom";
 
 
 
@@ -13,10 +14,12 @@ const MedicalHistory = () => {
   const user = parseJwt(token).username;
   const [medical_history, setmedical_history] = useState([]);
   const history = useHistory();
+  const location = useLocation();
+  const medicalID = location.state.PatientID;
 
   useEffect(() => {
     const getData = async () => {
-      const response = await fetch("http://localhost:4000/medical_history/", {
+      const response = await fetch(`http://localhost:4000/medical_history/${medicalID}`, {
         method: "GET",
         mode: 'cors',
         headers: {
