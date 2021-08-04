@@ -290,6 +290,22 @@ const MedicalHistoryCreate = () => {
                         </Col>
                     </Row>
                     <br/>
+                    <br/>
+                    <Row>
+                        <Col>
+                           <InputLabel><b>Xray URL</b></InputLabel>
+                            <Tooltip title="Enter The Xray URL For the Patient">
+                            <Input type="text" name="XrayURL" id="XrayURL" placeholder="Enter Xray URL "  required value={XrayURL} onChange={e => setXrayURL(e.target.value) }/>
+                            </Tooltip>
+                        </Col>
+                        <Col>
+                           <InputLabel><b>Lab Results URL</b></InputLabel>
+                            <Tooltip title="Enter The Lab Results URL For the Patient">
+                            <Input type="text" name="LabResults" id="LabResults" placeholder="Enter Lab Results URL "  required value={LabResults} onChange={e => setLabResults(e.target.value) }/>
+                            </Tooltip>
+                        </Col>
+                    </Row>
+                    <br/>
                     <div className={`alert ${!alertContent ? "hidden" : ""}`}>{alertContent}</div>
                         <Col>
                             <p style={{fontStyle: "italic"}}>Fill out all fields to add a new Medical Entry</p>
