@@ -11,7 +11,7 @@ import BugReportIcon from '@material-ui/icons/BugReport';
 import AllInboxIcon from '@material-ui/icons/AllInbox';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
-const drawerWidth = 230;
+const drawerWidth = 300;
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -158,7 +158,7 @@ const SideNav = (props) => {
         }}
       >
         <div className={classes.toolbar}></div>
-        <Search/>{/* search bar*/}
+        {/* <Search/> Disabled search bar for now as we need to get Search working in patients first */}
         <Divider />
         <List>
           {items.map((item, index) => {
