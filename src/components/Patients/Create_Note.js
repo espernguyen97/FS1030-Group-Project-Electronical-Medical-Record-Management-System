@@ -5,6 +5,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 import NoteAddIcon from '@material-ui/icons/NoteAdd';
 import parseJwt from "../../helpers/authHelper";
 import Swal from 'sweetalert2'
+import { useLocation } from 'react-router-dom';
 
 
 
@@ -22,17 +23,36 @@ const SQLDateParsed = () => {
     d.getMilliseconds()
     ).toISOString().slice(0, 19).replace('T', ' ')
     return(SQLDate)
-    }
+}
+
+
 
 const PatientCreate = () => {
+    const location = useLocation();
     const token = sessionStorage.getItem('token')
-    const [PatientID, setPatientID] = useState("")
+    const [PatientID, setPatientID] = useState(location.state.PatientID)
     const [Username, setUsername] = useState("")
     const [Note, setNote] = useState("")
     const [alertContent, setAlertContent] = useState(null)
     const Date =  SQLDateParsed();
-    const user = parseJwt(token).username;
+    const user = parseJwt(token).userEmail;
     const [patients, setPatients] = useState([]);
+
+    useEffect(() => {
+        const getData = async () => {
+          const response = await fetch(`http://localhost:4000/users/${user}`, {
+            method: "GET",
+            mode: 'cors',
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+          const data = await response.json();
+          setUsername(data.Username);
+        };
+        getData();
+      }, [token]);
+    
   
     useEffect(() => {
       const getData = async () => {
@@ -81,8 +101,6 @@ const PatientCreate = () => {
     }
 
     const resetForm = () => {
-        setPatientID("")
-        setUsername("")
         setNote("")
     }
     return (
@@ -94,21 +112,16 @@ const PatientCreate = () => {
                     <FormGroup>
                         <Col>
                            <InputLabel><b>PatientID</b></InputLabel>
-                            <Tooltip title="Enter The Patients First Name Here">
-                           <Input type="PatientID" name="PatientID" id="PatientID" placeholder="Enter The Patient ID" required value={PatientID} onChange={e => setPatientID(e.target.value)}/>
+                            <Tooltip title="Patient ID will display here">
+                           <Input type="PatientID" name="PatientID" id="PatientID" placeholder="Enter The Patient ID" value={PatientID} />
                             </Tooltip>
                         </Col>
                     </FormGroup>
                     <FormGroup>
                         <Col>
                            <InputLabel><b>Username</b></InputLabel>
-                            <Tooltip title="Select Your Username">
-                            <Input type="select" name="Username" id="Username" placeholder="Select Your Username"  required value={Username} onChange={e => setUsername(e.target.value) }>
-                            <option>testusername</option>
-                            <option>Dave</option>
-                            <option>Chris</option>
-                            <option>Steven</option>
-                            </Input>
+                            <Tooltip title="Your Username will display here">
+                            <Input type="Username" name="Username" id="Username" placeholder="Select Your Username" value={Username} />                        
                             </Tooltip>
                         </Col>
                     </FormGroup>
