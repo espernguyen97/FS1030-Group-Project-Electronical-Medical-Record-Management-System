@@ -14,6 +14,9 @@ import HistoryIcon from '@material-ui/icons/History';
 import MedicalHistory from './Patient_Medical_History_List';
 import CreateNewMedicalHistoryModal from './Create_New_Medical_History_Modal';
 import PatientRevisionHistory from './Patient_Revision_History';
+import ScheduleList from './scheduler/Schedule_List';
+import ScheduleModalCreate from './scheduler/Schedule_Create_Modal';
+import ScheduleIcon from '@material-ui/icons/Schedule';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -76,20 +79,25 @@ export default function PatientTab() {
           textColor="primary"
           aria-label="scrollable force tabs example"
         >
-          <Tab label="Notes" icon={<NotesIcon />} {...a11yProps(0)} />
-          <Tab label="Medical History" icon={<LocalHospitalIcon />} {...a11yProps(1)} />
-          <Tab label="Revision History" icon={<HistoryIcon />} {...a11yProps(2)} />
+        < Tab label="Visit Schedule" icon={<ScheduleIcon />} {...a11yProps(0)} />
+          <Tab label="Notes" icon={<NotesIcon />} {...a11yProps(1)} />
+          <Tab label="Medical History" icon={<LocalHospitalIcon />} {...a11yProps(2)} />
+          <Tab label="Revision History" icon={<HistoryIcon />} {...a11yProps(3)} />
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
+        <ScheduleModalCreate/><br/>
+        <ScheduleList/><br/>
+      </TabPanel>
+      <TabPanel value={value} index={1}>
         <PatientCreateNoteModal/><br/>
         <Notes/>
       </TabPanel>
-      <TabPanel value={value} index={1}>
+      <TabPanel value={value} index={2}>
         <CreateNewMedicalHistoryModal/><br/>
         <MedicalHistory/>
       </TabPanel>
-      <TabPanel value={value} index={2}>
+      <TabPanel value={value} index={3}>
         <PatientRevisionHistory/>
       </TabPanel>
     </div>
