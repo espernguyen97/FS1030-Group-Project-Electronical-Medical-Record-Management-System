@@ -5,6 +5,9 @@ import Tooltip from '@material-ui/core/Tooltip';
 import NoteAddIcon from '@material-ui/icons/NoteAdd';
 import parseJwt from "../../helpers/authHelper";
 import Swal from 'sweetalert2'
+import { useLocation } from 'react-router-dom';
+
+
 
 
 
@@ -25,9 +28,10 @@ const SQLDateParsed = () => {
     }
 
 const MedicalHistoryCreate = () => {
+    const location = useLocation();
+    const [PatientID, setPatientID] = useState(location.state.PatientID)
     const token = sessionStorage.getItem('token')
-    const [PatientID, setPatientID] = useState("")
-    const [Username, setUsername] = useState("")
+    const [Username, setUsername] = useState(location.state.Username)
     const [Fever, setFever] = useState("")
     const [Allergies, setAllergies] = useState("")
     const [XrayURL, setXrayURL] = useState("")
@@ -44,12 +48,45 @@ const MedicalHistoryCreate = () => {
     const [Weight, setWeight] = useState("")
     const [alertContent, setAlertContent] = useState(null)
     const Date =  SQLDateParsed();
-    const user = parseJwt(token).username;
+    const user = parseJwt(token).userEmail;
     const [patients, setPatients] = useState([]);
   
     useEffect(() => {
       const getData = async () => {
         const response = await fetch("http://localhost:4000/medical_history/", {
+          method: "GET",
+          mode: 'cors',
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        const data = await response.json();
+        setPatients(data);
+      };
+      getData();
+    }, [token]);
+
+    
+
+    useEffect(() => {
+        const getData = async () => {
+          const response = await fetch(`http://localhost:4000/users/${user}`, {
+            method: "GET",
+            mode: 'cors',
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+          const data = await response.json();
+          setUsername(data.Username);
+        };
+        getData();
+      }, [token]);
+    
+  
+    useEffect(() => {
+      const getData = async () => {
+        const response = await fetch("http://localhost:4000/patients/", {
           method: "GET",
           mode: 'cors',
           headers: {
@@ -121,7 +158,7 @@ const MedicalHistoryCreate = () => {
                         <Col>
                            <InputLabel><b>Billing Status</b></InputLabel>
                             <Tooltip title="Select if the patient has Paid Invoice">
-                            <Input type="select" name="BillStatus" id="BillStatus" placeholder="Select Your BillStatus"  required value={BillStatus} onChange={e => setBillStatus(e.target.value) }>
+                            <Input type="select" name="BillStatus" id="BillStatus" placeholder="Select Your BillStatus"required value={BillStatus} onChange={e => setBillStatus(e.target.value) }>
                             <option>Make A Selection</option>
                             <option>Paid</option>
                             <option>OutStanding</option>
@@ -134,17 +171,13 @@ const MedicalHistoryCreate = () => {
                         <Col>
                            <InputLabel><b>PatientID</b></InputLabel>
                             <Tooltip title="Enter The Patients  ID Here">
-                           <Input type="PatientID" name="PatientID" id="PatientID" placeholder="Enter The Patient ID" required value={PatientID} onChange={e => setPatientID(e.target.value)}/>
+                           <Input type="PatientID" name="PatientID" id="PatientID" disabled="true"  value={PatientID}/>
                             </Tooltip>
                         </Col>
                         <Col>
                            <InputLabel><b>Username</b></InputLabel>
                             <Tooltip title="Select Your Username">
-                            <Input type="select" name="Username" id="Username" placeholder="Select Your Username"  required value={Username} onChange={e => setUsername(e.target.value) }>
-                            <option>testusername</option>
-                            <option>Dave</option>
-                            <option>Chris</option>
-                            <option>Steven</option>
+                            <Input type="text" name="Username" id="Username"  disabled="true"  value={Username}>
                             </Input>
                             </Tooltip>
                         </Col>
