@@ -40,7 +40,7 @@ const MedicalHistoryCreate = () => {
     const [Prescriptions, setPrescriptions] = useState("")
     const [InsuredStatus, setInsuredStatus] = useState("")
     const [Insurance_Provider, setInsurance_Provider] = useState("")
-    const [Imunizations, setImunizations] = useState("")
+    const [Immunizations, setImmunizations] = useState("")
     const [BillStatus, setBillStatus] = useState("")
     const [Smoker, setSmoker] = useState("")
     const [Chronic_Pain, setChronic_Pain] = useState("")
@@ -110,7 +110,7 @@ const MedicalHistoryCreate = () => {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({Fever, PatientID, Username,Date, Allergies, XrayURL, Covid_Checked, Prescriptions, LabResults, BillStatus, Insurance_Provider, InsuredStatus, Smoker, Chronic_Pain, Past_Procedures, Weight,Imunizations})
+            body: JSON.stringify({Fever, PatientID, Username,Date, Allergies, XrayURL, Covid_Checked, Prescriptions, LabResults, BillStatus, Insurance_Provider, InsuredStatus, Smoker, Chronic_Pain, Past_Procedures, Weight,Immunizations})
         })
         const payload = await response.json()
         if (response.status >= 400) {
@@ -141,7 +141,7 @@ const MedicalHistoryCreate = () => {
         setPrescriptions("")
         setInsuredStatus("")
         setInsurance_Provider("")
-        setImunizations("")
+        setImmunizations("")
         setBillStatus("")
         setSmoker("")
         setChronic_Pain("")
@@ -246,9 +246,9 @@ const MedicalHistoryCreate = () => {
                     <br/>
                     <Row>
                         <Col>
-                           <InputLabel><b>Imunizations</b></InputLabel>
-                            <Tooltip title="Enter The Imunizations For the Patient">
-                            <Input type="textarea" name="Imunizations" id="Imunizations" placeholder="Imunization 1, Imunization 2 ... "  required value={Imunizations} onChange={e => setImunizations(e.target.value) }/>
+                           <InputLabel><b>Immunizations</b></InputLabel>
+                            <Tooltip title="Enter The Immunizations For the Patient">
+                            <Input type="textarea" name="Immunizations" id="Immunizations" placeholder="Imunization 1, Imunization 2 ... "  required value={Immunizations} onChange={e => setImmunizations(e.target.value) }/>
                             </Tooltip>
                         </Col>
                     </Row>

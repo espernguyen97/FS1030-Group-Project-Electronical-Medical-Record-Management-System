@@ -42,7 +42,7 @@ const ViewMedicalHistoryMedicalHistory = (props) => {
                             <Col>
                                 <p><span style={{color: "grey"}}>Insured Status:</span> {MedicalHistory.InsuredStatus}</p>
                                 <p><span style={{color: "grey"}}>Insurance Provider:</span> {MedicalHistory.Insurance_Provider}</p>
-                                <p><span style={{color: "grey"}}>Imunizations:</span> {MedicalHistory.Imunizations}</p>
+                                <p><span style={{color: "grey"}}>Immunizations:</span> {MedicalHistory.Immunizations}</p>
                                 <p><span style={{color: "grey"}}>BillStatus:</span> {MedicalHistory.BillStatus}</p>
                             </Col>
                             <Col>

@@ -54,7 +54,7 @@ const MedicalHistory = () => {
             <th>Last Update</th>
             <th>Fever</th>
             <th>Covid Check</th>
-            <th>Imunizations</th>
+            <th>Immunizations</th>
             <th>Prescriptions</th>
             <th>Allergies</th>
             <th>View More</th>
@@ -75,7 +75,7 @@ const MedicalHistory = () => {
                 <td>{moment(medical_history.Date).format("YYYY-MM-DD")}</td>
                 <td>{medical_history.Fever}</td>
                 <td>{medical_history.Covid_Checked}</td>
-                <td>{medical_history.Imunizations}</td>
+                <td>{medical_history.Immunizations}</td>
                 <td>{medical_history.Prescriptions}</td>
                 <td>{medical_history.Allergies}</td>
                 <td>
