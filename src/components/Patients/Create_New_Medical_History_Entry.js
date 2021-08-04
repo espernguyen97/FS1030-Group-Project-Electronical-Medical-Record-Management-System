@@ -248,7 +248,7 @@ const MedicalHistoryCreate = () => {
                         <Col>
                            <InputLabel><b>Immunizations</b></InputLabel>
                             <Tooltip title="Enter The Immunizations For the Patient">
-                            <Input type="textarea" name="Immunizations" id="Immunizations" placeholder="Imunization 1, Imunization 2 ... "  required value={Immunizations} onChange={e => setImmunizations(e.target.value) }/>
+                            <Input type="textarea" name="Immunizations" id="Immunizations" placeholder="Immunization 1, Immunization 2 ... "  required value={Immunizations} onChange={e => setImmunizations(e.target.value) }/>
                             </Tooltip>
                         </Col>
                     </Row>

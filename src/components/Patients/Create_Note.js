@@ -113,7 +113,7 @@ const PatientCreate = () => {
                         <Col>
                            <InputLabel><b>PatientID</b></InputLabel>
                             <Tooltip title="Patient ID will display here">
-                           <Input type="PatientID" name="PatientID" id="PatientID" placeholder="Enter The Patient ID" value={PatientID} />
+                           <Input type="PatientID" name="PatientID" id="PatientID" placeholder="Enter The Patient ID" value={PatientID} disabled="true" />
                             </Tooltip>
                         </Col>
                     </FormGroup>
@@ -121,7 +121,7 @@ const PatientCreate = () => {
                         <Col>
                            <InputLabel><b>Username</b></InputLabel>
                             <Tooltip title="Your Username will display here">
-                            <Input type="Username" name="Username" id="Username" placeholder="Select Your Username" value={Username} />                        
+                            <Input type="Username" name="Username" id="Username" placeholder="Select Your Username" value={Username} disabled="true" />                        
                             </Tooltip>
                         </Col>
                     </FormGroup>
