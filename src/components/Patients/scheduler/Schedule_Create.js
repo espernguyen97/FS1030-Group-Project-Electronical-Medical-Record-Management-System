@@ -3,7 +3,6 @@ import {Input, Form, Col,Row, Button, Container} from 'reactstrap'
 import InputLabel from '@material-ui/core/InputLabel';
 import Tooltip from '@material-ui/core/Tooltip';
 import NoteAddIcon from '@material-ui/icons/NoteAdd';
-import parseJwt from "../../../helpers/authHelper";
 import Swal from 'sweetalert2'
 import { useLocation } from 'react-router-dom';
 
@@ -15,7 +14,7 @@ const ScheduleCreate = () => {
     const [Username, setUsername] = useState("")
     const [TimeSlot, setTimeSlot] = useState("")
     const [alertContent, setAlertContent] = useState(null)
-    const [Date, setDate] = useState("")
+    const [Date, setDate] = useState("")// eslint-disable-next-line no-unused-vars
     const [patients, setPatients] = useState([]);
   
     useEffect(() => {

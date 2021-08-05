@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
 import parseJwt from "../../../helpers/authHelper";
 import { Container } from "reactstrap";
-import { Table, Button, Row } from "reactstrap";
-import PageviewIcon from '@material-ui/icons/Pageview';
-import { useHistory } from "react-router";
+import { Table, Row } from "reactstrap";
 import moment from "moment";
 import { useLocation } from "react-router-dom";
 
@@ -13,7 +11,6 @@ const ScheduleList = () => {
   const token = sessionStorage.getItem("token");
   const user = parseJwt(token).username;
   const [schedule, setschedule] = useState([]);
-  const history = useHistory();
   const location = useLocation();
   const scheduleID = location.state.PatientID;
 
@@ -29,15 +26,8 @@ const ScheduleList = () => {
       const data = await response.json();
       setschedule(data);
     };
-    getData();
+    getData();// eslint-disable-next-line 
   }, [token]);
-
-  const scheduleViewRoute = (event, schedule) => {
-    event.preventDefault();
-    let path = `/schedule/${schedule.scheduleID}`
-    history.push(path, schedule);
-  }
- 
 
   return (
     <Container className="mainContent">

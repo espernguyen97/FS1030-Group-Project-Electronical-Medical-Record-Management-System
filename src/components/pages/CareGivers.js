@@ -3,7 +3,6 @@ import Container from '@material-ui/core/Container';
 import { Row,Col} from 'reactstrap';
 import CreateUser from '../Users/CreateUser';
 import PwGen from '../Users/pwgen';
-import UserlistModal from '../Users/Create_Modal_User';
 import UserList from '../Users/CareGiver_list';
 
 
