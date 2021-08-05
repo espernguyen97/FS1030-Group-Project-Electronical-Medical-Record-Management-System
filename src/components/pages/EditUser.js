@@ -11,13 +11,14 @@ import {
   Input,
 } from "reactstrap";
 import Pulse from 'react-reveal/Pulse';
-
+ 
 const EditUser = (props) => {
   let id = props.match.params.id;
   let EditUser = props.location.state;
   const history = useHistory();
   const token = sessionStorage.getItem("token");
   const [User, setUser] = useState({
+    UserID: `${EditUser.UserID}`,
     Username: `${EditUser.Username}`,
     First_Name: `${EditUser.First_Name}`,
     Last_Name: `${EditUser.Last_Name}`,
@@ -37,7 +38,14 @@ const EditUser = (props) => {
       },
       body: JSON.stringify(User),
     }).then((response) => response.json());
-    history.push("/CareGivers");
+    let currentUser = JSON.parse(sessionStorage.getItem('currentUser'))
+    if (id == currentUser.UserID) {
+      sessionStorage.removeItem('currentUser')
+      sessionStorage.setItem('currentUser', JSON.stringify(User))
+      history.push(`/user-profile/${currentUser.UserID}`);
+    } else {
+      history.push("/caregivers")
+    }
   };
 
   const handleChange = (event) => {
@@ -48,13 +56,23 @@ const EditUser = (props) => {
     }));
   };
 
+  const checkAccess = () => {
+    let currentUser = JSON.parse(sessionStorage.getItem('currentUser'))
+    if (id == currentUser.UserID && !parseInt(currentUser.Admin_Flag)){
+      return false
+    } else {
+      return true
+    }   
+  }
+  const access = checkAccess()
+
   return (
     <div className="main-panel">
     <br/>
       <br/>
         <Pulse>
         <Container className="containerCU" fixed>
-      <h1>Edit User: {User.First_Name} {User.Last_Name}</h1>
+          <h1>Edit User: {User.First_Name} {User.Last_Name}</h1>
           <Form onSubmit={(e) => handleSubmit(e)}>
             <Row form>
               <Col md={6}>
@@ -109,29 +127,35 @@ const EditUser = (props) => {
                   />
                 </FormGroup>
               </Col>
-              <Col md={6}>
-                <FormGroup>
-                  <Label>Job Position</Label>
-                  <Input
-                    type="text"
-                    name="Job_Position"
-                    id="Job_Position"
-                    defaultValue={User.Job_Position}
-                    onChange={handleChange}
-                  />
-                </FormGroup>
-              </Col>
+              {access
+                ? <Col md={6}>
+                  <FormGroup>
+                    <Label>Job Position</Label>
+                    <Input
+                      type="text"
+                      name="Job_Position"
+                      id="Job_Position"
+                      defaultValue={User.Job_Position}
+                      onChange={handleChange}
+                    />
+                  </FormGroup>
+                </Col>
+                : null
+              }
             </Row>
-            <FormGroup>
-              <Label>Admin Flag</Label>
-              <Input
-                type="text"
-                name="Admin_Flag"
-                id="Admin_Flag"
-                defaultValue={User.Admin_Flag}
-                onChange={handleChange}
-              />
-            </FormGroup>
+            {access
+              ? <FormGroup>
+                <Label>Admin Flag</Label>
+                <Input
+                  type="text"
+                  name="Admin_Flag"
+                  id="Admin_Flag"
+                  defaultValue={User.Admin_Flag}
+                  onChange={handleChange}
+                />
+              </FormGroup>
+              : null
+            }
             <ButtonToggle type="submit" color="primary">Submit</ButtonToggle>
           </Form>
         </Container>

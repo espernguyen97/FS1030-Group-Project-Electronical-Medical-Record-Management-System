@@ -18,8 +18,10 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
   },
   heading: {
-    fontSize: theme.typography.pxToRem(15),
+    fontSize: theme.typography.pxToRem(24),
     fontWeight: theme.typography.fontWeightRegular,
+    width: "100%",
+    textDecoration: "underline"
   },
 }));
 
@@ -30,29 +32,27 @@ const UserList = () => {
   const [Users, setUsers] = useState([]);
   const history = useHistory();
 
-  useEffect(() => {
-    const getData = async () => {
-      const response = await fetch("http://localhost:4000/users/", {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      const data = await response.json();
-      setUsers(data);
-    };
-    getData();
-  }, [token]);
+  const getData = async () => {
+    const response = await fetch("http://localhost:4000/users/", {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    const data = await response.json();
+    setUsers(data);
+  };
+
+  useEffect(() => {getData()}, []);
 
   const UserEditRoute = (event, User) => {
       event.preventDefault();
-      let path = `/Users/${User.UserID}`
+      let path = `/edit-user/${User.UserID}`
       history.push(path, User);
   }
 
   const UserDelete = async (event, User) => {
     event.preventDefault()
-    console.log(User)
     const response = await fetch(`http://localhost:4000/Users/${User.UserID}`, {
       method: "DELETE",
       headers: {
@@ -62,8 +62,7 @@ const UserList = () => {
       },
     })
     const data = await response.json();
-    console.log(data)
-    window.location.reload();
+    getData();
   }
 
   return (
@@ -78,8 +77,8 @@ const UserList = () => {
         </AccordionSummary>
         <AccordionDetails>
           <Typography>
-                  <Row className="userTitle">
-                <h2 className="display-5">
+              <Row className="userTitle">
+                <h2 className="display-5" style={{paddingLeft: "10px"}}>
                   Total Users:{Users.length}
                   {user}
                 </h2>
@@ -94,6 +93,7 @@ const UserList = () => {
                     <th>Job Position</th>
                     <th>Email Address</th>
                     <th>Admin_Flag</th>
+                    <th></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -113,12 +113,13 @@ const UserList = () => {
                         <td>{User.Username}</td>
                         <td>{User.Job_Position}</td>
                         <td>{User.Email}</td>
-                        <td>{User.Admin_Flag}</td>
-                        <td>
+                        <td>{(User.Admin_Flag === 1) ? "true" : "false"}</td>
+                        <td style={{whiteSpace: "nowrap"}}>
                           {" "}
                           <Button color="primary" onClick={(e) => UserEditRoute(e, User)}>
                             <EditIcon />
                           </Button>
+                          {String.fromCharCode(160)}
                           <Button color="danger" onClick={(e) => UserDelete(e, User)}>
                             <DeleteForeverIcon />
                           </Button>

@@ -10,7 +10,7 @@ export default function Caregivers() {
     return (
       <div className="main-panel">
         <Container fixed>
-        <hr class="yellow"/>
+        <hr className="yellow"/>
             <Row className="my-5">
                   <Col>
                       <CreateUser/> {/* Create User Section*/}
@@ -22,7 +22,7 @@ export default function Caregivers() {
                   <Col>
                     <center><UserList/></center> {/* User List*/}
                   </Col>
-        <hr class="yellow"/>
+        <hr className="yellow"/>
         </Container>
       </div>
     );
