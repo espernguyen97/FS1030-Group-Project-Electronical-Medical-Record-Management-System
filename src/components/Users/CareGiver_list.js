@@ -6,8 +6,25 @@ import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import EditIcon from "@material-ui/icons/Edit";
 import { useHistory } from "react-router";
 import moment from "moment";
+import { makeStyles } from '@material-ui/core/styles';
+import Accordion from '@material-ui/core/Accordion';
+import AccordionSummary from '@material-ui/core/AccordionSummary';
+import AccordionDetails from '@material-ui/core/AccordionDetails';
+import Typography from '@material-ui/core/Typography';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    width: '100%',
+  },
+  heading: {
+    fontSize: theme.typography.pxToRem(15),
+    fontWeight: theme.typography.fontWeightRegular,
+  },
+}));
 
 const UserList = () => {
+  const classes = useStyles();
   const token = sessionStorage.getItem("token");
   const user = parseJwt(token).username;
   const [Users, setUsers] = useState([]);
@@ -51,55 +68,69 @@ const UserList = () => {
 
   return (
     <Container className="mainContent">
-      <Row className="userTitle">
-        <h2 className="display-5">
-          Total Users:{Users.length}
-          {user}
-        </h2>
-      </Row>
-      <Table responsive className="content">
-        <thead>
-          <tr>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Last login</th>
-            <th>Username</th>
-            <th>Job Position</th>
-            <th>Email Address</th>
-            <th>Admin_Flag</th>
-          </tr>
-        </thead>
-        <tbody>
-          {Users.length === 0 && (
-            <tr>
-              <td colSpan="4" className="text-center">
-                <i>No Users found</i>
-              </td>
-            </tr>
-          )}
-          {Users.length > 0 &&
-            Users.map((User) => (
-              <tr>
-                <td>{User.First_Name}</td>
-                <td>{User.Last_Name}</td>
-                <td>{moment(User.Last_Login).format("YYYY-MM-DD")}</td>
-                <td>{User.Username}</td>
-                <td>{User.Job_Position}</td>
-                <td>{User.Email}</td>
-                <td>{User.Admin_Flag}</td>
-                <td>
-                  {" "}
-                  <Button color="primary" onClick={(e) => UserEditRoute(e, User)}>
-                    <EditIcon />
-                  </Button>
-                  <Button color="danger" onClick={(e) => UserDelete(e, User)}>
-                    <DeleteForeverIcon />
-                  </Button>
-                </td>
-              </tr>
-            ))}
-        </tbody>
-      </Table>
+      <Accordion>
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel1a-content"
+          id="panel1a-header"
+        >
+          <Typography className={classes.heading}>User/CareGiver List</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <Typography>
+                  <Row className="userTitle">
+                <h2 className="display-5">
+                  Total Users:{Users.length}
+                  {user}
+                </h2>
+              </Row>
+              <Table responsive className="content">
+                <thead>
+                  <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Last login</th>
+                    <th>Username</th>
+                    <th>Job Position</th>
+                    <th>Email Address</th>
+                    <th>Admin_Flag</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {Users.length === 0 && (
+                    <tr>
+                      <td colSpan="4" className="text-center">
+                        <i>No Users found</i>
+                      </td>
+                    </tr>
+                  )}
+                  {Users.length > 0 &&
+                    Users.map((User) => (
+                      <tr>
+                        <td>{User.First_Name}</td>
+                        <td>{User.Last_Name}</td>
+                        <td>{moment(User.Last_Login).format("YYYY-MM-DD")}</td>
+                        <td>{User.Username}</td>
+                        <td>{User.Job_Position}</td>
+                        <td>{User.Email}</td>
+                        <td>{User.Admin_Flag}</td>
+                        <td>
+                          {" "}
+                          <Button color="primary" onClick={(e) => UserEditRoute(e, User)}>
+                            <EditIcon />
+                          </Button>
+                          <Button color="danger" onClick={(e) => UserDelete(e, User)}>
+                            <DeleteForeverIcon />
+                          </Button>
+                        </td>
+                      </tr>
+                    ))}
+                </tbody>
+              </Table>
+          </Typography>
+        </AccordionDetails>
+      </Accordion>
+      
     </Container>
   );
 };
