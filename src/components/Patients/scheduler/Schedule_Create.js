@@ -73,7 +73,7 @@ const ScheduleCreate = () => {
                 icon: 'success',
                 title: 'Success!',
                 titleText: 'Success' ,
-                text: 'A New Medical Entry Has been Created.',
+                text: 'A New Appointment Has been Created.',
                 confirmButtonColor: '#4BB543',
                 timer: 1500
               })
