@@ -6,8 +6,36 @@ import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import PageviewIcon from '@material-ui/icons/Pageview';
 import { useHistory } from "react-router";
 import moment from "moment";
+import { makeStyles } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
+import InputBase from '@material-ui/core/InputBase';
+import Divider from '@material-ui/core/Divider';
+import IconButton from '@material-ui/core/IconButton';
+import SearchIcon from '@material-ui/icons/Search';
+import RotateLeftIcon from '@material-ui/icons/RotateLeft';
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    padding: '2px 4px',
+    display: 'flex',
+    alignItems: 'center',
+    width: 400,
+  },
+  input: {
+    marginLeft: theme.spacing(1),
+    flex: 1,
+  },
+  iconButton: {
+    padding: 10,
+  },
+  divider: {
+    height: 28,
+    margin: 4,
+  },
+}));
 
 const Search = () => {
+  const classes = useStyles();
   const token = sessionStorage.getItem("token");
   const [query, setQuery] = useState();
   const [patients, setPatients] = useState([]);
@@ -72,9 +100,21 @@ const Search = () => {
 
   return (
     <Container className="mainContent">
-      <input type="text" name="search" onChange={handleSearch} />
-      <button>Search</button>
-      <button type="reset" onClick={resetState}>Reset</button>
+      <Paper component="form" className={classes.root}>
+      <IconButton className={classes.iconButton} aria-label="menu">
+        <SearchIcon />
+      </IconButton>
+      <InputBase
+        onChange={handleSearch}
+        className={classes.input}
+        placeholder="Search Google Maps"
+        inputProps={{ 'aria-label': 'search google maps' }}
+      />
+      <Divider className={classes.divider} orientation="vertical" />
+      <IconButton color="primary" className={classes.iconButton} aria-label="directions">
+        <RotateLeftIcon type="reset" onClick={resetState} />
+      </IconButton>
+    </Paper>
       {query && <p>Results for: {query}</p>}
       <Row className="userTitle">
         <h2 className="display-5">

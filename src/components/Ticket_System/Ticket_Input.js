@@ -65,19 +65,35 @@ const TicketInput = () => {
                     <Label for="emailEntry" sm={2}>Email</Label>
                     <Col sm={10}>
                     <Tooltip Username="Enter Your Email so we can contact you.">
-                    <Input type="email" name="email" id="emailEntry" placeholder="Enter Your Email for records"  required value={email} onChange={e => setEmail(e.target.value) }/>
+                    <Input type="email" name="email" id="emailEntry" placeholder="Enter Your Email so we can contact you."  required value={email} onChange={e => setEmail(e.target.value) }/>
                     </Tooltip>
                     </Col>
                 </FormGroup>
                 <FormGroup row>
                     <Label for="UsernameEntry" sm={2}>Username</Label>
                     <Col sm={10}>
-                    <Tooltip Username="Enter The Username Of The ticket Here">
+                    <Tooltip Username="Select your Username.">
                     <Input type="select" name="Username" id="UsernameEntry" placeholder="Enter the Username of your ticket" value={Username} onChange={e => setUsername(e.target.value)}>
-                    <option>testusername</option>
-                    <option>Dave</option>
-                    <option>Chris</option>
-                    <option>Steven</option>
+                            <option>John</option>
+                            <option>Adrian</option>
+                            <option>Alann</option>
+                            <option>Alexander</option>
+                            <option>Andrew</option>
+                            <option>Anthony</option>
+                            <option>Austin</option>
+                            <option>Benjamin</option>
+                            <option>Blake</option>
+                            <option>Boris</option>
+                            <option>Brandon</option>
+                            <option>Brian</option>
+                            <option>Cameron</option>
+                            <option>Carl</option>
+                            <option>Abigail</option>
+                            <option>Alexandra</option>
+                            <option>Alison</option>
+                            <option>Amanda</option>
+                            <option>Amelia</option>
+                            <option>Amy</option>
                     </Input>
                     </Tooltip>
                     </Col>
@@ -86,7 +102,7 @@ const TicketInput = () => {
                     <Label for="messageEntry" sm={2}>Message</Label>
                     <Col sm={10}>
                     <Tooltip Username="Fill In The Content Of Your ticket Here">
-                    <Input type="textarea" name="text" id="messageEntry" placeholder="Enter Your ticket/Issue here"   required value={content} onChange={e => setContent(e.target.value)}/>
+                    <Input type="textarea" name="text" id="messageEntry" placeholder="Example: UserID:2 Abigail Wilson has an issue when I try to add a new medical history... Give as much info as possible so we can assist in a timely fashion"   required value={content} onChange={e => setContent(e.target.value)}/>
                     </Tooltip>
                     </Col>
                 </FormGroup>

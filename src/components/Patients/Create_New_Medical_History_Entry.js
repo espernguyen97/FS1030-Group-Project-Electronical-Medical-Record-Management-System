@@ -7,10 +7,6 @@ import parseJwt from "../../helpers/authHelper";
 import Swal from 'sweetalert2'
 import { useLocation } from 'react-router-dom';
 
-
-
-
-
 const SQLDateParsed = () => {
 
     // MySQL formatted UTC 
@@ -65,8 +61,6 @@ const MedicalHistoryCreate = () => {
       };
       getData();
     }, [token]);
-
-    
 
     useEffect(() => {
         const getData = async () => {
@@ -158,8 +152,8 @@ const MedicalHistoryCreate = () => {
                         <Col>
                            <InputLabel><b>Billing Status</b></InputLabel>
                             <Tooltip title="Select if the patient has Paid Invoice">
-                            <Input type="select" name="BillStatus" id="BillStatus" placeholder="Select Your BillStatus"required value={BillStatus} onChange={e => setBillStatus(e.target.value) }>
-                            <option>Make A Selection</option>
+                            <Input type="select" name="BillStatus" id="BillStatus" placeholder="Select Your BillStatus" value={BillStatus} onChange={e => setBillStatus(e.target.value) }>
+                            <option></option>
                             <option>Paid</option>
                             <option>OutStanding</option>
                             </Input>
@@ -171,13 +165,13 @@ const MedicalHistoryCreate = () => {
                         <Col>
                            <InputLabel><b>PatientID</b></InputLabel>
                             <Tooltip title="Enter The Patients  ID Here">
-                           <Input type="PatientID" name="PatientID" id="PatientID" disabled="true"  value={PatientID}/>
+                           <Input type="PatientID" name="PatientID" id="PatientID" disabled="true"  required value={PatientID}/>
                             </Tooltip>
                         </Col>
                         <Col>
                            <InputLabel><b>Username</b></InputLabel>
                             <Tooltip title="Select Your Username">
-                            <Input type="text" name="Username" id="Username"  disabled="true"  value={Username}>
+                            <Input type="text" name="Username" id="Username"  disabled="true" required value={Username}>
                             </Input>
                             </Tooltip>
                         </Col>
@@ -187,8 +181,8 @@ const MedicalHistoryCreate = () => {
                         <Col>
                            <InputLabel><b>Covid Check</b></InputLabel>
                             <Tooltip title="Was This Patient Screened for Covid?">
-                            <Input type="select" name="Covid_Checked" id="Covid_Checked" placeholder="Yes Or No"  required value={Covid_Checked} onChange={e => setCovid_Checked(e.target.value) }>
-                            <option>Make A Selection</option>
+                            <Input type="select" name="Covid_Checked" id="Covid_Checked" placeholder="Yes Or No"   value={Covid_Checked} onChange={e => setCovid_Checked(e.target.value) }>
+                            <option></option>
                             <option>Yes</option>
                             <option>No</option>
                             </Input>
@@ -197,8 +191,8 @@ const MedicalHistoryCreate = () => {
                         <Col>
                            <InputLabel><b>Fever</b></InputLabel>
                             <Tooltip title="Select if the patient has signs of a fever">
-                            <Input type="select" name="Fever" id="Fever" placeholder="Select Your Username"  required value={Fever} onChange={e => setFever(e.target.value) }>
-                            <option>Make A Selection</option>
+                            <Input type="select" name="Fever" id="Fever" placeholder="Select Your Username"   value={Fever} onChange={e => setFever(e.target.value) }>
+                            <option></option>
                             <option>Yes</option>
                             <option>No</option>
                             </Input>
@@ -207,8 +201,8 @@ const MedicalHistoryCreate = () => {
                         <Col>
                            <InputLabel><b>Smoker</b></InputLabel>
                             <Tooltip title="Select if the patient is a Smoker">
-                            <Input type="select" name="Smoker" id="Smoker" placeholder="Select Your Smoker Status"  required value={Smoker} onChange={e => setSmoker(e.target.value) }>
-                            <option>Make A Selection</option>
+                            <Input type="select" name="Smoker" id="Smoker" placeholder="Select Your Smoker Status"   value={Smoker} onChange={e => setSmoker(e.target.value) }>
+                            <option></option>
                             <option>Yes</option>
                             <option>No</option>
                             </Input>
@@ -217,8 +211,8 @@ const MedicalHistoryCreate = () => {
                         <Col>
                            <InputLabel><b>Chronic Pain</b></InputLabel>
                             <Tooltip title="Select if the Paitient has Chronic Pain">
-                            <Input type="select" name="Chronic_Pain" id="Chronic_Pain" placeholder="Select Your Chronic Pain Status "  required value={Chronic_Pain} onChange={e => setChronic_Pain(e.target.value) }>
-                            <option>Make A Selection</option>
+                            <Input type="select" name="Chronic_Pain" id="Chronic_Pain" placeholder="Select Your Chronic Pain Status "   value={Chronic_Pain} onChange={e => setChronic_Pain(e.target.value) }>
+                            <option></option>
                             <option>Yes</option>
                             <option>No</option>
                             </Input>
@@ -230,7 +224,7 @@ const MedicalHistoryCreate = () => {
                         <Col>
                            <InputLabel><b>Allergies</b></InputLabel>
                             <Tooltip title="Enter The Allergies For the Patient">
-                            <Input type="textarea" name="Allergies" id="Allergies" placeholder="Allergy 1, Allergy 2, ..."  required value={Allergies} onChange={e => setAllergies(e.target.value) }/>
+                            <Input type="textarea" name="Allergies" id="Allergies" placeholder="Allergy 1, Allergy 2, ..."   value={Allergies} onChange={e => setAllergies(e.target.value) }/>
                             </Tooltip>
                         </Col>
                     </Row>
@@ -239,7 +233,7 @@ const MedicalHistoryCreate = () => {
                         <Col>
                            <InputLabel><b>Prescriptions</b></InputLabel>
                             <Tooltip title="Enter The Prescriptions For the Patient">
-                            <Input type="textarea" name="Prescriptions" id="Prescriptions" placeholder="Prescription 1, Prescription 2 ... "  required value={Prescriptions} onChange={e => setPrescriptions(e.target.value) }/>
+                            <Input type="textarea" name="Prescriptions" id="Prescriptions" placeholder="Prescription 1, Prescription 2 ... "  value={Prescriptions} onChange={e => setPrescriptions(e.target.value) }/>
                             </Tooltip>
                         </Col>
                     </Row>
@@ -248,7 +242,7 @@ const MedicalHistoryCreate = () => {
                         <Col>
                            <InputLabel><b>Immunizations</b></InputLabel>
                             <Tooltip title="Enter The Immunizations For the Patient">
-                            <Input type="textarea" name="Immunizations" id="Immunizations" placeholder="Immunization 1, Immunization 2 ... "  required value={Immunizations} onChange={e => setImmunizations(e.target.value) }/>
+                            <Input type="textarea" name="Immunizations" id="Immunizations" placeholder="Immunization 1, Immunization 2 ... "  value={Immunizations} onChange={e => setImmunizations(e.target.value) }/>
                             </Tooltip>
                         </Col>
                     </Row>
@@ -257,14 +251,14 @@ const MedicalHistoryCreate = () => {
                         <Col>
                            <InputLabel><b>Insurance Provider</b></InputLabel>
                             <Tooltip title="Enter The Patients Insurance Provider">
-                            <Input type="text" name="Insurance_Provider" id="Insurance_Provider" placeholder="Enter the Name of The Insurance Company"  required value={Insurance_Provider} onChange={e => setInsurance_Provider(e.target.value) }/>
+                            <Input type="text" name="Insurance_Provider" id="Insurance_Provider" placeholder="Enter the Name of The Insurance Company"  value={Insurance_Provider} onChange={e => setInsurance_Provider(e.target.value) }/>
                             </Tooltip>
                         </Col>
                         <Col>
                            <InputLabel><b>Insured Status</b></InputLabel>
                             <Tooltip title="Select Insured Status of the Patient">
-                            <Input type="select" name="InsuredStatus" id="InsuredStatus" placeholder="Select Your Insured Status "  required value={InsuredStatus} onChange={e => setInsuredStatus(e.target.value) }>
-                            <option>Make A Selection</option>
+                            <Input type="select" name="InsuredStatus" id="InsuredStatus" placeholder="Select Your Insured Status "  value={InsuredStatus} onChange={e => setInsuredStatus(e.target.value) }>
+                            <option></option>
                             <option>Insured</option>
                             <option>Not Insured</option>
                             </Input>
@@ -276,7 +270,7 @@ const MedicalHistoryCreate = () => {
                         <Col>
                            <InputLabel><b>Past Procedures</b></InputLabel>
                             <Tooltip title="Enter The Note For the Patient">
-                            <Input type="textarea" name="Past_Procedures" id="Past_Procedures" placeholder="Procedure 1,Procedure 2 ..."  required value={Past_Procedures} onChange={e => setPast_Procedures(e.target.value) }/>
+                            <Input type="textarea" name="Past_Procedures" id="Past_Procedures" placeholder="Procedure 1,Procedure 2 ..."   value={Past_Procedures} onChange={e => setPast_Procedures(e.target.value) }/>
                             </Tooltip>
                         </Col>
                     </Row>
@@ -285,7 +279,7 @@ const MedicalHistoryCreate = () => {
                         <Col>
                            <InputLabel><b>Weight</b></InputLabel>
                             <Tooltip title="Enter The Note For the Patient">
-                            <Input type="text" name="Weight" id="Weight" placeholder="Enter Patient Weight"  required value={Weight} onChange={e => setWeight(e.target.value) }/>
+                            <Input type="text" name="Weight" id="Weight" placeholder="Enter Patient Weight"   value={Weight} onChange={e => setWeight(e.target.value) }/>
                             </Tooltip>
                         </Col>
                     </Row>
@@ -295,13 +289,13 @@ const MedicalHistoryCreate = () => {
                         <Col>
                            <InputLabel><b>Xray URL</b></InputLabel>
                             <Tooltip title="Enter The Xray URL For the Patient">
-                            <Input type="text" name="XrayURL" id="XrayURL" placeholder="Enter Xray URL "  required value={XrayURL} onChange={e => setXrayURL(e.target.value) }/>
+                            <Input type="text" name="XrayURL" id="XrayURL" placeholder="Enter Xray URL "   value={XrayURL} onChange={e => setXrayURL(e.target.value) }/>
                             </Tooltip>
                         </Col>
                         <Col>
                            <InputLabel><b>Lab Results URL</b></InputLabel>
                             <Tooltip title="Enter The Lab Results URL For the Patient">
-                            <Input type="text" name="LabResults" id="LabResults" placeholder="Enter Lab Results URL "  required value={LabResults} onChange={e => setLabResults(e.target.value) }/>
+                            <Input type="text" name="LabResults" id="LabResults" placeholder="Enter Lab Results URL "   value={LabResults} onChange={e => setLabResults(e.target.value) }/>
                             </Tooltip>
                         </Col>
                     </Row>
