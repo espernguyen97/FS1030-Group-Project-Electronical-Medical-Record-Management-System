@@ -107,7 +107,7 @@ const Search = () => {
       <InputBase
         onChange={handleSearch}
         className={classes.input}
-        placeholder="Search Google Maps"
+        placeholder="Search Patient Database"
         inputProps={{ 'aria-label': 'search google maps' }}
       />
       <Divider className={classes.divider} orientation="vertical" />
