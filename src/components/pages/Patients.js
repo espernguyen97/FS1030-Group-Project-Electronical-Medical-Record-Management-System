@@ -17,7 +17,7 @@ export default function Patients() {
             <Row className="my-5">
                 <Col>
                   <Search/>{/* search bar*/}
-                  <PatientList/> {/* userlist*/}
+                  {/* <PatientList/> userlist */}
                 </Col>
             </Row>
         <hr className="yellow"/>
