@@ -6,27 +6,10 @@ import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import EditIcon from "@material-ui/icons/Edit";
 import { useHistory } from "react-router";
 import moment from "moment";
-import { makeStyles } from '@material-ui/core/styles';
-import Accordion from '@material-ui/core/Accordion';
-import AccordionSummary from '@material-ui/core/AccordionSummary';
-import AccordionDetails from '@material-ui/core/AccordionDetails';
-import Typography from '@material-ui/core/Typography';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    width: '100%',
-  },
-  heading: {
-    fontSize: theme.typography.pxToRem(24),
-    fontWeight: theme.typography.fontWeightRegular,
-    width: "100%",
-    textDecoration: "underline"
-  },
-}));
+
 
 const UserList = () => {
-  const classes = useStyles();
   const token = sessionStorage.getItem("token");
   const user = parseJwt(token).username;
   const [Users, setUsers] = useState([]);
@@ -67,16 +50,6 @@ const UserList = () => {
 
   return (
     <Container className="mainContent">
-      <Accordion>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel1a-content"
-          id="panel1a-header"
-        >
-          <Typography className={classes.heading}>User/CareGiver List</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Typography>
               <Row className="userTitle">
                 <h2 className="display-5" style={{paddingLeft: "10px"}}>
                   Total Users:{Users.length}
@@ -128,10 +101,6 @@ const UserList = () => {
                     ))}
                 </tbody>
               </Table>
-          </Typography>
-        </AccordionDetails>
-      </Accordion>
-      
     </Container>
   );
 };
