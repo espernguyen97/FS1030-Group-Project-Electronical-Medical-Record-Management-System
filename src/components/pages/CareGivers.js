@@ -13,6 +13,7 @@ import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import ListAltIcon from '@material-ui/icons/ListAlt';
+import Search from '../Users/UserSearch';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -94,7 +95,7 @@ export default function Caregivers() {
       </TabPanel>
       <TabPanel value={value} index={1}>
                   <Col>
-                    <center><UserList/></center> {/* User List*/}
+                    <center><Search/></center> {/* User List*/}
                   </Col>
       </TabPanel>
     </div>
