@@ -31,11 +31,11 @@ const SQLDateParsed = () => {
 const CreateUser = () => {
     const token = sessionStorage.getItem('token')
     const [First_Name, setFirst_Name] = useState("")
+    const [Last_Name, setLast_Name] = useState("")
     const [Email, setEmail] = useState("")
     const [Job_Position, setJob_Position] = useState("")
     const [Username, setUsername] = useState("")
-    const [Admin_Flag, setAdmin_Flag] = useState(false)
-    const [Last_Name, setLast_Name] = useState("")
+    const [Admin_Flag, setAdmin_Flag] = useState(false)   
     const [Password, setPassword] = useState("")
     const [alertContent, setAlertContent] = useState(null)
     const Last_Login =  SQLDateParsed(); 
@@ -87,34 +87,35 @@ const CreateUser = () => {
                 <center>
                 <img className="banner" src="assets/caregiverbanner.png" alt="#" />
                 <Form className="my-5" onSubmit={formSubmit}>
-                    <FormGroup row>
+                    <p style={{fontStyle: "italic"}}>Fill out all fields to create a new user</p>
+                    <FormGroup row style={{justifyContent: "center"}}>
                         <Col sm={10}>
                            <InputLabel htmlFor="input-with-icon-adornment">User Name</InputLabel>
                                 <PersonIcon/> 
-                            <Tooltip title="Enter The User Name Here">
+                            <Tooltip title="Max length 20 characters and cannot include spaces">
                            <Input  name="Username" id="Username" placeholder="Enter The User Name Here" required value={Username} onChange={e => setUsername(e.target.value)}/>
                             </Tooltip>
                         </Col>
                     </FormGroup>
-                    <FormGroup row>
+                    <FormGroup row style={{justifyContent: "center"}}>
                         <Col sm={10}>
                            <InputLabel htmlFor="input-with-icon-adornment">First Name</InputLabel>
                                 <PersonIcon/> 
-                            <Tooltip title="Enter The Doctors Name Here">
+                            <Tooltip title="Max length 20 characters and cannot include spaces">
                            <Input  name="First_Name" id="First_Name" placeholder="Doctors First Name Here" required value={First_Name} onChange={e => setFirst_Name(e.target.value)}/>
                             </Tooltip>
                         </Col>
                     </FormGroup>
-                    <FormGroup row>
+                    <FormGroup row style={{justifyContent: "center"}}>
                         <Col sm={10}>
                            <InputLabel htmlFor="input-with-icon-adornment">Last Name</InputLabel>
                                 <PersonIcon/> 
-                            <Tooltip title="Enter The Doctors Name Here">
+                            <Tooltip title="Max length 20 characters and cannot include spaces">
                            <Input name="Last_Name" id="Last_Name" placeholder="Doctors Last Name Here" required value={Last_Name} onChange={e => setLast_Name(e.target.value)}/>
                             </Tooltip>
                         </Col>
                     </FormGroup>
-                    <FormGroup row>
+                    <FormGroup row style={{justifyContent: "center"}}>
                         <Col sm={10}>
                            <InputLabel htmlFor="input-with-icon-adornment">Email Address</InputLabel>
                                 <AlternateEmailIcon/>
@@ -123,37 +124,41 @@ const CreateUser = () => {
                             </Tooltip>
                         </Col>
                     </FormGroup>
-                    <FormGroup row>
+                    <FormGroup row style={{justifyContent: "center"}}>
                         <Col sm={10}>
                            <InputLabel htmlFor="input-with-icon-adornment">Job Position</InputLabel>
                                 <LocalHospitalIcon/>
                             <Tooltip title="Enter Users Job Position">
-                            <Input name="Job_Position" id="Job_Position" placeholder="Enter Users Job Position"  required value={Job_Position} onChange={e => setJob_Position(e.target.value) }/>
+                                <select style={{textAlign: "center"}} name="Job_Position" id="Job_Position" required value={Job_Position} onChange={e => setJob_Position(e.target.value) }>
+                                    <option value="">--Select an option--</option>
+                                    <option value="Doctor">Doctor</option>
+                                    <option value="Nurse">Nurse</option>
+                                    <option value="Admin">Admin</option>
+                                </select>
                             </Tooltip>
                         </Col>
                     </FormGroup>
-                    <FormGroup row>
+                    <FormGroup row style={{justifyContent: "center"}}>
                         <Col sm={10}>
                            <InputLabel htmlFor="input-with-icon-adornment">Password</InputLabel>
                                 <LockIcon/>
-                            <Tooltip title="12 Character Minimum">
-                            <Input classname="pwfield" type="Password" name="Password" id="Password"  placeholder="12 Character Minimum"   value={Password} onChange={e => setPassword(e.target.value)}/>
+                            <Tooltip title="Must be at least 12 characters long with no spaces">
+                            <Input classname="pwfield" type="Password" name="Password" id="Password"  placeholder="12 Character Minimum" required  value={Password} onChange={e => setPassword(e.target.value)}/>
                             </Tooltip>
                         </Col>
                     </FormGroup>
-                    <FormGroup row>
+                    <FormGroup row style={{justifyContent: "center"}}>
                         <Col sm={10}>
                            <InputLabel htmlFor="input-with-icon-adornment">Is Admin</InputLabel>
                                 <SupervisorAccountIcon/>
-                            <Tooltip title="Is this user a Admin?">
+                            <Tooltip title="Is this user an Admin?">
                             <Checkbox color="primary" className="Admin_Flag" name="Admin_Flag" id="Admin_Flag" value={Admin_Flag} onChange={e => setAdmin_Flag(e.target.checked)}/>
                             </Tooltip>
                         </Col>
                     </FormGroup>
                     <div style={{color: "red"}} className={`alert ${!alertContent ? "hidden" : ""}`}>{alertContent}</div>
-                    <FormGroup check row>
+                    <FormGroup row>
                         <Col>
-                            <p style={{fontStyle: "italic"}}>Fill out all fields to create a new Admin</p>
                             <Button color="primary" type="submit">Create New Doctor</Button>
                         </Col>
                     </FormGroup>

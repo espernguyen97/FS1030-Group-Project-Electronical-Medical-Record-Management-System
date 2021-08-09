@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router";
 import Container from "@material-ui/core/Container";
+import Tooltip from '@material-ui/core/Tooltip';
+import Checkbox from '@material-ui/core/Checkbox';
 import {
   Form,
   ButtonToggle,
@@ -26,10 +28,11 @@ const EditUser = (props) => {
     Job_Position: `${EditUser.Job_Position}`,
     Admin_Flag: `${EditUser.Admin_Flag}`,
   });
+  const [alertContent, setAlertContent] = useState(null)
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    fetch(`http://localhost:4000/users/${id}`, {
+    const response = await fetch(`http://localhost:4000/users/${id}`, {
       method: "PATCH",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -37,14 +40,19 @@ const EditUser = (props) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(User),
-    }).then((response) => response.json());
-    let currentUser = JSON.parse(sessionStorage.getItem('currentUser'))
-    if (id == currentUser.UserID) {
-      sessionStorage.removeItem('currentUser')
-      sessionStorage.setItem('currentUser', JSON.stringify(User))
-      history.push(`/user-profile/${currentUser.UserID}`);
+    })
+    const payload = await response.json()
+    if (response.status === 400) {
+      setAlertContent(payload)
     } else {
-      history.push("/caregivers")
+      let currentUser = JSON.parse(sessionStorage.getItem('currentUser'))
+      if (id == currentUser.UserID) {
+        sessionStorage.removeItem('currentUser')
+        sessionStorage.setItem('currentUser', JSON.stringify(User))
+        history.push(`/user-profile/${currentUser.UserID}`)
+      } else {
+        history.push("/caregivers")
+      }
     }
   };
 
@@ -68,23 +76,21 @@ const EditUser = (props) => {
 
   return (
     <div className="main-panel">
-    <br/>
-      <br/>
         <Pulse>
         <Container className="containerCU" fixed>
           <h1>Edit User: {User.First_Name} {User.Last_Name}</h1>
           <Form onSubmit={(e) => handleSubmit(e)}>
+            <p style={{fontStyle: "italic"}}>All fields are required.</p>
             <Row form>
               <Col md={6}>
                 <FormGroup>
-                  <Label>Username:</Label>
-                  <Input
-                    type="text"
-                    name="Username"
-                    id="Username"
-                    defaultValue={User.Username}
-                    onChange={handleChange}
-                  />
+                  <Label>Username</Label>
+                  <Tooltip title="Max length 20 characters and cannot include spaces">
+                    <Input type="text" name="Username" id="Username" required
+                      defaultValue={User.Username}
+                      onChange={handleChange}
+                    />
+                  </Tooltip>
                 </FormGroup>
               </Col>
             </Row>
@@ -92,25 +98,23 @@ const EditUser = (props) => {
               <Col md={6}>
                 <FormGroup>
                   <Label>First Name</Label>
-                  <Input
-                    type="text"
-                    name="First_Name"
-                    id="firstName"
-                    defaultValue={User.First_Name}
-                    onChange={handleChange}
-                  />
+                  <Tooltip title="Max length 20 characters and cannot include spaces">
+                    <Input type="text" name="First_Name" id="firstName" required
+                      defaultValue={User.First_Name}
+                      onChange={handleChange}
+                    />
+                  </Tooltip>
                 </FormGroup>
               </Col>
               <Col md={6}>
                 <FormGroup>
                   <Label>Last Name</Label>
-                  <Input
-                    type="text"
-                    name="Last_Name"
-                    id="Last_Name"
-                    defaultValue={User.Last_Name}
-                    onChange={handleChange}
-                  />
+                  <Tooltip title="Max length 20 characters and cannot include spaces">
+                    <Input type="text" name="Last_Name" id="Last_Name" required
+                      defaultValue={User.Last_Name}
+                      onChange={handleChange}
+                    />
+                  </Tooltip>
                 </FormGroup>
               </Col>
             </Row>
@@ -118,10 +122,7 @@ const EditUser = (props) => {
               <Col md={6}>
                 <FormGroup>
                   <Label>Email</Label>
-                  <Input
-                    type="email"
-                    name="Email"
-                    id="Email"
+                  <Input type="email" name="Email" id="Email" required
                     defaultValue={User.Email}
                     onChange={handleChange}
                   />
@@ -131,13 +132,16 @@ const EditUser = (props) => {
                 ? <Col md={6}>
                   <FormGroup>
                     <Label>Job Position</Label>
-                    <Input
-                      type="text"
-                      name="Job_Position"
-                      id="Job_Position"
+                    <br/>
+                    <select style={{textAlign: "center"}} name="Job_Position" id="Job_Position" required 
                       defaultValue={User.Job_Position}
                       onChange={handleChange}
-                    />
+                    >
+                        <option value={User.Job_Position}>--Current: {User.Job_Position}--</option>
+                        <option value="Doctor">Doctor</option>
+                        <option value="Nurse">Nurse</option>
+                        <option value="Admin">Admin</option>
+                    </select>
                   </FormGroup>
                 </Col>
                 : null
@@ -146,17 +150,15 @@ const EditUser = (props) => {
             {access
               ? <FormGroup>
                 <Label>Admin Flag</Label>
-                <Input
-                  type="text"
-                  name="Admin_Flag"
-                  id="Admin_Flag"
-                  defaultValue={User.Admin_Flag}
-                  onChange={handleChange}
+                <Checkbox color="primary" className="Admin_Flag" name="Admin_Flag" id="Admin_Flag" checked={parseInt(User.Admin_Flag) ? true : false}
+                onChange={event => setUser((prevState) => ({...prevState,[event.target.name]: event.target.checked ? "1" : "0"}))}               
                 />
               </FormGroup>
               : null
             }
+            <div style={{color: "red"}} className={`alert ${!alertContent ? "hidden" : ""}`}>{alertContent}</div>
             <ButtonToggle type="submit" color="primary">Submit</ButtonToggle>
+            <br/><br/>
           </Form>
         </Container>
         </Pulse>
