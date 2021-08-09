@@ -115,6 +115,7 @@ const Search = () => {
         <RotateLeftIcon type="reset" onClick={resetState} />
       </IconButton>
     </Paper>
+    <br/><br/>
       {query && <p>Results for: {query}</p>}
       <Row className="userTitle">
         <h2 className="display-5">

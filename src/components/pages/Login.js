@@ -14,7 +14,6 @@ const Login = (props) => {
     let history = useHistory();
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
-    const [alertContent, ] = useState(null)
 
     const loginSubmit = async event => { 
         event.preventDefault()
@@ -72,7 +71,6 @@ const Login = (props) => {
           <center><img className="loginimg" src="./Assets/login.png" alt="Doctor Logo" /></center>
           <h1>Login</h1>
           <Form className="my-5" onSubmit={loginSubmit}>
-            <div className={`alert ${!alertContent ? "hidden" : ""}`}>{alertContent}</div>
             <FormGroup row>
               <Col>
               <InputLabel htmlFor="input-with-icon-adornment">Email Address</InputLabel>

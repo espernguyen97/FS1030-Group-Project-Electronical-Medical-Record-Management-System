@@ -182,7 +182,8 @@ input[type="Last_Name"]:focus {
   outline: none;
 }
 
-input[type="Last_Name"] {
+input[type="Last_Name"],
+input[type="First_Name"] {
   background-color: #ffffff93;
   outline: none;
   color: #000000;

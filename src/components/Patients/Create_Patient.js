@@ -22,7 +22,7 @@ const SQLDateParsed = () => {
     return(SQLDate)
     }
 
-const PatientCreate = () => {
+const PatientCreate = () => { 
     const token = sessionStorage.getItem('token')
     const [First_Name, setFirst_Name] = useState("")
     const [Last_Name, setLast_Name] = useState("")
@@ -52,8 +52,8 @@ const PatientCreate = () => {
             body: JSON.stringify({First_Name, Last_Name, DOB,OHIP,Address,City,Province,PostalCode,Phone_Number,Email,Age,Last_edit})
         })
         const payload = await response.json()
-        if (response.status >= 400) {
-            setAlertContent(`Error with fields: ${payload.invalid.join(",")}`)
+        if (response.status === 400) {
+            setAlertContent(payload)
         } else {
             setAlertContent(null)
             Swal.fire({
@@ -88,13 +88,14 @@ const PatientCreate = () => {
             <Container className="containerPatient_Create">
                 <center>
                 <h2>New Patient</h2>
-                <img className="banner" src="assets/NewPatient.png" alt="#" />
+                <img className="banner" src="assets/NewPatient.png" alt="#" />              
                 <Form className="my-5" onSubmit={formSubmit}>
-                <Row>
+                    <p style={{fontStyle: "italic"}}>All fields except Age are required.</p>
+                <Row style={{justifyContent: "space-between"}}>
                     <FormGroup>
                         <Col>
                            <InputLabel><b>First Name</b></InputLabel>
-                            <Tooltip title="Enter The Patients First Name Here">
+                            <Tooltip title="Max length 20 characters and cannot include spaces">
                            <Input type="First_Name" name="First_Name" id="First_Name" placeholder="First Name Here" required value={First_Name} onChange={e => setFirst_Name(e.target.value)}/>
                             </Tooltip>
                         </Col>
@@ -102,53 +103,53 @@ const PatientCreate = () => {
                     <FormGroup>
                         <Col>
                            <InputLabel><b>Last Name</b></InputLabel>
-                            <Tooltip title="Enter The Patients First Name Here">
+                            <Tooltip title="Max length 20 characters and cannot include spaces">
                             <Input type="Last_Name" name="Last_Name" id="Last_Name" placeholder="Last Name Here"  required value={Last_Name} onChange={e => setLast_Name(e.target.value) }/>
                             </Tooltip>
                         </Col>
                     </FormGroup>
                 </Row>
-                <Row>
+                <Row style={{justifyContent: "space-between"}}>
                     <FormGroup>
                         <Col>
                            <InputLabel><b>Date Of Birth</b></InputLabel>
-                            <Tooltip title="Enter The Patients Date Of Birth Here">
-                            <Input type="date" name="DOB" id="DOBEntry"  placeholder="DOB"   value={DOB} onChange={e => setDOB(e.target.value)}/>
+                            <Tooltip title="Enter The Patient's Date Of Birth Here">
+                            <Input type="date" name="DOB" id="DOBEntry"  placeholder="DOB" required value={DOB} onChange={e => setDOB(e.target.value)}/>
                             </Tooltip>
                         </Col>
                     </FormGroup>
                     <FormGroup>
                         <Col>
                            <InputLabel><b>O.H.I.P Number</b></InputLabel>
-                            <Tooltip title="Enter The Patients Health Card Number">
+                            <Tooltip title="Enter the patient's unique health card number.">
                             <Input type="OHIP" name="OHIP" id="OHIP" placeholder="OHIP Here"  required value={OHIP} onChange={e => setOHIP(e.target.value) }/>
                             </Tooltip>
                         </Col>
                     </FormGroup>
                 </Row>
-                <Row>
+                <Row style={{justifyContent: "space-between"}}>
                     <FormGroup>
                         <Col>
                            <InputLabel><b>Street Address</b></InputLabel>
-                            <Tooltip title="Enter The Patients Address">
-                            <Input type="Address"  name="Address" id="Address" placeholder=" Address Here"  required value={Address} onChange={e => setAddress(e.target.value) }/>
+                            <Tooltip title="Enter The Patient's Address">
+                            <Input type="Address"  name="Address" id="Address" placeholder=" Address Here" required value={Address} onChange={e => setAddress(e.target.value) }/>
                             </Tooltip>
                         </Col>
                     </FormGroup>
                     <FormGroup>
                         <Col>
                            <InputLabel><b>City</b></InputLabel>
-                            <Tooltip title="Enter The Patients City">
+                            <Tooltip title="Enter The Patient's City">
                             <Input type="City"  name="City" id="City" placeholder=" City Here"  required value={City} onChange={e => setCity(e.target.value) }/>
                             </Tooltip>
                         </Col>
                     </FormGroup>
                 </Row>
-                <Row>
+                <Row style={{justifyContent: "space-between"}}>
                     <FormGroup>
                         <Col>
                            <InputLabel><b>Province</b></InputLabel>
-                            <Tooltip title="Enter The Patients Province">
+                            <Tooltip title="Enter The Patient's Province">
                             <Input type="Province"  name="Province" id="Province" placeholder=" Province Here"  required value={Province} onChange={e => setProvince(e.target.value) }/>
                             </Tooltip>
                         </Col>
@@ -156,17 +157,17 @@ const PatientCreate = () => {
                     <FormGroup>
                         <Col>
                            <InputLabel><b>Postal Code</b></InputLabel>
-                            <Tooltip title="Enter The Patients Postal Code">
-                            <Input type="PostalCode"  name="PostalCode" id="PostalCode" placeholder=" Postal Code Here"  required value={PostalCode} onChange={e => setPostalCode(e.target.value) }/>
+                            <Tooltip title="Enter The Patient's Postal Code">
+                            <Input type="text"  name="PostalCode" id="PostalCode" placeholder=" Postal Code Here" maxlength="10" required value={PostalCode} onChange={e => setPostalCode(e.target.value) }/>
                             </Tooltip>
                         </Col>
                     </FormGroup>
                 </Row>
-                <Row>
+                <Row style={{justifyContent: "space-between"}}>
                     <FormGroup>
                         <Col>
                            <InputLabel><b>Phone Number</b></InputLabel>
-                            <Tooltip title="Enter The Patients Phone Number">
+                            <Tooltip title="Must be a 10-digit number with no dashes, brackets, etc.">
                             <Input type="Phone_Number"  name="Phone_Number" id="Phone_Number" placeholder=" Phone Number Here"  required value={Phone_Number} onChange={e => setPhone_Number(e.target.value) }/>
                             </Tooltip>
                         </Col>
@@ -184,16 +185,15 @@ const PatientCreate = () => {
                     <FormGroup>
                         <Col>
                            <InputLabel><b>Age</b></InputLabel>
-                            <Tooltip title="Enter the Patients Age">
-                            <Input type="Age" name="Age" id="Age" placeholder="Patient Age"  required value={Age} onChange={e => setAge(e.target.value) }/>
+                            <Tooltip title="Optional: enter the patient's age">
+                            <Input type="number" name="Age" id="Age" placeholder="Patient Age" min="0" max="150" value={Age} onChange={e => setAge(e.target.value) }/>
                             </Tooltip>
                         </Col>
                     </FormGroup>
                 </Row>
-                    <div className={`alert ${!alertContent ? "hidden" : ""}`}>{alertContent}</div>
-                    <FormGroup check row>
+                    <div style={{color: "red"}} className={`alert ${!alertContent ? "hidden" : ""}`}>{alertContent}</div>
+                    <FormGroup row>
                         <Col>
-                            <p style={{fontStyle: "italic"}}>Fill out all fields to create a Patient</p>
                             <Button color="primary" type="submit"><PersonAddIcon/>Create Patient</Button>
                         </Col>
                     </FormGroup>

@@ -1,6 +1,7 @@
 import React, { useState} from "react";
 import { useHistory } from "react-router";
 import Container from "@material-ui/core/Container";
+import Tooltip from '@material-ui/core/Tooltip';
 import moment from "moment";
 import {
   Form,
@@ -48,6 +49,7 @@ const EditPatient = (props) => {
     Last_Edit: `${SQLDateParsed()}`,
     PatientID: `${editPatient.PatientID}` //not editable in form. I included this for pushing back to the patient view page with the full updated info. SW
   });
+  const [alertContent, setAlertContent] = useState(null)
 
   const saveRevisions = () => {
     let PatientID = props.match.params.id
@@ -74,9 +76,9 @@ const EditPatient = (props) => {
     }
   }
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    fetch(`http://localhost:4000/patients/${id}`, {
+    const response = await fetch(`http://localhost:4000/patients/${id}`, {
       method: "PATCH",
       mode: 'cors',
       headers: {
@@ -85,10 +87,15 @@ const EditPatient = (props) => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(patient),
-    }).then((response) => response.json());
-    saveRevisions()
-    let path = `/patient/${patient.PatientID}`
-    history.push(path, patient);
+    })
+    const payload = await response.json()
+    if (response.status === 400) {
+      setAlertContent(payload)
+    } else {
+      saveRevisions()
+      let path = `/patient/${patient.PatientID}`
+      history.push(path, patient)
+    }
   };
 
   const handleChange = (event) => {
@@ -110,14 +117,13 @@ const EditPatient = (props) => {
             </Col>
           </Row>
           <Form onSubmit={(e) => handleSubmit(e)}>
+            <br/>
+            <p style={{fontStyle: "italic"}}>All fields are required.</p>
             <Row form>
               <Col md={6}>
                 <FormGroup>
                   <Label>Date of Birth</Label>
-                  <Input
-                    type="date"
-                    name="DOB"
-                    id="dob"
+                  <Input type="date" name="DOB" id="dob" required 
                     defaultValue={patient.DOB}
                     onChange={handleChange}
                   />
@@ -126,10 +132,7 @@ const EditPatient = (props) => {
               <Col md={6}>
                 <FormGroup>
                   <Label>OHIP Number</Label>
-                  <Input
-                    type="text"
-                    name="OHIP"
-                    id="ohip"
+                  <Input type="text" name="OHIP" id="ohip" required
                     defaultValue={patient.OHIP}
                     onChange={handleChange}
                   />
@@ -140,25 +143,23 @@ const EditPatient = (props) => {
               <Col md={6}>
                 <FormGroup>
                   <Label>First Name</Label>
-                  <Input
-                    type="text"
-                    name="First_Name"
-                    id="firstName"
-                    defaultValue={patient.First_Name}
-                    onChange={handleChange}
-                  />
+                  <Tooltip title="Max length 20 characters and cannot include spaces">
+                    <Input type="text" name="First_Name" id="firstName" required
+                      defaultValue={patient.First_Name}
+                      onChange={handleChange}
+                    />
+                  </Tooltip>
                 </FormGroup>
               </Col>
               <Col md={6}>
                 <FormGroup>
                   <Label>Last Name</Label>
-                  <Input
-                    type="text"
-                    name="Last_Name"
-                    id="lastName"
-                    defaultValue={patient.Last_Name}
-                    onChange={handleChange}
-                  />
+                  <Tooltip title="Max length 20 characters and cannot include spaces">
+                    <Input type="text" name="Last_Name" id="lastName" required
+                      defaultValue={patient.Last_Name}
+                      onChange={handleChange}
+                    />
+                  </Tooltip>
                 </FormGroup>
               </Col>
             </Row>
@@ -166,10 +167,7 @@ const EditPatient = (props) => {
               <Col md={6}>
                 <FormGroup>
                   <Label>Email</Label>
-                  <Input
-                    type="email"
-                    name="Email"
-                    id="email"
+                  <Input type="email" name="Email" id="email" required
                     defaultValue={patient.Email}
                     onChange={handleChange}
                   />
@@ -178,22 +176,18 @@ const EditPatient = (props) => {
               <Col md={6}>
                 <FormGroup>
                   <Label>Phone Number</Label>
-                  <Input
-                    type="tel"
-                    name="Phone_Number"
-                    id="tel"
-                    defaultValue={patient.Phone_Number}
-                    onChange={handleChange}
-                  />
+                  <Tooltip title="Must be a 10-digit number with no dashes, brackets, etc.">
+                    <Input type="tel" name="Phone_Number" id="tel" required
+                      defaultValue={patient.Phone_Number}
+                      onChange={handleChange}
+                    />
+                  </Tooltip>
                 </FormGroup>
               </Col>
             </Row>
             <FormGroup>
               <Label>Address</Label>
-              <Input
-                type="text"
-                name="Address"
-                id="address"
+              <Input type="text" name="Address" id="address" required
                 defaultValue={patient.Address}
                 onChange={handleChange}
               />
@@ -202,10 +196,7 @@ const EditPatient = (props) => {
               <Col md={6}>
                 <FormGroup>
                   <Label>City</Label>
-                  <Input
-                    type="text"
-                    name="City"
-                    id="city"
+                  <Input type="text" name="City" id="city" required
                     defaultValue={patient.City}
                     onChange={handleChange}
                   />
@@ -214,10 +205,7 @@ const EditPatient = (props) => {
               <Col md={4}>
                 <FormGroup>
                   <Label>Province</Label>
-                  <Input
-                    type="text"
-                    name="Province"
-                    id="province"
+                  <Input type="text" name="Province" id="province" required
                     defaultValue={patient.Province}
                     onChange={handleChange}
                   />
@@ -226,10 +214,7 @@ const EditPatient = (props) => {
               <Col md={2}>
                 <FormGroup>
                   <Label>Postal Code</Label>
-                  <Input
-                    type="text"
-                    name="PostalCode"
-                    id="postalcode"
+                  <Input type="text" name="PostalCode" id="postalcode" required maxlength="10"
                     defaultValue={patient.PostalCode}
                     onChange={handleChange}
                   />
@@ -238,10 +223,7 @@ const EditPatient = (props) => {
               <Col md={2}>
                 <FormGroup>
                   <Label>Date submitted for Edit:</Label>
-                  <Input
-                    type="text"
-                    name="Last_Edit"
-                    id="Last_Edit"
+                  <Input type="text" name="Last_Edit" id="Last_Edit"
                     disabled = {true}
                     defaultValue={patient.Last_Edit}
                     onChange={handleChange}
@@ -249,6 +231,7 @@ const EditPatient = (props) => {
                 </FormGroup>
               </Col>
             </Row>
+            <div style={{color: "red"}} className={`alert ${!alertContent ? "hidden" : ""}`}>{alertContent}</div>
             <ButtonToggle type="submit" color="primary">Submit</ButtonToggle>
           </Form><br/><br/>
         </Container>
