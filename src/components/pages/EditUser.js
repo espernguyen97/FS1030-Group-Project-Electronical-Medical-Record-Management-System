@@ -46,7 +46,7 @@ const EditUser = (props) => {
       setAlertContent(payload)
     } else {
       let currentUser = JSON.parse(sessionStorage.getItem('currentUser'))
-      if (id === currentUser.UserID) {
+      if (parseInt(id) === currentUser.UserID) {
         sessionStorage.removeItem('currentUser')
         sessionStorage.setItem('currentUser', JSON.stringify(User))
         history.push(`/user-profile/${currentUser.UserID}`)

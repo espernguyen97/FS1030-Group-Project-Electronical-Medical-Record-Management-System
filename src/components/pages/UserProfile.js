@@ -35,7 +35,7 @@ const UserProfile = (props) => {
 
     const userEditRoute = (event, user) => {
         event.preventDefault();
-        let path = `/edit-user/${user.UserID}`
+        let path = `/edit-profile/${user.UserID}`
         history.push(path, user);
     }
     //profile Picture
