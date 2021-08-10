@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { parseJwt } from "../helpers/authHelper";
+import { parseJwt } from "../../helpers/authHelper";
 import { Container } from "reactstrap";
-import { Table, Button, Row } from "reactstrap";
+import { Table, Button, Row, Col } from "reactstrap";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import PageviewIcon from '@material-ui/icons/Pageview';
 import { useHistory } from "react-router";
@@ -13,6 +13,7 @@ import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
 import RotateLeftIcon from '@material-ui/icons/RotateLeft';
+import PatientCreateModal from './Create_Modal';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -42,20 +43,19 @@ const Search = () => {
   const user = parseJwt(token).username;
   const history = useHistory();
 
-  useEffect(() => {
-    const getData = async () => {
-      const response = await fetch("http://localhost:4000/patients/", {
-        method: "GET",
-        mode: 'cors',
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      const data = await response.json();
-      setPatients(data);
-    };
-    getData();
-  }, [token]);
+  const getData = async () => {
+    const response = await fetch("http://localhost:4000/patients/", {
+      method: "GET",
+      mode: 'cors',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    const data = await response.json();
+    setPatients(data);
+  };
+  // eslint-disable-next-line
+  useEffect(() => {getData()}, [token]);
 
   const handleSearch = (event) => {
     setQuery(event.target.value);
@@ -73,7 +73,9 @@ const Search = () => {
   };
 
   const resetState = () => {
-    window.location.reload();
+    getData()
+    document.getElementById("patient-searchbar").value = ""
+    setQuery(null)
   }
 
   const patientViewRoute = (event, patient) => {
@@ -85,7 +87,7 @@ const Search = () => {
   const patientDelete = async (event, patient) => {
     event.preventDefault()
     console.log(patient)
-    const response = await fetch(`http://localhost:4000/patients/${patient.PatientID}`, {
+    await fetch(`http://localhost:4000/patients/${patient.PatientID}`, {
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -93,9 +95,7 @@ const Search = () => {
         "Content-Type": "application/json",
       },
     })
-    const data = await response.json();
-    console.log(data)
-    window.location.reload();
+    getData()
   }
 
   let currentUser = JSON.parse(sessionStorage.getItem('currentUser'))
@@ -103,6 +103,9 @@ const Search = () => {
 
   return (
     <Container className="mainContent">
+      <Col>
+        {adminAccess ? <PatientCreateModal getPatients={getData}/> : null}
+      </Col>
       <Paper component="form" className={classes.root}>
       <IconButton className={classes.iconButton} aria-label="menu">
         <SearchIcon />
@@ -110,6 +113,7 @@ const Search = () => {
       <InputBase
         onChange={handleSearch}
         className={classes.input}
+        id="patient-searchbar"
         placeholder="Search Patient Database"
         inputProps={{ 'aria-label': 'search google maps' }}
       />

@@ -22,7 +22,7 @@ const SQLDateParsed = () => {
     return(SQLDate)
     }
 
-const PatientCreate = () => { 
+const PatientCreate = (props) => { 
     const token = sessionStorage.getItem('token')
     const [First_Name, setFirst_Name] = useState("")
     const [Last_Name, setLast_Name] = useState("")
@@ -64,8 +64,9 @@ const PatientCreate = () => {
                 text: 'A New Patient Has been Created.',
                 confirmButtonColor: '#4BB543',
                 timer: 1500
-              })
+            })
             resetForm()
+            props.getPatients()           
         }
     }
 

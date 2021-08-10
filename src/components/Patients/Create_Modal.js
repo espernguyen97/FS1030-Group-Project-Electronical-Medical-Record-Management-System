@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function PatientCreateModal() {
+export default function PatientCreateModal(props) {
   const classes = useStyles();
   // getModalStyle is not a pure function, we roll the style only on the first render
   const [modalStyle] = React.useState(getModalStyle);
@@ -49,13 +49,13 @@ export default function PatientCreateModal() {
 
   const body = (
     <div style={modalStyle} className={classes.paper}>
-      <PatientCreate/>
+      <PatientCreate getPatients={props.getPatients}/>
     </div>
   );
 
   return (
     <div>
-      <Button color="primary" type="button" onClick={handleOpen}>
+      <Button style={{marginBottom: "2rem"}} color="primary" type="button" onClick={handleOpen}>
        <PersonAddIcon/> Create New Patient
       </Button>
       <Modal
