@@ -31,7 +31,7 @@ export default function Teams() {
               component="img"
               alt="David D-Hart"
               height="140"
-              image="https://ca.slack-edge.com/T013QGKDVGA-U01JJ0AHGTU-475c3167e358-512"
+              image="https://i.ibb.co/5L4DKck/customc0447b5dacb66b2c-320x180.jpg"
               title="David D-Hart"
             />
             <CardContent>
