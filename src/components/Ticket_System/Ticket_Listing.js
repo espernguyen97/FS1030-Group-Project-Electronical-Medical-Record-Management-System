@@ -65,6 +65,7 @@ const TicketSubmissionsList = () => {
             <th>Username</th>
             <th>Date</th>
             <th>Issue</th>
+            <th>Status</th>
           </tr>
         </thead>
         <tbody>
@@ -81,6 +82,7 @@ const TicketSubmissionsList = () => {
                 <td>{ticket.Username}</td>
                 <td>{moment(ticket.Date).format("YYYY-MM-DD")}</td>
                 <td>{ticket.content}</td>
+                <td>{ticket.Completed}</td>
                 <td>
                   {" "}
                   <Button color="success" onClick={(e) => ticketEditRoute(e, ticket)}>
