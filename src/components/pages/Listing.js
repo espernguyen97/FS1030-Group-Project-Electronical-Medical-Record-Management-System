@@ -1,23 +1,28 @@
-import React from 'react'
-import { Container,Row,Col} from 'reactstrap'
+import React from 'react';
+import Container from '@material-ui/core/Container';
+import { Row,Col} from 'reactstrap';
+import Fade from 'react-reveal/Fade';
 import AdminPanel from '../Adminpanel';
-import SideNav from '../shared/SideNav';
-import Pulse from 'react-reveal/Pulse';
 
-const Listings = () => {
+export default function Listing() {
+
     return (
-        <Container>
-            <SideNav/>
-            <br/><br/>
-                <Row>
-                    <Col>
-                        <Pulse>
-                            <AdminPanel/> 
-                        </Pulse>
-                    </Col>
-                </Row>
+      <Fade>
+      <div className="main-panel">
+        <Container fixed>
+          <br/>
+          <br/>
+          <center>
+            <Col>
+            </Col>
+            <Row className="my-5">
+                <Col>
+                  <AdminPanel/>
+                </Col>
+            </Row>
+        </center>
         </Container>
-    )
-}
-
-export default Listings
+      </div>
+      </Fade>
+    );
+  }
