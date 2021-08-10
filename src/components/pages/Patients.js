@@ -6,6 +6,9 @@ import PatientCreateModal from '../Patients/Create_Modal';
 import Fade from 'react-reveal/Fade';
 
 export default function Patients() {
+  let currentUser = JSON.parse(sessionStorage.getItem('currentUser'))
+  let adminAccess = parseInt(currentUser.Admin_Flag)
+
     return (
       <Fade>
       <div className="main-panel">
@@ -14,11 +17,11 @@ export default function Patients() {
           <br/>
           <center>
             <Col>
-              <PatientCreateModal/>
+              {adminAccess ? <PatientCreateModal/> : null}
             </Col>
             <Row className="my-5">
                 <Col>
-                  <Search/>{/* search bar*/}
+                  <Search/>{/* search bar and patient list */}
                 </Col>
             </Row>
         </center>

@@ -98,6 +98,9 @@ const Search = () => {
     window.location.reload();
   }
 
+  let currentUser = JSON.parse(sessionStorage.getItem('currentUser'))
+  let adminAccess = parseInt(currentUser.Admin_Flag)
+
   return (
     <Container className="mainContent">
       <Paper component="form" className={classes.root}>
@@ -161,9 +164,12 @@ const Search = () => {
                     <PageviewIcon/>
                   </Button>                 
                   {String.fromCharCode(160)}
-                  <Button color="danger" onClick={(e) => patientDelete(e, patient)}>
-                    <DeleteForeverIcon />
-                  </Button>
+                  {adminAccess
+                    ? <Button color="danger" onClick={(e) => patientDelete(e, patient)}>
+                        <DeleteForeverIcon />
+                      </Button>
+                    : null
+                  }                 
                 </td>
               </tr>
             ))}

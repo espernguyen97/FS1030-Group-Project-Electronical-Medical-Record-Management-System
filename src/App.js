@@ -30,6 +30,8 @@ function App() {
     setUser(JSON.parse(sessionStorage.getItem('currentUser')))
   }, []) //I added this effect to prevent any window refresh from resetting the states above back to their default false values. SW
 
+  let adminAccess = parseInt(user.Admin_Flag)
+
   return (
    <BrowserRouter>
         <CssBaseline />
@@ -42,15 +44,16 @@ function App() {
             <SideNav token={token} setToken={setToken} setUser={setUser}/>
             <PrivateRoute component={Listing} exact path="/submissions" />
             <PrivateRoute component={SubmitTicket} exact path="/submit_ticket" />
-            <PrivateRoute component={TicketList} exact path="/tickets" />
+            {adminAccess && <PrivateRoute component={TicketList} exact path="/tickets" />}
+            {adminAccess && <PrivateRoute component={EditTicket} exact path="/tickets/entries/:id" />}
             <PrivateRoute component={Patients} exact path="/patients" />
             <PrivateRoute component={ViewPatient} exact path="/patient/:id" />
             <PrivateRoute component={EditPatient} exact path="/edit-patient/:id" /> 
-            <PrivateRoute component={UserProfile} exact path="/user-profile/:id" />
-            <PrivateRoute component={Caregivers} exact path="/caregivers" />
-            <PrivateRoute component={EditUser} exact path="/edit-user/:id" />
             <PrivateRoute component={ViewPatientMedicalHistory} exact path="/medical_history/:id" />
-            <PrivateRoute component={EditTicket} exact path="/tickets/entries/:id" />            
+            <PrivateRoute component={UserProfile} exact path="/user-profile/:id" />
+            {adminAccess && <PrivateRoute component={Caregivers} exact path="/caregivers" />}
+            <PrivateRoute component={EditUser} exact path={`/edit-user/${user.UserID}`} />
+            {adminAccess && <PrivateRoute component={EditUser} exact path="/edit-user/:id" />}                     
           </PrivateRoute>
           <Route path="*" component={NotFound} />
         </Switch>

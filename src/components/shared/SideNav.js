@@ -80,31 +80,39 @@ const SideNav = (props) => {
   const [open] = useState(true);
   let history = useHistory()
 
+  let currentUser = JSON.parse(sessionStorage.getItem('currentUser'))
+  let adminAccess = parseInt(currentUser.Admin_Flag)
+
   const items = [
     {
       text: "Dashboard",
       icon: <HomeIcon />,
-      path: "/submissions"
+      path: "/submissions",
+      access: true
     },
     {
       text: "Patients",
       icon: <AccountCircleIcon />,
-      path: "/Patients"
+      path: "/Patients",
+      access: true
     },
     {
       text: "Tickets",
       icon: <AllInboxIcon />,
-      path: "/Tickets"
+      path: "/Tickets",
+      access: adminAccess
     },
     {
       text: "Submit Ticket",
       icon: <BugReportIcon />,
-      path: "/Submit_Ticket"
+      path: "/Submit_Ticket",
+      access: true
     },
     {
       text: "Care Givers",
       icon: <SupervisorAccountIcon />,
-      path: "/CareGivers"
+      path: "/CareGivers",
+      access: adminAccess
     },
     {
       text: "Logout",
@@ -175,15 +183,17 @@ const SideNav = (props) => {
                   <ListItemText primary={item.text} />
                 </ListItem>
               )
-            } else {
+            } else if (item.access) {
               return (
                 <ListItem button component={RouterLink} to={item.path} key={index}>
                   <ListItemIcon>{item.icon}</ListItemIcon>
                   <ListItemText primary={item.text} />
                 </ListItem>
               )
+            } else {
+              return null
             }
-          })}
+          })}            
         </List>
       </Drawer>
     </div>
