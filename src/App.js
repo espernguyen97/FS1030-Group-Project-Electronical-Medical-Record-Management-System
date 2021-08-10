@@ -30,7 +30,10 @@ function App() {
     setUser(JSON.parse(sessionStorage.getItem('currentUser')))
   }, []) //I added this effect to prevent any window refresh from resetting the states above back to their default false values. SW
 
-  let adminAccess = parseInt(user.Admin_Flag)
+  let adminAccess = false
+  if (user){
+    adminAccess = parseInt(user.Admin_Flag)
+  }
 
   return (
    <BrowserRouter>
@@ -52,7 +55,7 @@ function App() {
             <PrivateRoute component={ViewPatientMedicalHistory} exact path="/medical_history/:id" />
             <PrivateRoute component={UserProfile} exact path="/user-profile/:id" />
             {adminAccess && <PrivateRoute component={Caregivers} exact path="/caregivers" />}
-            <PrivateRoute component={EditUser} exact path={`/edit-user/${user.UserID}`} />
+            {user ? <PrivateRoute component={EditUser} exact path={`/edit-user/${user.UserID}`} /> : null}
             {adminAccess && <PrivateRoute component={EditUser} exact path="/edit-user/:id" />}                     
           </PrivateRoute>
           <Route path="*" component={NotFound} />
