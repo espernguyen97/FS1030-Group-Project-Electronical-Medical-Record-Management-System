@@ -8,6 +8,7 @@ import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import Fade from 'react-reveal/Fade';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -25,6 +26,7 @@ const ViewMedicalHistoryMedicalHistory = (props) => {
 
     
     return (
+        <Fade top>
         <div className="main-panel">
             <Card>               
                 <CardContent>
@@ -52,7 +54,7 @@ const ViewMedicalHistoryMedicalHistory = (props) => {
                                 <p><span style={{color: "grey"}}>Weight:</span> {MedicalHistory.Weight}</p>
                             </Col>
                         </Row>
-                                <p><span style={{color: "grey"}}><i><b>Last Edit:</b></i></span> {moment(MedicalHistory.Date).format("YYYY-MM-DD")}</p>
+                                <p><span style={{color: "grey"}}><i><b>Entry Submitted:</b></i></span> {moment(MedicalHistory.Date).format("YYYY-MM-DD")}</p>
                             <br/>
                             <Col>
                                 <div className={classes.root}>
@@ -92,6 +94,7 @@ const ViewMedicalHistoryMedicalHistory = (props) => {
                 </CardContent>
             </Card>
         </div>
+        </Fade>
     )
 }
 

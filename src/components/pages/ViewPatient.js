@@ -5,6 +5,7 @@ import { Card, CardContent } from '@material-ui/core';
 import EditIcon from "@material-ui/icons/Edit";
 import moment from "moment";
 import PatientTab from "../Patients/Patient_Tab";
+import Fade from 'react-reveal/Fade';
 
 //profile Picture
 const url = "https://randomuser.me/api/";
@@ -33,6 +34,7 @@ const ViewPatient = (props) => {
         history.push(path, patient);
     }
 //profile Picture
+// eslint-disable-next-line
     const [loading, setLoading] = useState(true);
     const [person, setPerson] = useState(null);
 
@@ -55,6 +57,7 @@ const ViewPatient = (props) => {
     }, []);
 
     return (
+        <Fade top>
         <div className="main-panel">
             <Card>               
                 <CardContent>
@@ -95,6 +98,7 @@ const ViewPatient = (props) => {
             </Card>
             <PatientTab/>
         </div>
+        </Fade>
     )
 }
 

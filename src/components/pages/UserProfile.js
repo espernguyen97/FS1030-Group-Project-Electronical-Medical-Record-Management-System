@@ -4,6 +4,7 @@ import { Container, Row, Col, Button } from "reactstrap";
 import { Card, CardContent } from '@material-ui/core';
 import EditIcon from "@material-ui/icons/Edit";
 import moment from "moment";
+import Fade from 'react-reveal/Fade';
 
 //profile Picture
 const url = "https://randomuser.me/api/";
@@ -27,7 +28,7 @@ const UserProfile = (props) => {
             delete currentUser.Password
             setUser(currentUser)
         }
-        getUser()
+        getUser()// eslint-disable-next-line
     }, [])
 
     const history = useHistory();
@@ -38,6 +39,7 @@ const UserProfile = (props) => {
         history.push(path, user);
     }
     //profile Picture
+    // eslint-disable-next-line
     const [loading, setLoading] = useState(true);
     const [person, setPerson] = useState(null);
 
@@ -60,6 +62,7 @@ const UserProfile = (props) => {
     }, []);
 
     return (
+        <Fade top>
         <div className="main-panel">
             <Card>               
                 <CardContent>
@@ -93,6 +96,7 @@ const UserProfile = (props) => {
                 </CardContent>
             </Card>
         </div>
+        </Fade>
     )
 }
 

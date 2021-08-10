@@ -10,7 +10,7 @@ import {
   Input,
 } from "reactstrap";
 import moment from "moment";
-import Pulse from 'react-reveal/Pulse';
+import Fade from 'react-reveal/Fade';
 
 
 const SQLDateParsed = new Date().toLocaleString();
@@ -54,7 +54,7 @@ const EditTicket = (props) => {
     <div className="main-panel">
     <br/>
       <br/>
-        <Pulse>
+        <Fade top>
         <Container className="containerCU" fixed>
       <h1>Ticket From User: {EditTicket.Username}</h1>
           <Form onSubmit={(e) => handleSubmit(e)}>
@@ -114,7 +114,7 @@ const EditTicket = (props) => {
             </FormGroup>
           </Form>
         </Container>
-        </Pulse>
+        </Fade>
     </div>
   );
 };

@@ -6,6 +6,8 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
+import Zoom from 'react-reveal/Zoom';
+import Slide from 'react-reveal/Slide';
 
 const useStyles = makeStyles({
   root: {
@@ -23,6 +25,7 @@ export default function Teams() {
       <center><h1>Group D Team Roster</h1></center><br/>
     <Row>
       <Col>
+      <Slide left>
         <Card className={classes.root}>
             <CardMedia
               component="img"
@@ -35,13 +38,12 @@ export default function Teams() {
               <Typography gutterBottom variant="h5" component="h3">
               <h3>David D-Hart</h3>
               </Typography>
-              <Typography variant="body2" color="textSecondary" component="p">
-              I'm a tech passionate person, always willing to learn new things.I am an individual who seeks to find the most efficient way of completing my tasks & will go up and beyond what is expected to achieve the results.I have experience with Game developement/Modding and many things web oriented like website & application creation from small websites to .<br/><br/><br/>
-              </Typography>
             </CardContent>
         </Card>
+      </Slide>
       </Col>
         <Col>
+      <Zoom>
           <Card className={classes.root}>
               <CardMedia
                 component="img"
@@ -54,13 +56,12 @@ export default function Teams() {
                 <Typography gutterBottom variant="h5" component="h3">
                 <h3>Steven D White</h3>
                 </Typography>
-                <Typography variant="body2" color="textSecondary" component="p">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer ac purus facilisis, feugiat enim eu, fermentum libero. Aliquam pellentesque nisl sed tempus dapibus. Sed sed purus enim. Duis ut magna id ex euismod ornare quis eget nisl. Quisque varius rutrum feugiat. Morbi laoreet viverra felis ac malesuada. Aenean sed felis non risus semper ultricies. Aenean aliquam finibus velit vitae hendrerit.
-                </Typography>
               </CardContent>
           </Card>
+      </Zoom>
       </Col>
         <Col>
+      <Slide right>
           <Card className={classes.root}>
               <CardMedia
                 component="img"
@@ -73,16 +74,15 @@ export default function Teams() {
                 <Typography gutterBottom variant="h5" component="h3">
                 <h3>Chris Germishuys</h3>
                 </Typography>
-                <Typography variant="body2" color="textSecondary" component="p">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer ac purus facilisis, feugiat enim eu, fermentum libero. Aliquam pellentesque nisl sed tempus dapibus. Sed sed purus enim. Duis ut magna id ex euismod ornare quis eget nisl. Quisque varius rutrum feugiat. Morbi laoreet viverra felis ac malesuada. Aenean sed felis non risus semper ultricies. Aenean aliquam finibus velit vitae hendrerit.
-                </Typography>
               </CardContent>
           </Card>
+      </Slide>
       </Col>
     </Row>
     <br/>
     <Row>
       <Col>
+      <Slide left>
         <Card className={classes.root}>
             <CardMedia
               component="img"
@@ -95,15 +95,14 @@ export default function Teams() {
               <Typography gutterBottom variant="h5" component="h3">
               <h3>Nhi Nguyen</h3>
               </Typography>
-              <Typography variant="body2" color="textSecondary" component="p">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer ac purus facilisis, feugiat enim eu, fermentum libero. Aliquam pellentesque nisl sed tempus dapibus. Sed sed purus enim. Duis ut magna id ex euismod ornare quis eget nisl. Quisque varius rutrum feugiat. Morbi laoreet viverra felis ac malesuada. Aenean sed felis non risus semper ultricies. Aenean aliquam finibus velit vitae hendrerit.
-              </Typography>
             </CardContent>
         </Card>
+      </Slide>
       </Col>
           <Col>
           </Col>
         <Col>
+      <Slide right>
           <Card className={classes.root}>
               <CardMedia
                 component="img"
@@ -116,11 +115,9 @@ export default function Teams() {
                 <Typography gutterBottom variant="h5" component="h3">
                 <h3>Mathivannan M</h3>
                 </Typography>
-                <Typography variant="body2" color="textSecondary" component="p">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer ac purus facilisis, feugiat enim eu, fermentum libero. Aliquam pellentesque nisl sed tempus dapibus. Sed sed purus enim. Duis ut magna id ex euismod ornare quis eget nisl. Quisque varius rutrum feugiat. Morbi laoreet viverra felis ac malesuada. Aenean sed felis non risus semper ultricies. Aenean aliquam finibus velit vitae hendrerit.
-                </Typography>
               </CardContent>
           </Card>
+      </Slide>
       </Col>
     </Row>
   </main>

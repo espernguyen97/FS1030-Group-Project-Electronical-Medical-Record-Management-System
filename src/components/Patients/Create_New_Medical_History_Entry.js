@@ -47,7 +47,7 @@ const MedicalHistoryCreate = () => {
     const [Weight, setWeight] = useState("")
     const [alertContent, setAlertContent] = useState(null)
     const Date =  SQLDateParsed();
-    const user = parseJwt(token).userEmail;
+    const user = parseJwt(token).userEmail;// eslint-disable-next-line
     const [patients, setPatients] = useState([]);
     
   
@@ -78,7 +78,7 @@ const MedicalHistoryCreate = () => {
           const data = await response.json();
           setUsername(data.Username);
         };
-        getData();
+        getData();// eslint-disable-next-line
       }, [token]);
     
   
@@ -160,6 +160,9 @@ const MedicalHistoryCreate = () => {
                             </Input>
                             </Tooltip>
                         </Col> 
+                    </Row>
+                    <br/>
+                    <Row>
                         <Col>
                            <InputLabel><b>Insurance Provider</b></InputLabel>
                             <Tooltip title="Enter The Patients Insurance Provider">
@@ -224,6 +227,7 @@ const MedicalHistoryCreate = () => {
                         </Tooltip>
                     </Col>
                 </Row>
+                    <br/>
                     <Row>
                         <Col>
                            <InputLabel><b>Weight</b></InputLabel>
@@ -245,6 +249,7 @@ const MedicalHistoryCreate = () => {
                         </Tooltip>
                     </Col>
                 </Row>
+                    <br/>
                 <Row>
                     <Col>
                     <InputLabel><b>Prescriptions</b></InputLabel>
@@ -253,6 +258,7 @@ const MedicalHistoryCreate = () => {
                         </Tooltip>
                     </Col>
                 </Row>
+                    <br/>
                 <Row>
                     <Col>
                     <InputLabel><b>Immunizations</b></InputLabel>
@@ -261,6 +267,7 @@ const MedicalHistoryCreate = () => {
                         </Tooltip>
                     </Col>
                 </Row>
+                    <br/>
                 <Row>
                     <Col>
                     <InputLabel><b>Past Procedures</b></InputLabel>
@@ -319,7 +326,7 @@ const MedicalHistoryCreate = () => {
                 <Form className="my-5" onSubmit={formSubmit}>
                     <div className={`alert ${!alertContent ? "hidden" : ""}`}>{alertContent}</div>
                         <Col>
-                            <p style={{fontStyle: "italic"}}>Fill out all fields to add a new Medical Entry</p>
+                            <p style={{fontStyle: "italic"}}>Fill out the fields you require then submit</p>
                             <Button color="primary" type="submit"><NoteAddIcon/>Add Medical History Entry</Button>
                         </Col>
                 </Form>

@@ -12,7 +12,7 @@ import {
   Label,
   Input,
 } from "reactstrap";
-import Pulse from 'react-reveal/Pulse';
+import Fade from 'react-reveal/Fade';
 
 
 const SQLDateParsed = () => {
@@ -108,7 +108,8 @@ const EditPatient = (props) => {
 
   return (
     <div className="main-panel">
-        <Pulse>
+    <br/>
+        <Fade top>
         <Container className="containerCU" fixed>
           <Row>
             <Col>
@@ -235,7 +236,7 @@ const EditPatient = (props) => {
             <ButtonToggle type="submit" color="primary">Submit</ButtonToggle>
           </Form><br/><br/>
         </Container>
-        </Pulse>
+        </Fade>
     </div>
   );
 };

@@ -3,7 +3,6 @@ import Container from '@material-ui/core/Container';
 import { Row,Col} from 'reactstrap';
 import CreateUser from '../Users/CreateUser';
 import PwGen from '../Users/pwgen';
-import UserList from '../Users/CareGiver_list';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -14,6 +13,7 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import ListAltIcon from '@material-ui/icons/ListAlt';
 import Search from '../Users/UserSearch';
+
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -27,7 +27,7 @@ function TabPanel(props) {
       {...other}
     >
       {value === index && (
-        <Box p={3}>
+        <Box>
           <Typography>{children}</Typography>
         </Box>
       )}
@@ -67,7 +67,7 @@ export default function Caregivers() {
     return (
       <div className="main-panel">
         <Container fixed>
-        <hr className="yellow"/>
+          <br/>
         <div className={classes.root}>
       <AppBar position="static" color="default">
         <Tabs
@@ -94,12 +94,13 @@ export default function Caregivers() {
             </Row>
       </TabPanel>
       <TabPanel value={value} index={1}>
+            <Row className="my-5">
                   <Col>
-                    <center><Search/></center> {/* User List*/}
+                    <center><Search/></center> 
                   </Col>
+            </Row>
       </TabPanel>
     </div>
-        <hr className="yellow"/>
         </Container>
       </div>
     );

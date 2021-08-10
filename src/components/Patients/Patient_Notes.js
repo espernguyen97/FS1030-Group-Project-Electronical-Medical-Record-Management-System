@@ -25,7 +25,7 @@ const Notes = () => {
       const data = await response.json();
       setnotes(data);
     };
-    getData();
+    getData();// eslint-disable-next-line
   }, [token]);
 
  

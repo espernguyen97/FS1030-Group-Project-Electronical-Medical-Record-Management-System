@@ -27,13 +27,13 @@ const SQLDateParsed = () => {
 
 const PatientCreate = () => {
   const location = useLocation();
-  const token = sessionStorage.getItem("token");
+  const token = sessionStorage.getItem("token");// eslint-disable-next-line
   const [PatientID, setPatientID] = useState(location.state.PatientID);
   const [Username, setUsername] = useState("");
   const [Note, setNote] = useState("");
   const [alertContent, setAlertContent] = useState(null);
   const Date = SQLDateParsed();
-  const user = parseJwt(token).userEmail;
+  const user = parseJwt(token).userEmail;// eslint-disable-next-line
   const [patients, setPatients] = useState([]);
 
   useEffect(() => {
@@ -48,7 +48,7 @@ const PatientCreate = () => {
       const data = await response.json();
       setUsername(data.Username);
     };
-    getData();
+    getData();// eslint-disable-next-line
   }, [token]);
 
   useEffect(() => {

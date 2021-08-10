@@ -30,7 +30,7 @@ function TabPanel(props) {
       {...other}
     >
       {value === index && (
-        <Box p={3}>
+        <Box >
           <Typography>{children}</Typography>
         </Box>
       )}
@@ -86,18 +86,22 @@ export default function PatientTab() {
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
+      <br/>
         <ScheduleModalCreate/><br/>
         <ScheduleList/><br/>
       </TabPanel>
       <TabPanel value={value} index={1}>
+      <br/>
         <PatientCreateNoteModal/><br/>
         <Notes/>
       </TabPanel>
       <TabPanel value={value} index={2}>
+      <br/>
         <CreateNewMedicalHistoryModal/><br/>
         <MedicalHistory/>
       </TabPanel>
       <TabPanel value={value} index={3}>
+      <br/>
         <PatientRevisionHistory/>
       </TabPanel>
     </div>

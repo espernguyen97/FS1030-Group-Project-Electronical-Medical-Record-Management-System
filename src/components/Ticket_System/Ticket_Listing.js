@@ -6,6 +6,7 @@ import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import { useHistory } from "react-router";
 import moment from "moment";
 import PageviewIcon from '@material-ui/icons/Pageview';
+import Fade from 'react-reveal/Fade';
 
 const TicketSubmissionsList = () => {
   const token = sessionStorage.getItem("token");
@@ -50,6 +51,7 @@ const TicketSubmissionsList = () => {
   }
 
   return (
+    <Fade>
     <Container className="mainContent">
       <Row className="userTitle">
         <h2 className="display-5">
@@ -93,6 +95,7 @@ const TicketSubmissionsList = () => {
         </tbody>
       </Table>
     </Container>
+    </Fade>
   );
 };
 

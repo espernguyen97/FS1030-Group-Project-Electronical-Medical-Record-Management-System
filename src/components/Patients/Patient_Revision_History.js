@@ -20,7 +20,7 @@ const PatientRevisionHistory = (props) => {
             })
             const data = await response.json()
             setRevisions(data)
-        })()
+        })()// eslint-disable-next-line
     }, [token])
 
     return (

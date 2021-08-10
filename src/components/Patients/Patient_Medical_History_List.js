@@ -29,7 +29,7 @@ const MedicalHistory = () => {
       const data = await response.json();
       setmedical_history(data);
     };
-    getData();
+    getData();// eslint-disable-next-line
   }, [token]);
 
   const medical_historyViewRoute = (event, medical_history) => {

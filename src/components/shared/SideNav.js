@@ -5,7 +5,7 @@ import clsx from "clsx";
 import {CssBaseline,Drawer,Divider,List, ListItem,ListItemIcon,ListItemText,makeStyles} from "@material-ui/core";
 import HomeIcon from '@material-ui/icons/Home';
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
-import Search from '../search';
+import Swal from "sweetalert2";
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 import BugReportIcon from '@material-ui/icons/BugReport';
 import AllInboxIcon from '@material-ui/icons/AllInbox';
@@ -134,7 +134,14 @@ const SideNav = (props) => {
             props.setToken(false)  
             props.setUser(false) 
             setTimeout(function(){
-                alert("Sorry, your session has timed out. You have been logged out and returned to the login page.")
+              Swal.fire({
+                icon: "error",
+                title: "Sorry!",
+                titleText: "Sorry!",
+                text: "Sorry, your session has timed out. You have been logged out and returned to the login page.",
+                confirmButtonColor: "#4BB543",
+                timer: 1500,
+              });
             }, 1000) //Add small delay to alert to ensure previous lines run and complete first.      
         }, 1000*60*60*2) //token expires after two hours
     }
@@ -158,7 +165,6 @@ const SideNav = (props) => {
         }}
       >
         <div className={classes.toolbar}></div>
-        {/* <Search/> Disabled search bar for now as we need to get Search working in patients first */}
         <Divider />
         <List>
           {items.map((item, index) => {

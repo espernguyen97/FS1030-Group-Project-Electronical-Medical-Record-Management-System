@@ -1,9 +1,8 @@
-import React, { Component, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { parseJwt } from "../../helpers/authHelper";
 import { Container } from "reactstrap";
 import { Table, Button, Row } from "reactstrap";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
-import PageviewIcon from '@material-ui/icons/Pageview';
 import { useHistory } from "react-router";
 import moment from "moment";
 import { makeStyles } from '@material-ui/core/styles';
@@ -14,6 +13,7 @@ import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
 import RotateLeftIcon from '@material-ui/icons/RotateLeft';
 import EditIcon from "@material-ui/icons/Edit";
+import Fade from 'react-reveal/Fade';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -100,6 +100,7 @@ const Search = () => {
   }
 
   return (
+    <Fade>
     <Container className="mainContent">
       <Paper component="form" className={classes.root}>
       <IconButton className={classes.iconButton} aria-label="menu">
@@ -170,6 +171,7 @@ const Search = () => {
         </tbody>
       </Table>
     </Container>
+    </Fade>
   );
 };
 

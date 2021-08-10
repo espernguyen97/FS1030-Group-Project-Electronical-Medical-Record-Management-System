@@ -1,122 +1,150 @@
-import React, { useState } from 'react'
-import { Form, FormGroup, Col, Input, Label, Button, Container} from 'reactstrap'
+import React, { useEffect, useState } from "react";
+import { Input, Form, FormGroup, Col, Button, Container} from "reactstrap";
+import InputLabel from "@material-ui/core/InputLabel";
 import Tooltip from '@material-ui/core/Tooltip';
-import Pulse from 'react-reveal/Pulse';
-import Swal from 'sweetalert2'
+import NoteAddIcon from "@material-ui/icons/NoteAdd";
+import parseJwt from "../../helpers/authHelper";
+import Swal from "sweetalert2";
+import Slide from 'react-reveal/Slide'
 
 const SQLDateParsed = () => {
-
-    // MySQL formatted UTC 
-    let d = new Date()
-    let SQLDate = new Date(
+  // MySQL formatted UTC
+  let d = new Date();
+  let SQLDate = new Date(
     d.getFullYear(),
     d.getMonth(),
     d.getDate(),
     d.getHours(),
-    (d.getMinutes()), 
+    d.getMinutes(),
     d.getSeconds(),
     d.getMilliseconds()
-    ).toISOString().slice(0, 19).replace('T', ' ')
-    return(SQLDate)
-    }
+  )
+    .toISOString()
+    .slice(0, 19)
+    .replace("T", " ");
+  return SQLDate;
+};
 
 const TicketInput = () => {
-    const [email, setEmail] = useState("")
-    const [Username, setUsername] = useState("")
-    const [content, setContent] = useState("")
-    const Date =  SQLDateParsed();
+  const token = sessionStorage.getItem("token");// eslint-disable-next-line
+  const [Username, setUsername] = useState("");
+  const [email, setEmail] = useState("")
+  const [content, setContent] = useState("")
+  const Date =  SQLDateParsed();
+  const user = parseJwt(token).userEmail;// eslint-disable-next-line
 
-    const formSubmit = async event => {
-        event.preventDefault()
-        const response = await fetch('http://localhost:4000/tickets/entries', {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-              },
-            body: JSON.stringify({email,Username,content,Date})
-        })
-        const payload = await response.json()
-        if (response.status >= 400) {
-            alert(`woops! Error: ${payload.message} for fields: ${payload.invalid.join(",")}`)
-        } else {
-            Swal.fire({
-                icon: 'info',
-                title: 'Success!',
-                titleText: 'Success' ,
-                text: 'A New Ticket Has been Created. A Admin Will Be In Touch In The Next 24Hrs',
-                confirmButtonColor: '#4BB543',
-              })
-            resetForm()
-        }
+  useEffect(() => {
+    const getData = async () => {
+      const response = await fetch(`http://localhost:4000/users/${user}`, {
+        method: "GET",
+        mode: "cors",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const data = await response.json();
+      setUsername(data.Username);
+    };
+    getData();// eslint-disable-next-line
+  }, [token]);
+
+
+  const formSubmit = async event => {
+    event.preventDefault()
+    const response = await fetch('http://localhost:4000/tickets/entries', {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+        body: JSON.stringify({email,Username,content,Date})
+    })
+    const payload = await response.json()
+    if (response.status >= 400) {
+        alert(`woops! Error: ${payload.message} for fields: ${payload.invalid.join(",")}`)
+    } else {
+        Swal.fire({
+            icon: 'info',
+            title: 'Success!',
+            titleText: 'Success' ,
+            text: 'A New Ticket Has been Created. An Admin Will Be In Touch In The Next 24Hrs',
+            confirmButtonColor: '#4BB543',
+          })
+        resetForm()
     }
-    const resetForm = () => {
-        setEmail("")
-        setUsername("")
-        setContent("")
-    }
-    return (
-        <Pulse>
-        <Container className="containerCU">
-          <center>
+}
+const resetForm = () => {
+    setEmail("")
+    setUsername("")
+    setContent("")
+}
+  return (
+    <Slide top>
+      <Container className="containerCU">
+        <center>
                 <img className="banner" src="assets/supportbanner.png" alt="#" />
-                <Form className="my-5" onSubmit={formSubmit}>
-                <FormGroup row>
-                    <Label for="emailEntry" sm={2}>Email</Label>
-                    <Col sm={10}>
-                    <Tooltip Username="Enter Your Email so we can contact you.">
-                    <Input type="email" name="email" id="emailEntry" placeholder="Enter Your Email so we can contact you."  required value={email} onChange={e => setEmail(e.target.value) }/>
+          <h2>Caregiver Support</h2>
+          <Form className="my-5" onSubmit={formSubmit}>
+            <FormGroup>
+                <InputLabel>
+                  <b>Email</b>
+                </InputLabel>
+               <Col>
+                    <Tooltip Username="Enter an email we can easily get in touch with you at.">
+                    <Input type="email" name="email" id="emailEntry" placeholder="Enter an email we can easily get in touch with you."  required value={email} onChange={e => setEmail(e.target.value) }/>
                     </Tooltip>
-                    </Col>
-                </FormGroup>
-                <FormGroup row>
-                    <Label for="UsernameEntry" sm={2}>Username</Label>
-                    <Col sm={10}>
-                    <Tooltip Username="Select your Username.">
-                    <Input type="select" name="Username" id="UsernameEntry" placeholder="Enter the Username of your ticket" value={Username} onChange={e => setUsername(e.target.value)}>
-                            <option>John</option>
-                            <option>Adrian</option>
-                            <option>Alann</option>
-                            <option>Alexander</option>
-                            <option>Andrew</option>
-                            <option>Anthony</option>
-                            <option>Austin</option>
-                            <option>Benjamin</option>
-                            <option>Blake</option>
-                            <option>Boris</option>
-                            <option>Brandon</option>
-                            <option>Brian</option>
-                            <option>Cameron</option>
-                            <option>Carl</option>
-                            <option>Abigail</option>
-                            <option>Alexandra</option>
-                            <option>Alison</option>
-                            <option>Amanda</option>
-                            <option>Amelia</option>
-                            <option>Amy</option>
-                    </Input>
-                    </Tooltip>
-                    </Col>
-                </FormGroup>
-                <FormGroup row>
-                    <Label for="messageEntry" sm={2}>Message</Label>
-                    <Col sm={10}>
-                    <Tooltip Username="Fill In The Content Of Your ticket Here">
-                    <Input type="textarea" name="text" id="messageEntry" placeholder="Example: UserID:2 Abigail Wilson has an issue when I try to add a new medical history... Give as much info as possible so we can assist in a timely fashion"   required value={content} onChange={e => setContent(e.target.value)}/>
-                    </Tooltip>
-                    </Col>
-                </FormGroup>
-                <FormGroup check row>
-                    <Col sm={{ size: 10, offset: 2 }}>
-                    <center><Button color="primary" >Submit</Button></center>
-                    </Col>
-                </FormGroup>
-            </Form>
-          </center>
-        </Container>
-        </Pulse>
-      )
-    }
+              </Col>
+              <br/>
+              <Col>
+                <InputLabel>
+                  <b>Username</b>
+                </InputLabel>
+                <Tooltip title="Your Username will display here">
+                  <Input
+                    type="Username"
+                    name="Username"
+                    id="Username"
+                    placeholder="Select Your Username"
+                    value={Username}
+                    disabled="true"
+                  />
+                </Tooltip>
+              </Col>
+            </FormGroup>
+            <FormGroup>
+              <Col>
+                <InputLabel>
+                  <b>Ticket</b>
+                </InputLabel>
+                <Tooltip title="Example: UserID:2 Abigail Wilson has an issue when I try to add a new medical history... Give as much info as possible so we can assist in a timely fashion">
+                  <Input
+                    type="textarea"
+                    name="content"
+                    id="content"
+                    placeholder="Example: UserID:2 Abigail Wilson has an issue when I try to add a new medical history... Give as much info as possible so we can assist in a timely fashion Here"
+                    required
+                    value={content}
+                    onChange={(e) => setContent(e.target.value)}
+                  />
+                </Tooltip>
+              </Col>
+            </FormGroup>
+            <FormGroup check row>
+              <Col>
+                <p style={{ fontStyle: "italic" }}>
+                  Fill out all fields to create a new Ticket
+                </p>
+                <Button color="primary" type="submit">
+                  <NoteAddIcon />
+                  Create Ticket
+                </Button>
+              </Col>
+            </FormGroup>
+          </Form>
+        </center>
+      </Container>
+</Slide>
+  );
+};
 
-    
-    export default TicketInput
+export default TicketInput;

@@ -12,7 +12,7 @@ import {
   Label,
   Input,
 } from "reactstrap";
-import Pulse from 'react-reveal/Pulse';
+import Fade from 'react-reveal/Fade';
  
 const EditUser = (props) => {
   let id = props.match.params.id;
@@ -46,7 +46,7 @@ const EditUser = (props) => {
       setAlertContent(payload)
     } else {
       let currentUser = JSON.parse(sessionStorage.getItem('currentUser'))
-      if (id == currentUser.UserID) {
+      if (id === currentUser.UserID) {
         sessionStorage.removeItem('currentUser')
         sessionStorage.setItem('currentUser', JSON.stringify(User))
         history.push(`/user-profile/${currentUser.UserID}`)
@@ -66,7 +66,7 @@ const EditUser = (props) => {
 
   const checkAccess = () => {
     let currentUser = JSON.parse(sessionStorage.getItem('currentUser'))
-    if (id == currentUser.UserID && !parseInt(currentUser.Admin_Flag)){
+    if (id === currentUser.UserID && !parseInt(currentUser.Admin_Flag)){
       return false
     } else {
       return true
@@ -76,7 +76,8 @@ const EditUser = (props) => {
 
   return (
     <div className="main-panel">
-        <Pulse>
+      <br/>
+    <Fade top>
         <Container className="containerCU" fixed>
           <h1>Edit User: {User.First_Name} {User.Last_Name}</h1>
           <Form onSubmit={(e) => handleSubmit(e)}>
@@ -133,7 +134,7 @@ const EditUser = (props) => {
                   <FormGroup>
                     <Label>Job Position</Label>
                     <br/>
-                    <select style={{textAlign: "center"}} name="Job_Position" id="Job_Position" required 
+                    <Input type="select" style={{textAlign: "center"}} name="Job_Position" id="Job_Position" required 
                       defaultValue={User.Job_Position}
                       onChange={handleChange}
                     >
@@ -141,7 +142,7 @@ const EditUser = (props) => {
                         <option value="Doctor">Doctor</option>
                         <option value="Nurse">Nurse</option>
                         <option value="Admin">Admin</option>
-                    </select>
+                    </Input>
                   </FormGroup>
                 </Col>
                 : null
@@ -161,7 +162,7 @@ const EditUser = (props) => {
             <br/><br/>
           </Form>
         </Container>
-        </Pulse>
+        </Fade>
     </div>
   );
 };

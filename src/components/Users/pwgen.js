@@ -4,6 +4,7 @@ import {Button} from 'reactstrap'
 import LockOpenIcon from '@material-ui/icons/LockOpen';
 import Tooltip from '@material-ui/core/Tooltip';
 import InputLabel from '@material-ui/core/InputLabel';
+import Slide from 'react-reveal/Slide'
 
 export default function App() {
   const [length, setLength] = useState(18);
@@ -44,6 +45,7 @@ export default function App() {
   };
 
   return (
+    <Slide right>
     <div className="containerpw">
       <form className="generator-form">
         <h2 className="title"> Password Generator</h2>
@@ -150,5 +152,6 @@ export default function App() {
         </center>
       </form>
     </div>
+    </Slide>
   );
 }

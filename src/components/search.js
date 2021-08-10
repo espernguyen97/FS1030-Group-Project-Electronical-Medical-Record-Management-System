@@ -1,4 +1,4 @@
-import React, { Component, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { parseJwt } from "../helpers/authHelper";
 import { Container } from "reactstrap";
 import { Table, Button, Row } from "reactstrap";
