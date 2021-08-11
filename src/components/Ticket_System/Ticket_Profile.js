@@ -42,8 +42,6 @@ const EditTicket = (props) => {
       },
       body: JSON.stringify(Ticket),
     }).then((response) => response.json());
-    console.log(SQLDateParsed)
-    console.log(Ticket)
     history.push("/tickets");
   };
 
