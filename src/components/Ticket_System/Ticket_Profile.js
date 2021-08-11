@@ -14,7 +14,7 @@ import moment from "moment";
 import Fade from 'react-reveal/Fade';
 
 
-const SQLDateParsed = new Date().toLocaleString();
+const SQLDateParsed = moment();
 
 const EditTicket = (props) => {
   let id = props.match.params.id;
@@ -42,6 +42,8 @@ const EditTicket = (props) => {
       },
       body: JSON.stringify(Ticket),
     }).then((response) => response.json());
+    console.log(SQLDateParsed)
+    console.log(Ticket)
     history.push("/tickets");
   };
 
@@ -80,7 +82,7 @@ const EditTicket = (props) => {
               </Col>
               <Col md={6}>
                 <FormGroup>
-                  <Label>email</Label>
+                  <Label>Email</Label>
                   <Input
                     type="email"
                     name="Email"
