@@ -7,6 +7,19 @@ import parseJwt from "../../helpers/authHelper";
 import Swal from "sweetalert2";
 import Slide from 'react-reveal/Slide'
 
+
+
+function MakeID(len) {
+  let text = "";
+  
+  let charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+  
+  for (let i = 0; i < len; i++)
+    text += charset.charAt(Math.floor(Math.random() * charset.length));
+  
+  return text;
+}
+
 const SQLDateParsed = () => {
   // MySQL formatted UTC
   let d = new Date();
@@ -31,6 +44,7 @@ const TicketInput = () => {
   const [email, setEmail] = useState("")
   const [content, setContent] = useState("")
   const Date =  SQLDateParsed();
+  const TicketNumber =  MakeID(64);
   const user = parseJwt(token).userEmail;// eslint-disable-next-line
 
   useEffect(() => {
@@ -57,7 +71,7 @@ const TicketInput = () => {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
           },
-        body: JSON.stringify({email,Username,content,Date})
+        body: JSON.stringify({email,Username,content,Date,TicketNumber})
     })
     const payload = await response.json()
     if (response.status >= 400) {
@@ -69,6 +83,7 @@ const TicketInput = () => {
             titleText: 'Success' ,
             text: 'A New Ticket Has been Created. An Admin Will Be In Touch In The Next 24Hrs',
             confirmButtonColor: '#4BB543',
+            
           })
         resetForm()
     }
@@ -87,10 +102,20 @@ const resetForm = () => {
           <Form className="my-5" onSubmit={formSubmit}>
             <FormGroup>
                 <InputLabel>
+                  <b>Ticket Number</b><br/><br/>
+                  <i>Keep this for your records</i>
+                </InputLabel>
+               <Col>
+                    <Tooltip title="Keep This Ticket Number For Your Records.">
+                    <Input disabled={true} type="text" name="TicketNumber" id="TicketNumber" value={TicketNumber}  />
+                    </Tooltip>
+              </Col>
+              <br/>
+                <InputLabel>
                   <b>Email</b>
                 </InputLabel>
                <Col>
-                    <Tooltip Username="Enter an email we can easily get in touch with you at.">
+                    <Tooltip title="Enter an email we can easily get in touch with you at.">
                     <Input type="email" name="email" id="emailEntry" placeholder="Enter an email we can easily get in touch with you."  required value={email} onChange={e => setEmail(e.target.value) }/>
                     </Tooltip>
               </Col>

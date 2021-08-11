@@ -92,6 +92,21 @@ p#user-info {
   width: max-content;
 }
 
+p#ProfileAvatar {
+  transition: all .2s ease-in-out;
+  color: white;
+  margin: 0;
+  cursor: pointer;
+  padding-right: 2.5rem;
+  line-height: 2.5;
+  width: max-content;
+}
+
+/*I cannot get the on hover working for this for some reason */
+p#ProfileAvatar:hover {
+  transform: scale(1.1);
+
+}
 a.navbar-brand {
   text-align: center;
   margin: 0 auto;

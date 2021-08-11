@@ -27,6 +27,7 @@ const EditTicket = (props) => {
     Date: `${moment(SQLDateParsed).format("YYYY-MM-DD")}`,
     content: `${EditTicket.content}`,
     Completed: `${EditTicket.Completed}`,
+    TicketNumber: `${EditTicket.TicketNumber}`,
     Notes: `${EditTicket.Notes}`,
     
   });
@@ -61,6 +62,7 @@ const EditTicket = (props) => {
         <Container className="containerCU" fixed> 
         <h3>Ticket From User: {EditTicket.Username}</h3>
             <hr class="yellow"/>
+        <h5>Ticket Number: {EditTicket.TicketNumber}</h5>
                   <Label>Current Status:</Label>
         <h3><Input type="text" defaultValue={EditTicket.Completed} disabled = {true}/></h3>
           <Form onSubmit={(e) => handleSubmit(e)}>

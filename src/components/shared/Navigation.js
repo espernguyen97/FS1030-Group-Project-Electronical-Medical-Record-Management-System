@@ -3,19 +3,41 @@ import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, Container }
 import { Redirect, Route } from "react-router-dom"
 import { useHistory } from "react-router";
 import Scroll from '../backtotop'
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+import Avatar from '@material-ui/core/Avatar';
+import Fade from 'react-reveal/Fade';
+import AccountBoxIcon from '@material-ui/icons/AccountBox';
+import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
 
 
 const Navigation = (props) => {
     const [isOpen, setIsOpen] = useState(false)
     const toggle = () => setIsOpen(!isOpen)
     const history = useHistory();
+    const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+    setTimeout(function(){setAnchorEl(null); }, 5000);
+  };
+
+  const ScheduleRoute = (event, user) => {
+    event.preventDefault();
+    let path = `/submissions/`
+    history.push(path, user);
+}  
+
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
     const profileViewRoute = (event, user) => {
         event.preventDefault();
         let path = `/user-profile/${user.UserID}`
         history.push(path, user);
     }
-
 return (
     <Navbar style={{backgroundColor: '#000', opacity: '95%'}} expand="md" fixed="top">
         <Container>
@@ -32,7 +54,20 @@ return (
                             <p id="user-info"><span style={{fontStyle: "italic"}}>logged in as</span>{String.fromCharCode(8194)}<span style={{fontWeight: "bold"}}>{props.user.Job_Position} {props.user.First_Name} {props.user.Last_Name}</span></p>
                         </NavItem>
                         <NavItem>
-                            <button type="button" className="silver-btn" onClick={(e) => profileViewRoute(e, props.user)}>Profile</button>
+    <Fade right>
+                            <p id="ProfileAvatar"><Avatar  onClick={handleClick} alt="User Profile" src="https://www.pngarts.com/files/10/Default-Profile-Picture-PNG-Image-Background.png" />
+                            </p>
+                            <Menu
+                                id="fade-menu"
+                                anchorEl={anchorEl}
+                                keepMounted
+                                open={Boolean(anchorEl)}
+                                onClose={handleClose}
+                            >
+                                <MenuItem onClick={(e) => profileViewRoute(e, props.user)}><AccountBoxIcon/>Profile</MenuItem>
+                                <MenuItem onClick={ScheduleRoute}><CalendarTodayIcon/>Appointments</MenuItem>
+                            </Menu>
+                            </Fade>
                         </NavItem>
                     </>
                 }          
