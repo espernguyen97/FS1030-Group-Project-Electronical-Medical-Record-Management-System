@@ -72,7 +72,7 @@ const Search = () => {
     }, 100);
   };
 
-  const resetState = () => {
+  const resetState = () => { 
     getData()
     document.getElementById("patient-searchbar").value = ""
     setQuery(null)

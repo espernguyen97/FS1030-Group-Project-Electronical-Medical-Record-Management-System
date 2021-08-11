@@ -39,20 +39,19 @@ const Search = () => {
   const [appointments, setappointment] = useState([]);
   const appointment = parseJwt(token).appointmentname;
 
-  useEffect(() => {
-    const getData = async () => {
-      const response = await fetch("http://localhost:4000/schedule/", {
-        method: "GET",
-        mode: 'cors',
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      const data = await response.json();
-      setappointment(data);
-    };
-    getData();
-  }, [token]);
+  const getData = async () => {
+    const response = await fetch("http://localhost:4000/schedule/", {
+      method: "GET",
+      mode: 'cors',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    const data = await response.json();
+    setappointment(data);
+  };
+  // eslint-disable-next-line
+  useEffect(() => {getData()}, [token]);
 
   const handleSearch = (event) => {
     setQuery(event.target.value);
@@ -70,7 +69,9 @@ const Search = () => {
   };
 
   const resetState = () => {
-    window.location.reload();
+    getData()
+    document.getElementById("appointment-searchbar").value = ""
+    setQuery(null)
   }
 
   return (
@@ -85,6 +86,7 @@ const Search = () => {
       <InputBase
         onChange={handleSearch}
         className={classes.input}
+        id="appointment-searchbar"
         placeholder="Search Appointment Database"
         inputProps={{ 'aria-label': 'Search Appointment Database' }}
       />

@@ -54,8 +54,9 @@ return (
                             <p id="user-info"><span style={{fontStyle: "italic"}}>logged in as</span>{String.fromCharCode(8194)}<span style={{fontWeight: "bold"}}>{props.user.Job_Position} {props.user.First_Name} {props.user.Last_Name}</span></p>
                         </NavItem>
                         <NavItem>
-    <Fade right>
-                            <p id="ProfileAvatar"><Avatar  onClick={handleClick} alt="User Profile" src="https://www.pngarts.com/files/10/Default-Profile-Picture-PNG-Image-Background.png" />
+                        <Fade right>
+                            <p id="ProfileAvatar">
+                                <Avatar onClick={handleClick} alt="User Profile" src="https://www.pngarts.com/files/10/Default-Profile-Picture-PNG-Image-Background.png" />
                             </p>
                             <Menu
                                 id="fade-menu"
@@ -67,7 +68,7 @@ return (
                                 <MenuItem onClick={(e) => profileViewRoute(e, props.user)}><AccountBoxIcon/>Profile</MenuItem>
                                 <MenuItem onClick={ScheduleRoute}><CalendarTodayIcon/>Appointments</MenuItem>
                             </Menu>
-                            </Fade>
+                        </Fade>
                         </NavItem>
                     </>
                 }          

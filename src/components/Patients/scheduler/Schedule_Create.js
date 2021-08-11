@@ -96,9 +96,8 @@ const ScheduleCreate = () => {
                     <Row>
                         <Col>
                            <InputLabel><b>Date:</b></InputLabel>
-                            <Tooltip title="Select if the patient has Paid Invoice">
-                            <Input type="date" name="Date" id="Date" placeholder="Select Your Date"required value={Date} onChange={e => setDate(e.target.value) }>
-                            </Input>
+                            <Tooltip title="Enter appointment date">
+                              <Input type="date" name="Date" id="Date" placeholder="Select Your Date"required value={Date} onChange={e => setDate(e.target.value) }></Input>
                             </Tooltip>
                         </Col>
                     </Row>
@@ -106,9 +105,8 @@ const ScheduleCreate = () => {
                     <Row>
                         <Col>
                            <InputLabel><b>TimeSlot</b></InputLabel>
-                            <Tooltip title="Select if the patient has signs of a TimeSlot">
-                            <Input type="time" name="TimeSlot" id="TimeSlot" placeholder="Select Your TimeSlot"  required value={TimeSlot} onChange={e => setTimeSlot(e.target.value) }>
-                            </Input>
+                            <Tooltip title="Enter appointment timeslot">
+                              <Input type="time" name="TimeSlot" id="TimeSlot" placeholder="Select Your TimeSlot"  required value={TimeSlot} onChange={e => setTimeSlot(e.target.value) }></Input>
                             </Tooltip>
                         </Col>
                     </Row>
@@ -116,9 +114,7 @@ const ScheduleCreate = () => {
                     <Row>
                         <Col>
                            <InputLabel><b>PatientID</b></InputLabel>
-                            <Tooltip title="Enter The Patients  ID Here">
                            <Input type="PatientID" name="PatientID" id="PatientID" disabled="true"  value={PatientID}/>
-                            </Tooltip>
                         </Col>
                         <Col>
                            <InputLabel><b>Docotor For Appointment</b></InputLabel>

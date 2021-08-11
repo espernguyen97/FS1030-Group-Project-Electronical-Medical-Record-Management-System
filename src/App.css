@@ -102,11 +102,12 @@ p#ProfileAvatar {
   width: max-content;
 }
 
-/*I cannot get the on hover working for this for some reason */
-p#ProfileAvatar:hover {
-  transform: scale(1.1);
-
+p#ProfileAvatar > div:hover {
+  border: 2px solid white;
+  transform: scale(1.2);
+  filter: brightness(105%);
 }
+
 a.navbar-brand {
   text-align: center;
   margin: 0 auto;

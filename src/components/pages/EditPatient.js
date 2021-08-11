@@ -58,7 +58,7 @@ const EditPatient = (props) => {
     let Editor = `${currentUser.First_Name} ${currentUser.Last_Name}`
     let Revisions = []
     for (let key in patient) {
-      if (key !== "Last_Edit" && patient[key] !== editPatient[key]) {
+      if (key !== "Last_Edit" && key !== "PatientID" && patient[key] !== editPatient[key]) {
         Revisions.push(`${key} changed from ${editPatient[key]} to ${patient[key]} by ${Editor}`)
       }
     }

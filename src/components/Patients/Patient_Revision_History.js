@@ -51,6 +51,7 @@ const PatientRevisionHistory = (props) => {
                     </tbody>
                 </Table>
             }
+            <br/><br/>
         </Container>
     )
 }

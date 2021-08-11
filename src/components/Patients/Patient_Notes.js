@@ -67,6 +67,7 @@ const Notes = () => {
             ))}
         </tbody>
       </Table>
+      <br/><br/>
     </Container>
   );
 };
