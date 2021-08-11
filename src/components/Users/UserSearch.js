@@ -43,20 +43,19 @@ const Search = () => {
   const user = parseJwt(token).username;
   const history = useHistory();
 
-  useEffect(() => {
-    const getData = async () => {
-      const response = await fetch("http://localhost:4000/users/", {
-        method: "GET",
-        mode: 'cors',
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      const data = await response.json();
-      setusers(data);
-    };
-    getData();
-  }, [token]);
+  const getData = async () => {
+    const response = await fetch("http://localhost:4000/users/", {
+      method: "GET",
+      mode: 'cors',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    const data = await response.json();
+    setusers(data);
+  };
+  // eslint-disable-next-line 
+  useEffect(() => {getData()}, [token]);
 
   const handleSearch = (event) => {
     setQuery(event.target.value);
@@ -74,7 +73,9 @@ const Search = () => {
   };
 
   const resetState = () => {
-    window.location.reload();
+    getData()
+    document.getElementById("user-searchbar").value = ""
+    setQuery(null)
   }
 
   const UserEditRoute = (event, User) => {
@@ -85,8 +86,7 @@ const Search = () => {
 
   const userDelete = async (event, user) => {
     event.preventDefault()
-    console.log(user)
-    const response = await fetch(`http://localhost:4000/users/${users.userID}`, {
+    await fetch(`http://localhost:4000/users/${user.UserID}`, {
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -94,9 +94,7 @@ const Search = () => {
         "Content-Type": "application/json",
       },
     })
-    const data = await response.json();
-    console.log(data)
-    window.location.reload();
+    getData()
   }
 
   return (
@@ -109,6 +107,7 @@ const Search = () => {
       <InputBase
         onChange={handleSearch}
         className={classes.input}
+        id="user-searchbar"
         placeholder="Search user Database"
         inputProps={{ 'aria-label': 'Search user Database' }}
       />
