@@ -241,6 +241,7 @@ const MedicalHistoryCreate = () => {
                  },
         { name: "Records", component: 
         <React.Fragment>
+            <br/>
                 <Row>
                     <Col>
                     <InputLabel><b>Allergies</b></InputLabel>
