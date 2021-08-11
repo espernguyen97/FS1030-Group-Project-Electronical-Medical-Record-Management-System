@@ -102,12 +102,11 @@ p#ProfileAvatar {
   width: max-content;
 }
 
-p#ProfileAvatar > div:hover {
-  border: 2px solid white;
-  transform: scale(1.2);
-  filter: brightness(105%);
-}
+/*I cannot get the on hover working for this for some reason */
+p#ProfileAvatar:hover {
+  transform: scale(1.1);
 
+}
 a.navbar-brand {
   text-align: center;
   margin: 0 auto;
@@ -126,6 +125,76 @@ a.navbar-brand {
 .silver-btn:hover {
   filter: sepia(100%);
 }
+
+
+  /* HEALTH CARD CSS BELOW - Dave*/
+
+.BGHealthCard {
+  background: url("https://t3.ftcdn.net/jpg/03/05/99/90/360_F_305999061_nA5TKH6izLnHAvR3ysI3J1XbKiS2R9W5.jpg");
+  width: 392px;
+  height: 270px;
+  display: flex;
+  flex-direction: column;
+  margin: 5px auto 0;
+  border-radius: 30px;
+  padding: 0 10px 0 20px;
+}
+.header-title {
+  color: white;
+  text-transform: uppercase;
+  font-weight: bold;
+  text-align: left;
+  padding: 0 40px;
+  font-size: 12px;
+}
+.bloc-content {
+  display: flex;
+  justify-content: space-between;
+}
+.HealthCardNumber {
+  padding: 1px 5px;
+  color: #fff;
+  font-size: 22px;
+  margin: 10px 0;
+  border-radius: 30px;
+}
+.number-card {
+  background: rgba(0, 0, 0, 0.404);
+  padding: 1px 5px;
+  color: #fff;
+  font-size: 12px;
+  margin: 10px 0;
+  border-radius: 30px;
+}
+.number-Address {
+  background: rgba(0, 0, 0, 0.404);
+  padding: 1px 5px;
+  color: #fff;
+  font-size: 12px;
+  margin: 10px 0;
+  border-radius: 30px;
+}
+.right {
+  flex-direction: column;
+  display: flex;
+  justify-content: space-between;
+}
+.bloc {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  color: white;
+  text-transform: uppercase;
+}
+.bloc-1 {
+  font-size: 18px;
+  line-height: 32px;
+}
+.bloc-1 span {
+  font-weight: bold;
+  font-size: 25px;
+}
+
 
 
   /* BELOW IS CONSOLIDATED FROM PWGEN.CSS*/

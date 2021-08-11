@@ -4,6 +4,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Tooltip from '@material-ui/core/Tooltip';
 import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import Swal from 'sweetalert2'
+import Avatar from '@material-ui/core/Avatar';
 
 
 const SQLDateParsed = () => {
@@ -89,7 +90,73 @@ const PatientCreate = (props) => {
             <Container className="containerPatient_Create">
                 <center>
                 <h2>New Patient</h2>
-                <img className="banner" src="assets/NewPatient.png" alt="#" />              
+                <div className="BGHealthCard">
+                    <Row>
+                        <Col>
+                <h3 className="header-title">Group D EMR Health Card</h3>
+                        </Col>
+                        <Col>
+                    <Avatar classname="picture" alt="User Picture" src="https://source.unsplash.com/random/800x800/?face" />
+                        </Col>
+                    </Row>
+                <div className="bloc-content">
+                    <div className="HealthCardNumber">{OHIP}</div>
+                    <div className="bloc">
+                        <div className="bloc-1">
+                        </div>
+                        <div>
+                            Date Of Birth
+                            <br />
+                            <span>{DOB}</span>
+                            <br/>Age: {Age}
+                        </div>
+                    </div>
+                    </div>
+                    <div className="right">
+                        <Row>
+                        <Col>
+                    <div className="number-card">
+                        {First_Name} <br/>
+                        </div>
+                        </Col>
+                        <Col>
+                    <div className="number-card">
+                        {Last_Name}<br/>
+                        </div>
+                        </Col>
+                        </Row>
+                        <Row>
+                        <Col>
+                    <div className="number-Address">
+                        {Address} <br/>
+                        </div>
+                        </Col>
+                        </Row>
+                        <Row>
+                        <Col>
+                    <div className="number-Address">
+                        {City} <br/>
+                        </div>
+                        </Col>
+                        <Col>
+                    <div className="number-Address">
+                        {Province} <br/>
+                        </div>
+                        </Col>
+                        <Col>
+                    <div className="number-Address">
+                        {PostalCode} <br/>
+                        </div>
+                        </Col>
+                        </Row>
+                        <Col>
+                    <div className="number-Address">
+                        {Email} <br/>
+                        </div>
+                        </Col>
+                    <div className="space" />
+                    </div>
+                </div>     
                 <Form className="my-5" onSubmit={formSubmit}>
                     <p style={{fontStyle: "italic"}}>All fields except Age are required.</p>
                 <Row style={{justifyContent: "space-between"}}>
@@ -123,7 +190,7 @@ const PatientCreate = (props) => {
                         <Col>
                            <InputLabel><b>O.H.I.P Number</b></InputLabel>
                             <Tooltip title="Enter the patient's unique health card number.">
-                            <Input type="OHIP" name="OHIP" id="OHIP" placeholder="OHIP Here"  required value={OHIP} onChange={e => setOHIP(e.target.value) }/>
+                            <Input  maxlength="18" type="OHIP" name="OHIP" id="OHIP" placeholder="OHIP Here"  required value={OHIP} onChange={e => setOHIP(e.target.value) }/>
                             </Tooltip>
                         </Col>
                     </FormGroup>
