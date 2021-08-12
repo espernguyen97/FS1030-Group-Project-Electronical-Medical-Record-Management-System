@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Search = () => {
+const Search = (props) => {
   const classes = useStyles();
   const token = sessionStorage.getItem("token");
   const [query, setQuery] = useState();
@@ -82,19 +82,40 @@ const Search = () => {
     event.preventDefault();
     let path = `/edit-user/${User.UserID}`
     history.push(path, User);
-}
+  }
 
   const userDelete = async (event, user) => {
     event.preventDefault()
-    await fetch(`http://localhost:4000/users/${user.UserID}`, {
+    let currentUser = JSON.parse(sessionStorage.getItem('currentUser'))
+    if (currentUser.UserID === user.UserID){
+     if (window.confirm("Are you sure you want to delete yourself from the system? If you proceed you will be logged out and unable to log back in.")){
+      await fetch(`http://localhost:4000/users/${user.UserID}`, {
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${token}`,
         Accept: "application/json",
         "Content-Type": "application/json",
-      },
-    })
-    getData()
+        },
+      })
+      sessionStorage.removeItem('token')
+      sessionStorage.removeItem('currentUser')
+      props.setToken(false)
+      props.setUser(false)
+      history.push("/login")
+     } else {
+       return
+     }
+    } else {
+      await fetch(`http://localhost:4000/users/${user.UserID}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        },
+      })
+      getData()
+    }
   }
 
   return (

@@ -54,7 +54,7 @@ function App() {
             <PrivateRoute component={EditPatient} exact path="/edit-patient/:id" /> 
             <PrivateRoute component={ViewPatientMedicalHistory} exact path="/medical_history/:id" />
             <PrivateRoute component={UserProfile} exact path="/user-profile/:id" />
-            {adminAccess && <PrivateRoute component={Caregivers} exact path="/caregivers" />}
+            {adminAccess && <PrivateRoute exact path="/caregivers"><Caregivers setToken={setToken} setUser={setUser}/></PrivateRoute> }
             {user ? <PrivateRoute component={EditUser} exact path={`/edit-profile/:id`} /> : null}
             {adminAccess && <PrivateRoute component={EditUser} exact path="/edit-user/:id" />}                     
           </PrivateRoute>

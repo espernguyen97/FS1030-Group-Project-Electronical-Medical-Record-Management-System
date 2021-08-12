@@ -56,7 +56,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Caregivers() {
+export default function Caregivers(props) {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
@@ -96,7 +96,7 @@ export default function Caregivers() {
       <TabPanel value={value} index={1}>
             <Row className="my-5">
                   <Col>
-                    <center><Search/></center> 
+                    <center><Search setToken={props.setToken} setUser={props.setUser}/></center> 
                   </Col>
             </Row>
       </TabPanel>
