@@ -117,7 +117,7 @@ const ScheduleCreate = () => {
                            <Input type="PatientID" name="PatientID" id="PatientID" disabled="true"  value={PatientID}/>
                         </Col>
                         <Col>
-                           <InputLabel><b>Docotor For Appointment</b></InputLabel>
+                           <InputLabel><b>Doctor For Appointment</b></InputLabel>
                             <Tooltip title="Select The Doctor For This Appointment">
                             <Input type="select" name="Username" id="Username" required value={Username} onChange={e => setUsername(e.target.value) }>
                             <option>John</option>

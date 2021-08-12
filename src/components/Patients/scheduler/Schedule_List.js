@@ -92,6 +92,7 @@ const ScheduleList = () => {
                 <th>Date</th>
                 <th>Time Slot</th>
                 <th>Doctor</th>
+                <th>{" "}</th>
               </tr>
             </thead>
             <tbody>
@@ -111,6 +112,7 @@ const ScheduleList = () => {
                         <td>{moment(schedule.Date).format("YYYY-MM-DD")}</td>
                         <td>{schedule.Timeslot}</td>
                         <td>{schedule.Username}</td>
+                        <td>{" "}</td>
                       </tr>
                     )
                   } else {
