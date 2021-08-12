@@ -486,3 +486,10 @@ input[classname="passwordCU"] {
     font-size: 14px;
   }
 }
+
+p#ProfileAvatar > div:hover {
+  border: 2px solid white;
+  transform: scale(1.2);
+  filter: brightness(105%);
+}
+
