@@ -56,7 +56,7 @@ return (
                         <NavItem>
                         <Fade right>
                             <p id="ProfileAvatar">
-                                <Avatar onClick={handleClick} alt="User Profile" src="https://www.pngarts.com/files/10/Default-Profile-Picture-PNG-Image-Background.png" />
+                                <Avatar onClick={handleClick} alt="User Profile" src="https://source.unsplash.com/random/800x800/?face" />
                             </p>
                             <Menu
                                 id="fade-menu"
