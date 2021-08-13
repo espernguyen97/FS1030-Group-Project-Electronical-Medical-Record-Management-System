@@ -57,6 +57,7 @@ const EditPatient = (props) => {
     let UserID = currentUser.UserID
     let Editor = `${currentUser.First_Name} ${currentUser.Last_Name}`
     let Revisions = []
+    editPatient.DOB = moment(editPatient.DOB).format("YYYY-MM-DD")
     for (let key in patient) {
       if (key !== "Last_Edit" && key !== "PatientID" && patient[key] !== editPatient[key]) {
         Revisions.push(`${key} changed from ${editPatient[key]} to ${patient[key]} by ${Editor}`)
